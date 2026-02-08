@@ -145,7 +145,7 @@ const Home = () => {
                         <StatItem number="150+" label="Projects Delivered" />
                         <StatItem number="98%" label="Client Retention" />
                         <StatItem number="25+" label="Industries Served" />
-                        <StatItem number="12" label="Global Awards" />
+                        <StatItem number="5+" label="Years Experience" />
                     </div>
                 </div>
             </section>

@@ -88,34 +88,7 @@ const About = () => {
                     </div>
                 </div>
 
-                {/* Team Section (Placeholder) */}
-                <div className="text-center">
-                    <motion.h2
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        className="text-3xl font-bold mb-12"
-                    >
-                        Meet the Team
-                    </motion.h2>
-                    <div className="grid md:grid-cols-4 gap-8">
-                        {[1, 2, 3, 4].map((item) => (
-                            <motion.div
-                                key={item}
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: item * 0.1 }}
-                                className="group"
-                            >
-                                <div className="h-64 w-full bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl mb-4 overflow-hidden relative">
-                                    <div className="absolute inset-0 bg-indigo-500/20 group-hover:bg-indigo-500/0 transition-colors" />
-                                </div>
-                                <h3 className="text-xl font-bold">Team Member</h3>
-                                <p className="text-indigo-400 text-sm">Role Title</p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
+
             </div>
         </section>
     );

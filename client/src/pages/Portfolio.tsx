@@ -25,7 +25,7 @@ const Portfolio = () => {
         { label: 'Projects Delivered', value: '150+' },
         { label: 'Client Retention', value: '98%' },
         { label: 'Industries Served', value: '25+' },
-        { label: 'Awards Won', value: '12' },
+        { label: 'Years Experience', value: '5+' },
     ];
 
     return (
