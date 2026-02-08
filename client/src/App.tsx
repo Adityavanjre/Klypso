@@ -2,13 +2,14 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import ScrollToTop from './components/ScrollToTop'; // Import ScrollToTop
-import ChatWidget from './components/ChatWidget'; // Import ChatWidget
+import ScrollToTop from './components/ScrollToTop';
+import ChatWidget from './components/ChatWidget';
 import Home from './pages/Home';
 import Services from './pages/Services';
 import Portfolio from './pages/Portfolio';
+import ProjectDetails from './pages/ProjectDetails';
+import About from './pages/About';
 import Contact from './pages/Contact';
-import About from './pages/About'; // Import About
 import Legal from './pages/Legal';
 import NotFound from './pages/NotFound';
 
@@ -32,7 +33,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
           <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/about" element={<About />} /> {/* Add About route */}
+          <Route path="/project/:id" element={<ProjectDetails />} />
+          <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/legal" element={<Legal />} />
 

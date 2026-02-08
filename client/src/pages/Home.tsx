@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Code, Send, Layout, Smartphone, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import { projects } from '../data/projects';
 
 const Home = () => {
     const heroRef = useRef(null);
@@ -163,34 +164,24 @@ const Home = () => {
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-8">
-                        <motion.div
-                            whileHover={{ y: -10 }}
-                            className="group relative h-80 rounded-2xl overflow-hidden cursor-pointer"
-                        >
-                            <img
-                                src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1170&auto=format&fit=crop"
-                                alt="Lumina Fashion"
-                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-8 flex flex-col justify-end">
-                                <h3 className="text-2xl font-bold mb-1">Lumina Fashion</h3>
-                                <p className="text-gray-300 text-sm">E-Commerce • Strategy</p>
-                            </div>
-                        </motion.div>
-                        <motion.div
-                            whileHover={{ y: -10 }}
-                            className="group relative h-80 rounded-2xl overflow-hidden cursor-pointer"
-                        >
-                            <img
-                                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1170&auto=format&fit=crop"
-                                alt="FinVault"
-                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-8 flex flex-col justify-end">
-                                <h3 className="text-2xl font-bold mb-1">FinVault</h3>
-                                <p className="text-gray-300 text-sm">Fintech • Security</p>
-                            </div>
-                        </motion.div>
+                        {projects.slice(0, 2).map((project, index) => (
+                            <Link to={`/project/${project.id}`} key={index}>
+                                <motion.div
+                                    whileHover={{ y: -10 }}
+                                    className="group relative h-80 rounded-2xl overflow-hidden cursor-pointer"
+                                >
+                                    <img
+                                        src={project.image}
+                                        alt={project.title}
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-8 flex flex-col justify-end">
+                                        <h3 className="text-2xl font-bold mb-1">{project.title}</h3>
+                                        <p className="text-gray-300 text-sm">{project.category}</p>
+                                    </div>
+                                </motion.div>
+                            </Link>
+                        ))}
                     </div>
 
                     <div className="mt-8 text-center md:hidden">

@@ -1,7 +1,14 @@
 export interface Project {
   _id?: string;
+  id?: string; // Static ID for URL routing
   title: string;
   description: string;
+  fullDescription?: string;
+  challenge?: string;
+  solution?: string;
+  technologies?: string[];
+  impact?: string;
+  gallery?: string[];
   image: string;
   category: string;
   link?: string;
