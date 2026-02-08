@@ -1,4 +1,6 @@
-export const projects = [
+import type { Project } from '../types';
+
+export const projects: Project[] = [
     {
         id: 'lumina-fashion',
         title: 'Lumina Fashion',
@@ -10,6 +12,11 @@ export const projects = [
         solution: 'We built a headless commerce solution using Next.js and Shopify Plus. This allowed for lightning-fast page loads and complete design freedom. we implemented AI-driven product recommendations and a streamlined one-page checkout.',
         technologies: ['React', 'Next.js', 'Shopify Plus', 'Tailwind CSS', 'Framer Motion'],
         impact: '40% increase in conversion rate, 25% increase in AOV, and a 60% reduction in bounce rate.',
+        testimonial: {
+            quote: "Klypso transformed our digital presence. The new site captures our brand essence perfectly while delivering incredible performance.",
+            author: "Elena Rossi",
+            role: "CMO, Lumina Fashion"
+        },
         gallery: [
             'https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1170&auto=format&fit=crop',
             'https://images.unsplash.com/photo-1490481651871-ab5a8cf0db69?q=80&w=1170&auto=format&fit=crop'
@@ -26,6 +33,11 @@ export const projects = [
         solution: 'We utilized WebRTC for secure, high-quality video streaming and built a custom encrypted messaging layer. We developed middleware to safely sync data with existing hospital databases using HL7 standards.',
         technologies: ['React', 'Node.js', 'WebRTC', 'Socket.io', 'MongoDB'],
         impact: 'Facilitated over 50,000 remote consultations in the first year and reduced patient wait times by 70%.',
+        testimonial: {
+            quote: "A secure, robust platform that stood up to the demands of a global crisis. Klypso delivered under immense pressure.",
+            author: "Dr. James Chen",
+            role: "CTO, Nexus Health"
+        },
         gallery: [
             'https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=1170&auto=format&fit=crop',
             'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?q=80&w=1170&auto=format&fit=crop'

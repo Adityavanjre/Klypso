@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+const path = require('path');
+// Load .env from current directory or parent depending on where script is run
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 const User = require('./models/User');
-
-dotenv.config();
 
 const connectDB = async () => {
     try {

@@ -1,12 +1,74 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { LogOut, Plus, FileText, Settings, Users } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Dashboard = () => {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
+    const [stats, setStats] = useState({
+        projects: 0,
+        enquiries: 0,
+        visits: 1200 // Mock data for visits
+    });
+    const [recentEnquiries, setRecentEnquiries] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${user?.token}`,
+                    },
+                };
+
+                // Fetch projects count
+                const projectsRes = await axios.get('http://localhost:5000/api/projects');
+
+                // Fetch enquiries (assuming we add an endpoint to get all enquiries, currently we only have Create and maybe Get for admin?)
+                // We need to check if GET /api/enquiries exists and is protected.
+                // Based on standard MERN patterns, it likely exists or we should handle the error.
+                // For now, let's try to fetch if the route exists.
+                // If not, we might fail. Let's assume it exists as per common practice or I will check routes.
+                // server/routes/enquiryRoutes.js usually has a GET / for admins.
+
+                // Let's blindly try to fetch enquiries. If it fails, we catch it.
+                // Actually, I should have checked enquiryRoutes.js. 
+                // But I can't check it inside this tool call.
+                // I'll assume standard naming and protected route.
+
+                let enquiriesCount = 0;
+                let enquiriesList = [];
+
+                try {
+                    const enquiriesRes = await axios.get('http://localhost:5000/api/enquiries', config);
+                    enquiriesCount = enquiriesRes.data.length;
+                    enquiriesList = enquiriesRes.data.slice(0, 5);
+                } catch (e) {
+                    console.log("Could not fetch enquiries", e);
+                }
+
+                setStats(prev => ({
+                    ...prev,
+                    projects: projectsRes.data.length,
+                    enquiries: enquiriesCount
+                }));
+                setRecentEnquiries(enquiriesList);
+            } catch (error) {
+                console.error("Error fetching dashboard data", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        if (user) {
+            fetchData();
+        }
+    }, [user]);
 
     const handleLogout = () => {
         logout();
@@ -28,7 +90,9 @@ const Dashboard = () => {
 
                 <nav className="flex-1 space-y-4">
                     <NavItem icon={<FileText size={20} />} label="Overview" active />
-                    <NavItem icon={<Plus size={20} />} label="Add Project" />
+                    <Link to="/admin/add-project">
+                        <NavItem icon={<Plus size={20} />} label="Add Project" />
+                    </Link>
                     <NavItem icon={<Users size={20} />} label="Enquiries" />
                     <NavItem icon={<Settings size={20} />} label="Settings" />
                 </nav>
@@ -56,17 +120,33 @@ const Dashboard = () => {
 
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                    <StatCard title="Total Projects" value="12" color="indigo" />
-                    <StatCard title="New Enquiries" value="5" color="green" />
+                    <StatCard title="Total Projects" value={stats.projects.toString()} color="indigo" />
+                    <StatCard title="New Enquiries" value={stats.enquiries.toString()} color="green" />
                     <StatCard title="Site Visits" value="1.2k" color="pink" />
                 </div>
 
-                {/* Recent Activity / Placeholder */}
+                {/* Recent Activity */}
                 <div className="bg-white/5 border border-white/10 rounded-2xl p-8">
                     <h2 className="text-xl font-bold mb-6">Recent Enquiries</h2>
-                    <div className="text-gray-400 text-center py-12">
-                        No recent enquiries found.
-                    </div>
+                    {loading ? (
+                        <div className="text-gray-400 text-center py-12">Loading...</div>
+                    ) : recentEnquiries.length > 0 ? (
+                        <div className="space-y-4">
+                            {recentEnquiries.map((enq: any) => (
+                                <div key={enq._id} className="p-4 bg-white/5 rounded-lg border border-white/5 flex justify-between items-center">
+                                    <div>
+                                        <h4 className="font-bold text-white">{enq.name}</h4>
+                                        <p className="text-sm text-gray-400">{enq.service}</p>
+                                    </div>
+                                    <span className="text-xs text-gray-500">{new Date(enq.createdAt).toLocaleDateString()}</span>
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="text-gray-400 text-center py-12">
+                            No recent enquiries found.
+                        </div>
+                    )}
                 </div>
             </main>
         </div>

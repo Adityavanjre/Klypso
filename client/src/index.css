@@ -41,7 +41,29 @@ body {
   flex-direction: column;
   min-width: 320px;
   min-height: 100vh;
-  @apply bg-black text-white;
+  @apply bg-black text-white overflow-x-hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-zinc-950;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-zinc-700/50 rounded-full hover:bg-zinc-600 transition-colors;
+}
+
+/* Utility for hiding scrollbar */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 #root {

@@ -12,6 +12,11 @@ export interface Project {
   image: string;
   category: string;
   link?: string;
+  testimonial?: {
+    quote: string;
+    author: string;
+    role: string;
+  };
   createdAt?: string;
 }
 

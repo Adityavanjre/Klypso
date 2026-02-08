@@ -11,8 +11,8 @@ import ProjectDetails from './pages/ProjectDetails';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Legal from './pages/Legal';
+import Order from './pages/Order';
 import NotFound from './pages/NotFound';
-
 import Login from './pages/Login';
 import Dashboard from './pages/Admin/Dashboard';
 import AddProject from './pages/Admin/AddProject';
@@ -20,12 +20,13 @@ import AdminRoute from './components/AdminRoute';
 
 function App() {
   const location = useLocation();
+  const isAuthPage = location.pathname.startsWith('/admin') || location.pathname === '/login';
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-white font-sans">
-      <Header />
+      {!isAuthPage && <Header />}
       <ScrollToTop />
-      <ChatWidget />
+      {!isAuthPage && <ChatWidget />}
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
@@ -35,6 +36,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/legal" element={<Legal />} />
+          <Route path="/order" element={<Order />} />
 
           <Route path="/login" element={<Login />} />
 
@@ -46,7 +48,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AnimatePresence>
-      <Footer />
+      {!isAuthPage && <Footer />}
     </div>
   );
 }

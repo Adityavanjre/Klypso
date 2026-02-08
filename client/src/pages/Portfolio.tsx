@@ -1,144 +1,117 @@
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import SEO from '../components/SEO';
-import { projects } from '../data/projects';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
+import Loader from '../components/Loader';
 import type { Project } from '../types';
+import { ArrowRight } from 'lucide-react';
+import { projects as projectsData } from '../data/projects';
+import { Link } from 'react-router-dom';
 
 const Portfolio = () => {
-    // Schema for SEO
-    const portfolioSchema = {
-        "@context": "https://schema.org",
-        "@type": "CollectionPage",
-        "name": "Klypso Portfolio",
-        "description": "Explore our portfolio of digital masterpieces.",
-        "url": "https://klypso.agency/portfolio",
-        "hasPart": projects.map(project => ({
-            "@type": "CreativeWork",
-            "name": project.title,
-            "description": project.description,
-            "url": `https://klypso.agency/project/${project.id}`
-        }))
-    };
+    // We can use local data for now as a reliable source since backend is using memory server
+    // which resets on restart. This ensures the portfolio always looks good.
+    const [projects] = useState<Project[]>(projectsData);
+    const [loading] = useState(false);
+    const [filter, setFilter] = useState('All');
 
-    const stats = [
-        { label: 'Projects Delivered', value: '150+' },
-        { label: 'Client Retention', value: '98%' },
-        { label: 'Industries Served', value: '25+' },
-        { label: 'Years Experience', value: '5+' },
-    ];
+    const categories = ['All', 'Web', 'App', 'Security', 'AR/VR', 'Data'];
+
+    const filteredProjects = filter === 'All'
+        ? projects
+        : projects.filter(p => p.category.includes(filter));
 
     return (
-        <div className="min-h-screen bg-black text-white">
-            <SEO
-                title="Our Portfolio | Klypso - Exceptional Digital Solutions"
-                description="Explore Klypso's portfolio of successful projects. From high-end e-commerce platforms to secure fintech dashboards, we deliver digital excellence that drives results."
-                canonical="/portfolio"
-                schema={portfolioSchema}
-            />
+        <section className="min-h-screen bg-black text-white pt-24 pb-12 px-4">
+            <Helmet>
+                <title>Our Work | Klypso Portfolio</title>
+                <meta name="description" content="Showcasing our finest digital creations and success stories." />
+            </Helmet>
 
-            {/* Hero Section */}
-            <section className="pt-32 pb-20 px-4 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-zinc-900 via-black to-black">
-                <div className="container mx-auto text-center">
+            <div className="container mx-auto">
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="text-center mb-16"
+                >
+                    <h1 className="text-4xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500 mb-6">
+                        Selected Works
+                    </h1>
+                    <p className="text-gray-400 max-w-xl mx-auto text-lg">
+                        Innovative solutions for complex challenges. Browse our recent projects.
+                    </p>
+                </motion.div>
+
+                {/* Filter Tabs */}
+                <div className="flex flex-wrap justify-center gap-4 mb-12 overflow-x-auto pb-4 scrollbar-hide">
+                    {categories.map(cat => (
+                        <button
+                            key={cat}
+                            onClick={() => setFilter(cat)}
+                            className={`px-6 py-2 rounded-full text-sm font-semibold transition-all border ${filter === cat
+                                ? 'bg-white text-black border-white scale-105'
+                                : 'bg-transparent text-gray-400 border-white/10 hover:border-white/30'
+                                }`}
+                        >
+                            {cat}
+                        </button>
+                    ))}
+                </div>
+
+                {loading ? (
+                    <Loader />
+                ) : (
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
+                        layout
+                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
                     >
-                        <h1 className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">
-                            Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">Masterpieces</span>
-                        </h1>
-                        <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                            A showcase of our finest work. Each project represents a unique challenge solved with creativity, precision, and cutting-edge technology.
-                        </p>
+                        <AnimatePresence mode="popLayout">
+                            {filteredProjects.map((project) => (
+                                <ProjectCard key={project._id || project.id} project={project} />
+                            ))}
+                        </AnimatePresence>
                     </motion.div>
-                </div>
-            </section>
-
-            {/* Stats Section */}
-            <section className="py-10 border-y border-white/5 bg-white/5">
-                <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                        {stats.map((stat, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: index * 0.1 }}
-                                className="text-center"
-                            >
-                                <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.value}</div>
-                                <div className="text-sm text-gray-400 uppercase tracking-wider">{stat.label}</div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Projects Grid */}
-            <section className="py-20 px-4">
-                <div className="container mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {projects.map((project, index) => (
-                            <ProjectCard key={project.id || index} project={project} index={index} />
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* CTA Section */}
-            <section className="py-20 bg-zinc-900/50">
-                <div className="container mx-auto px-4 text-center">
-                    <h2 className="text-3xl md:text-5xl font-bold mb-8">Have a vision? Let's build it.</h2>
-                    <Link to="/contact" className="btn-primary px-8 py-4 text-lg rounded-full inline-flex items-center gap-2 group">
-                        Start Your Project <ArrowRight className="group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                </div>
-            </section>
-        </div>
+                )}
+            </div>
+        </section>
     );
 };
 
-const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            viewport={{ once: true }}
-            className="group relative bg-zinc-900 rounded-2xl overflow-hidden border border-white/5 hover:border-white/20 transition-all duration-500 flex flex-col h-full"
-        >
-            {/* Image Container */}
-            <div className="relative h-64 overflow-hidden">
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors z-10" />
-                <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute top-4 left-4 z-20">
-                    <span className="px-3 py-1 bg-black/60 backdrop-blur-md text-xs font-semibold uppercase tracking-wider text-white rounded-full border border-white/10">
-                        {project.category}
-                    </span>
+const ProjectCard = ({ project }: { project: Project }) => (
+    <motion.div
+        layout
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.9 }}
+        whileHover={{ y: -5 }}
+        className="group relative bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-300 flex flex-col h-[400px]"
+    >
+        <Link to={`/project/${project.id}`} className="flex flex-col h-full">
+            {/* Project Image Area */}
+            <div className={`h-1/2 w-full ${project.image} relative overflow-hidden`}>
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+                <div className="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-xs font-medium text-white border border-white/10">
+                    {project.category}
                 </div>
             </div>
 
             {/* Content */}
-            <div className="p-8 flex flex-col flex-grow">
-                <h3 className="text-2xl font-bold mb-3 group-hover:text-indigo-400 transition-colors duration-300">{project.title}</h3>
-                <p className="text-gray-400 mb-6 line-clamp-2 leading-relaxed flex-grow">
+            <div className="p-8 flex flex-col flex-1 relative">
+                <h3 className="text-2xl font-bold mb-3 group-hover:text-indigo-300 transition-colors">
+                    {project.title}
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed mb-6 line-clamp-3">
                     {project.description}
                 </p>
 
-                <Link
-                    to={`/project/${project.id}`}
-                    className="inline-flex items-center text-sm font-bold uppercase tracking-widest text-white hover:text-indigo-400 transition-colors gap-2 mt-auto"
-                >
-                    View Case Study <ArrowRight size={16} />
-                </Link>
+                <div className="mt-auto pt-6 border-t border-white/5 flex justify-between items-center text-sm font-medium text-white/50 group-hover:text-white transition-colors">
+                    <span>View Case Study</span>
+                    <div className="bg-white/10 p-2 rounded-full group-hover:bg-indigo-500 transition-colors">
+                        <ArrowRight size={16} />
+                    </div>
+                </div>
             </div>
-        </motion.div>
-    );
-};
+        </Link>
+    </motion.div>
+);
 
 export default Portfolio;

@@ -37,17 +37,13 @@ const Contact = () => {
         setStatus(null);
 
         try {
-            const encode = (data: any) => {
-                return Object.keys(data)
-                    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-                    .join("&");
-            };
-
-            await fetch("/", {
+            const res = await fetch("http://localhost:5000/api/enquiries", {
                 method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: encode({ "form-name": "contact", ...formData })
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData)
             });
+
+            if (!res.ok) throw new Error('Failed to send enquiry');
 
             setStatus('success');
             setFormData({ name: '', email: '', service: services[0], message: '' });
@@ -76,8 +72,7 @@ const Contact = () => {
                     <p className="text-gray-400">We'd love to hear about your project.</p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-6" name="contact" data-netlify="true">
-                    <input type="hidden" name="form-name" value="contact" />
+                <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-6">
                         <div>
                             <label className="block text-sm font-medium text-gray-300 mb-2">Your Name</label>

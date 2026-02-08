@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Code, Send, Layout, Smartphone, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import Testimonials from '../components/Testimonials';
 import { projects } from '../data/projects';
 
 const Home = () => {
@@ -19,14 +20,19 @@ const Home = () => {
         "@type": "ProfessionalService",
         "name": "Klypso Agency",
         "url": "https://klypso.agency",
-        "image": "https://klypso.agency/logo.png",
-        "description": "Premium IT services agency specializing in high-performance web development and digital strategy.",
+        "logo": "https://klypso.agency/logo.png",
+        "image": "https://klypso.agency/og-image.jpg",
+        "description": "Klypso is a premium IT services agency in Bangalore offering Web Development, App Development, Digital Marketing, and SEO services.",
         "address": {
             "@type": "PostalAddress",
-            "addressLocality": "Digital Space",
-            "addressCountry": "Global"
+            "streetAddress": "Tech Park",
+            "addressLocality": "Bangalore",
+            "addressRegion": "Karnataka",
+            "postalCode": "560001",
+            "addressCountry": "IN"
         },
-        "priceRange": "$$$",
+        "telephone": "+919449734414",
+        "priceRange": "$$",
         "openingHoursSpecification": {
             "@type": "OpeningHoursSpecification",
             "dayOfWeek": [
@@ -38,14 +44,20 @@ const Home = () => {
             ],
             "opens": "09:00",
             "closes": "18:00"
-        }
+        },
+        "sameAs": [
+            "https://www.facebook.com/klypso",
+            "https://www.instagram.com/klypso",
+            "https://www.linkedin.com/company/klypso"
+        ]
     };
 
     return (
         <div className="bg-black text-white">
             <SEO
-                title="Klypso | Premium Digital Agency"
-                description="Klypso is a premium agency specializing in high-performance web development, app creation, and digital strategy."
+                title="Klypso | Best Web & App Development Company in Bangalore"
+                description="Klypso is a leading IT services agency in Bangalore specializing in Custom Web Development, Mobile App Development, Digital Marketing, SEO, and E-commerce Solutions. We deliver premium digital experiences."
+                keywords="Web Development Company Bangalore, App Development Services, Digital Marketing Agency, SEO Services Bangalore, Custom Software Development, IT Services Agency, Klypso, Best Web Design Company, React Native Developers, MERN Stack Development, E-commerce Trends, Premium Digital Agency India"
                 canonical="/"
                 schema={homeSchema}
             />
@@ -191,6 +203,8 @@ const Home = () => {
                     </div>
                 </div>
             </section>
+
+            <Testimonials />
 
             {/* CTA Section */}
             <section className="py-24 px-4 relative overflow-hidden">

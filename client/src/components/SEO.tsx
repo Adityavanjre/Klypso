@@ -3,19 +3,20 @@ import { Helmet } from 'react-helmet-async';
 interface SEOProps {
   title: string;
   description: string;
+  keywords?: string;
   canonical?: string;
   image?: string;
   type?: string;
   schema?: object;
 }
 
-const SEO = ({ 
-  title, 
-  description, 
+const SEO = ({
+  title,
+  description,
   canonical,
   image = '/og-image.jpg', // Default image in public folder
   type = 'website',
-  schema 
+  schema
 }: SEOProps) => {
   const siteUrl = 'https://klypso.agency'; // Replace with actual domain
   const fullUrl = canonical ? `${siteUrl}${canonical}` : siteUrl;
@@ -26,6 +27,7 @@ const SEO = ({
       {/* Standard Metadata */}
       <title>{title}</title>
       <meta name="description" content={description} />
+      {keywords && <meta name="keywords" content={keywords} />}
       <link rel="canonical" href={fullUrl} />
 
       {/* Open Graph / Facebook */}
