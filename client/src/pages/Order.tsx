@@ -1,157 +1,393 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight, CheckCircle, CreditCard, ShieldCheck } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ArrowRight, CheckCircle, CreditCard, ShieldCheck, ChevronRight, ChevronLeft, Link as LinkIcon, AlertCircle } from 'lucide-react';
+import axios from 'axios';
 
 const Order = () => {
-    const [selectedPlan, setSelectedPlan] = useState('standard');
+    const [step, setStep] = useState(1);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
     const [showQRCode, setShowQRCode] = useState(false);
 
+    // Form State
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        service: 'Website Development & Integration',
+        projectType: 'New Project',
+        budget: '$1k - $5k',
+        timeline: '1-2 months',
+        message: '',
+        referenceLinks: '', // simple string for now, could be comma separated
+    });
+
     const upiId = "adityavanjre280-4@okaxis";
-    // Constructing a UPI link. 
-    // Note: This link format works on mobile devices with UPI apps installed.
-    // Generating a QR code URL using a public API for display.
     const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=${upiId}&pn=Klypso&cu=INR`;
 
-    const plans = [
-        {
-            id: 'basic',
-            name: 'Basic Website',
-            price: '₹25,000',
-            features: ['Responsive 5-Page Site', 'Contact Form', 'Basic SEO', '1 Month Support']
-        },
-        {
-            id: 'standard',
-            name: 'Business Growth',
-            price: '₹50,000',
-            features: ['Dynamic Website (10 Pages)', 'CMS Integration', 'Advanced SEO', 'Social Media Setup', '3 Months Support'],
-            popular: true
-        },
-        {
-            id: 'premium',
-            name: 'E-Commerce / App',
-            price: '₹1,00,000+',
-            features: ['Full E-Commerce / Mobile App', 'Payment Gateway', 'Custom Admin Panel', '6 Months Support', 'Performance Optimization']
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const nextStep = () => {
+        if (step === 1) {
+            if (!formData.name || !formData.email || !formData.message) {
+                setError('Please fill in all required fields.');
+                return;
+            }
         }
-    ];
+        setError('');
+        setStep(step + 1);
+    };
+
+    const prevStep = () => setStep(step - 1);
+
+    const handleSubmitRequirements = async () => {
+        setLoading(true);
+        setError('');
+        try {
+            // Send enquire data to backend to save as a lead/enquiry first
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            };
+
+            // Format reference links to array if needed
+            const payload = {
+                ...formData,
+                referenceLinks: formData.referenceLinks.split(',').map(link => link.trim()).filter(link => link)
+            };
+
+            await axios.post('http://localhost:5000/api/enquiries', payload, config);
+
+            // Move to payment step only after successful submission
+            setStep(3);
+        } catch (err) {
+            console.error(err);
+            setError('Failed to submit requirements. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const renderStep1_Requirements = () => (
+        <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            className="space-y-6"
+        >
+            <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-2">Name *</label>
+                    <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500 transition-colors"
+                        placeholder="Your Name"
+                    />
+                </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-2">Email *</label>
+                    <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500 transition-colors"
+                        placeholder="your@email.com"
+                    />
+                </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-2">Phone</label>
+                    <input
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500 transition-colors"
+                        placeholder="+91..."
+                    />
+                </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-2">Service Type *</label>
+                    <select
+                        name="service"
+                        value={formData.service}
+                        onChange={handleChange}
+                        className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500 transition-colors appearance-none"
+                    >
+                        <option value="Website Development & Integration">Website Development</option>
+                        <option value="App Development">App Development</option>
+                        <option value="Digital Marketing">Digital Marketing</option>
+                        <option value="Social Media Management">Social Media</option>
+                        <option value="Creative Content">Creative Content</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-2">Project Type</label>
+                    <select
+                        name="projectType"
+                        value={formData.projectType}
+                        onChange={handleChange}
+                        className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500 transition-colors"
+                    >
+                        <option value="New Project">New Project</option>
+                        <option value="Redesign">Redesign Existing</option>
+                        <option value="Maintenance">Maintenance</option>
+                        <option value="Consultation">Consultation</option>
+                    </select>
+                </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-2">Estimated Budget</label>
+                    <select
+                        name="budget"
+                        value={formData.budget}
+                        onChange={handleChange}
+                        className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500 transition-colors"
+                    >
+                        <option value="< $1k">Less than ₹50k</option>
+                        <option value="$1k - $5k">₹50k - ₹2L</option>
+                        <option value="$5k - $10k">₹2L - ₹5L</option>
+                        <option value="> $10k">More than ₹5L</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label className="block text-sm font-medium text-gray-400 mb-2">Timeline Expectations</label>
+                <div className="flex gap-4 flex-wrap">
+                    {['ASAP', '1-2 months', '3-6 months', 'Flexible'].map(opt => (
+                        <button
+                            key={opt}
+                            type="button"
+                            onClick={() => setFormData({ ...formData, timeline: opt })}
+                            className={`px-4 py-2 rounded-full border text-sm transition-all ${formData.timeline === opt ? 'bg-indigo-600 border-indigo-600 text-white' : 'border-white/20 text-gray-400 hover:border-white/40'}`}
+                        >
+                            {opt}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
+            <div>
+                <label className="block text-sm font-medium text-gray-400 mb-2">Project Details & Requirements *</label>
+                <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows={4}
+                    className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500 transition-colors"
+                    placeholder="Describe your vision, features needed, and any specific goals..."
+                ></textarea>
+            </div>
+
+            <div>
+                <label className="block text-sm font-medium text-gray-400 mb-2">Reference Links (Optional)</label>
+                <div className="flex items-center bg-white/5 border border-white/10 rounded-lg p-3">
+                    <LinkIcon size={18} className="text-gray-500 mr-2" />
+                    <input
+                        type="text"
+                        name="referenceLinks"
+                        value={formData.referenceLinks}
+                        onChange={handleChange}
+                        className="w-full bg-transparent text-white focus:outline-none"
+                        placeholder="e.g., example.com, dribbble.com/shot..."
+                    />
+                </div>
+                <p className="text-xs text-gray-500 mt-1">Separate multiple links with commas.</p>
+            </div>
+
+            <div className="flex justify-end pt-4">
+                <button
+                    onClick={nextStep}
+                    className="btn-primary px-8 py-3 flex items-center gap-2"
+                >
+                    Review Requirements <ChevronRight size={18} />
+                </button>
+            </div>
+        </motion.div>
+    );
+
+    const renderStep2_Review = () => (
+        <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            className="space-y-8"
+        >
+            <div className="bg-gradient-to-br from-indigo-900/20 to-purple-900/20 border border-indigo-500/30 rounded-2xl p-6">
+                <h3 className="text-xl font-bold mb-4 flex items-center text-indigo-300">
+                    <CheckCircle className="mr-2" size={20} /> Requirement Summary
+                </h3>
+                <div className="grid md:grid-cols-2 gap-y-4 gap-x-8 text-sm">
+                    <div><span className="text-gray-400">Name:</span> <div>{formData.name}</div></div>
+                    <div><span className="text-gray-400">Email:</span> <div>{formData.email}</div></div>
+                    <div><span className="text-gray-400">Service:</span> <div>{formData.service}</div></div>
+                    <div><span className="text-gray-400">Project Type:</span> <div>{formData.projectType}</div></div>
+                    <div><span className="text-gray-400">Budget:</span> <div>{formData.budget}</div></div>
+                    <div><span className="text-gray-400">Timeline:</span> <div>{formData.timeline}</div></div>
+                </div>
+                <div className="mt-4 pt-4 border-t border-white/10">
+                    <span className="text-gray-400 text-sm">Project Description:</span>
+                    <p className="mt-1 text-gray-300 italic">"{formData.message}"</p>
+                </div>
+            </div>
+
+            <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4 flex gap-4 items-start">
+                <AlertCircle className="text-yellow-500 shrink-0 mt-0.5" size={20} />
+                <div>
+                    <h4 className="font-bold text-yellow-500 mb-1">Process Note</h4>
+                    <p className="text-sm text-gray-300">
+                        We recommend submitting your requirements first. Our team will review them and provide a detailed quote and estimation within 24 hours. However, if you are ready to kickstart immediately, you can proceed to pay a booking advance.
+                    </p>
+                </div>
+            </div>
+
+            <div className="flex justify-between pt-4">
+                <button
+                    onClick={prevStep}
+                    className="text-gray-400 hover:text-white px-6 py-3 flex items-center gap-2"
+                >
+                    <ChevronLeft size={18} /> Edit
+                </button>
+                <button
+                    onClick={handleSubmitRequirements}
+                    disabled={loading}
+                    className="btn-primary px-8 py-3 flex items-center gap-2"
+                >
+                    {loading ? 'Submitting...' : 'Submit & Continue to Payment'}
+                    {!loading && <CreditCard size={18} />}
+                </button>
+            </div>
+        </motion.div>
+    );
+
+    const renderStep3_Payment = () => (
+        <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="text-center"
+        >
+            <div className="mb-8">
+                <div className="w-16 h-16 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle size={32} />
+                </div>
+                <h2 className="text-2xl font-bold mb-2">Requirements Received!</h2>
+                <p className="text-gray-400">We have received your project details. You can now proceed with an advance payment to lock your slot.</p>
+            </div>
+
+            <div className="max-w-md mx-auto bg-white rounded-2xl p-6 text-black shadow-2xl overflow-hidden relative">
+                <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-indigo-500 to-purple-500" />
+
+                <h3 className="font-bold text-lg mb-6 flex justify-center items-center gap-2">
+                    <CreditCard size={20} /> Secure Advance Payment
+                </h3>
+
+                {showQRCode ? (
+                    <div className="space-y-4">
+                        <div className="bg-gray-100 p-4 rounded-xl">
+                            <img
+                                src={qrCodeUrl}
+                                alt="UPI QR Code"
+                                className="w-48 h-48 mx-auto object-contain mix-blend-multiply"
+                            />
+                        </div>
+                        <p className="text-sm font-medium text-gray-600">Scan via GPay, PhonePe, Paytm</p>
+                        <p className="font-mono bg-gray-100 py-2 px-4 rounded text-sm select-all cursor-pointer border border-gray-200" title="Click to copy">
+                            {upiId}
+                        </p>
+                        <button
+                            onClick={() => setShowQRCode(false)}
+                            className="text-sm text-indigo-600 font-medium hover:underline"
+                        >
+                            Back
+                        </button>
+                    </div>
+                ) : (
+                    <div className="space-y-4">
+                        <div className="p-4 bg-indigo-50 rounded-xl border border-indigo-100">
+                            <div className="text-sm text-gray-500">Advance Amount</div>
+                            <div className="text-3xl font-bold text-indigo-900">₹25,000</div>
+                        </div>
+                        <button
+                            onClick={() => setShowQRCode(true)}
+                            className="w-full bg-black text-white py-4 rounded-xl font-bold hover:bg-gray-800 transition-colors flex justify-center items-center gap-2"
+                        >
+                            Pay Now <ArrowRight size={18} />
+                        </button>
+                        <p className="text-xs text-center text-gray-400 mt-4">
+                            Your payment is secure. We will start the estimation process immediately.
+                        </p>
+                    </div>
+                )}
+            </div>
+
+            <div className="mt-8 text-gray-500 text-sm">
+                <LinkIcon size={14} className="inline mr-1" />
+                A confirmation email will be sent to {formData.email}
+            </div>
+        </motion.div>
+    );
 
     return (
         <div className="min-h-screen bg-black text-white pt-24 pb-12 px-4">
             <Helmet>
-                <title>Order Services | Klypso Payment</title>
-                <meta name="description" content="Place your order for Klypso's premium digital services. Secure payment via UPI available." />
+                <title>Start Project | Klypso</title>
+                <meta name="description" content="Tell us about your project requirements and get started with Klypso." />
             </Helmet>
 
-            <div className="container mx-auto max-w-6xl">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-center mb-16"
-                >
-                    <h1 className="text-4xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-emerald-600 mb-6">
-                        Start Your Journey
-                    </h1>
-                    <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                        Select a package that suits your needs and make a secure payment to kickstart your project instantly.
-                    </p>
-                </motion.div>
-
-                <div className="grid md:grid-cols-3 gap-8 mb-16">
-                    {plans.map((plan) => (
-                        <div
-                            key={plan.id}
-                            className={`relative bg-white/5 border ${selectedPlan === plan.id ? 'border-green-500 ring-1 ring-green-500/50' : 'border-white/10'} rounded-2xl p-8 cursor-pointer transition-all hover:border-green-500/50`}
-                            onClick={() => setSelectedPlan(plan.id)}
-                        >
-                            {plan.popular && (
-                                <div className="absolute top-0 right-0 bg-green-500 text-black text-xs font-bold px-3 py-1 rounded-bl-xl rounded-tr-xl">
-                                    POPULAR
+            <div className="container mx-auto max-w-4xl">
+                {/* Progress Steps */}
+                <div className="flex justify-center mb-12">
+                    <div className="flex items-center gap-4">
+                        {[1, 2, 3].map((s) => (
+                            <div key={s} className="flex items-center">
+                                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${step >= s ? 'bg-indigo-600 text-white' : 'bg-white/10 text-gray-500'}`}>
+                                    {s}
                                 </div>
-                            )}
-                            <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
-                            <div className="text-3xl font-bold text-green-400 mb-6">{plan.price}</div>
-                            <ul className="space-y-3 mb-8">
-                                {plan.features.map((feature, idx) => (
-                                    <li key={idx} className="flex items-center text-sm text-gray-300">
-                                        <CheckCircle size={16} className="text-green-500 mr-2 shrink-0" />
-                                        {feature}
-                                    </li>
-                                ))}
-                            </ul>
-                            <button
-                                className={`w-full py-3 rounded-lg font-bold transition-all ${selectedPlan === plan.id ? 'bg-green-500 text-black' : 'bg-white/10 hover:bg-white/20'}`}
-                            >
-                                {selectedPlan === plan.id ? 'Selected' : 'Select Plan'}
-                            </button>
-                        </div>
-                    ))}
+                                {s < 3 && <div className={`w-12 h-1 bg-white/10 mx-2 ${step > s ? 'bg-indigo-600' : ''}`} />}
+                            </div>
+                        ))}
+                    </div>
                 </div>
 
-                {/* Payment Section */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    className="max-w-4xl mx-auto bg-zinc-900 border border-white/10 rounded-3xl p-8 md:p-12"
-                >
-                    <div className="grid md:grid-cols-2 gap-12 items-center">
-                        <div>
-                            <h2 className="text-2xl font-bold mb-6 flex items-center">
-                                <CreditCard className="mr-3 text-green-400" /> Payment Details
-                            </h2>
-                            <p className="text-gray-300 mb-6 leading-relaxed">
-                                You are about to pay for the <strong>{plans.find(p => p.id === selectedPlan)?.name}</strong> package.
-                                Please scan the QR code using any UPI app (Google Pay, PhonePe, Paytm, etc.).
-                            </p>
+                <div className="text-center mb-10">
+                    <h1 className="text-3xl md:text-5xl font-bold mb-4">
+                        {step === 1 && "Project Details"}
+                        {step === 2 && "Review & Confirm"}
+                        {step === 3 && "Secure Payment"}
+                    </h1>
+                    <p className="text-gray-400">
+                        {step === 1 && "Help us understand your vision better."}
+                        {step === 2 && "Ensure everything is correct before proceeding."}
+                        {step === 3 && "Complete the initial booking to start."}
+                    </p>
+                </div>
 
-                            <div className="space-y-4 mb-8">
-                                <div className="p-4 bg-black/50 rounded-lg border border-white/5">
-                                    <div className="text-gray-400 text-xs uppercase tracking-wider mb-1">UPI ID</div>
-                                    <div className="font-mono text-lg text-green-400 select-all">{upiId}</div>
-                                </div>
-                                <div className="flex items-center gap-2 text-sm text-gray-400">
-                                    <ShieldCheck size={16} className="text-green-500" />
-                                    Secure Payment via Axis Bank UPI
-                                </div>
-                            </div>
-
-                            <button
-                                onClick={() => setShowQRCode(!showQRCode)}
-                                className="w-full btn-primary py-4 text-lg font-bold bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 border-none"
-                            >
-                                {showQRCode ? 'Hide QR Code' : 'Show Payment QR Code'}
-                            </button>
-                        </div>
-
-                        <div className="flex flex-col items-center justify-center bg-white p-8 rounded-2xl relative">
-                            {showQRCode ? (
-                                <>
-                                    <img
-                                        src={qrCodeUrl}
-                                        alt="UPI QR Code"
-                                        className="w-48 h-48 md:w-64 md:h-64 object-contain"
-                                    />
-                                    <div className="mt-4 text-black font-bold text-center">
-                                        Scan to Pay
-                                    </div>
-                                    <div className="mt-1 text-gray-500 text-xs">
-                                        Accepts GPay, PhonePe, Paytm, etc.
-                                    </div>
-                                </>
-                            ) : (
-                                <div className="w-full h-64 flex flex-col items-center justify-center text-gray-400">
-                                    <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center mb-4">
-                                        <CreditCard className="text-gray-400" />
-                                    </div>
-                                    <p>Click "Show Payment QR Code" to reveal</p>
-                                </div>
-                            )}
-                        </div>
+                {error && (
+                    <div className="bg-red-500/10 border border-red-500/20 text-red-500 p-4 rounded-xl mb-6 text-center">
+                        {error}
                     </div>
-                </motion.div>
+                )}
 
-                <div className="text-center mt-12 text-gray-500 text-sm">
-                    After payment, please send a screenshot to <a href="mailto:adityavanjre280@gmail.com" className="text-green-400 hover:underline">adityavanjre280@gmail.com</a> along with your requirements.
+                <div className="bg-zinc-900/50 border border-white/5 rounded-3xl p-6 md:p-12 mb-12">
+                    <AnimatePresence mode="wait">
+                        {step === 1 && renderStep1_Requirements()}
+                        {step === 2 && renderStep2_Review()}
+                        {step === 3 && renderStep3_Payment()}
+                    </AnimatePresence>
                 </div>
             </div>
         </div>
