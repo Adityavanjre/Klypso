@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+
 import { motion } from 'framer-motion';
 import { Send, CheckCircle, AlertCircle } from 'lucide-react';
 
@@ -37,7 +37,18 @@ const Contact = () => {
         setStatus(null);
 
         try {
-            await axios.post('http://localhost:5000/api/enquiries', formData);
+            const encode = (data: any) => {
+                return Object.keys(data)
+                    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+                    .join("&");
+            };
+
+            await fetch("/", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: encode({ "form-name": "contact", ...formData })
+            });
+
             setStatus('success');
             setFormData({ name: '', email: '', service: services[0], message: '' });
         } catch (error) {
@@ -54,7 +65,7 @@ const Contact = () => {
                 <title>Contact Us | Klypso</title>
                 <meta name="description" content="Get in touch with Klypso for all your web, app, and digital marketing needs." />
             </Helmet>
-            <motion.div 
+            <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
@@ -65,28 +76,29 @@ const Contact = () => {
                     <p className="text-gray-400">We'd love to hear about your project.</p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6" name="contact" data-netlify="true">
+                    <input type="hidden" name="form-name" value="contact" />
                     <div className="grid md:grid-cols-2 gap-6">
                         <div>
                             <label className="block text-sm font-medium text-gray-300 mb-2">Your Name</label>
-                            <input 
-                                type="text" 
-                                name="name" 
-                                value={formData.name} 
-                                onChange={handleChange} 
-                                required 
+                            <input
+                                type="text"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                required
                                 className="w-full bg-black/50 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500 transition-colors"
                                 placeholder="John Doe"
                             />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-300 mb-2">Your Email</label>
-                            <input 
-                                type="email" 
-                                name="email" 
-                                value={formData.email} 
-                                onChange={handleChange} 
-                                required 
+                            <input
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
                                 className="w-full bg-black/50 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500 transition-colors"
                                 placeholder="john@example.com"
                             />
@@ -95,10 +107,10 @@ const Contact = () => {
 
                     <div>
                         <label className="block text-sm font-medium text-gray-300 mb-2">Service Interested In</label>
-                        <select 
-                            name="service" 
-                            value={formData.service} 
-                            onChange={handleChange} 
+                        <select
+                            name="service"
+                            value={formData.service}
+                            onChange={handleChange}
                             className="w-full bg-black/50 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500 transition-colors appearance-none"
                         >
                             {services.map((svc) => (
@@ -109,19 +121,19 @@ const Contact = () => {
 
                     <div>
                         <label className="block text-sm font-medium text-gray-300 mb-2">Message</label>
-                        <textarea 
-                            name="message" 
-                            value={formData.message} 
-                            onChange={handleChange} 
-                            required 
+                        <textarea
+                            name="message"
+                            value={formData.message}
+                            onChange={handleChange}
+                            required
                             rows={4}
                             className="w-full bg-black/50 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500 transition-colors resize-none"
                             placeholder="Tell us about your project..."
                         />
                     </div>
 
-                    <button 
-                        type="submit" 
+                    <button
+                        type="submit"
                         disabled={loading}
                         className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed group"
                     >
@@ -130,7 +142,7 @@ const Contact = () => {
                     </button>
 
                     {status === 'success' && (
-                        <motion.div 
+                        <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             className="mt-4 p-4 bg-green-500/20 text-green-400 border border-green-500/30 rounded-lg flex items-center gap-2 justify-center"
@@ -141,7 +153,7 @@ const Contact = () => {
                     )}
 
                     {status === 'error' && (
-                        <motion.div 
+                        <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             className="mt-4 p-4 bg-red-500/20 text-red-400 border border-red-500/30 rounded-lg flex items-center gap-2 justify-center"
