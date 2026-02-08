@@ -5,34 +5,19 @@ const nodemailer = require('nodemailer');
 // @route   POST /api/enquiries
 // @access  Public
 const createEnquiry = async (req, res) => {
-    const {
-        name,
-        email,
-        phone,
-        service,
-        projectType,
-        budget,
-        timeline,
-        message,
-        referenceLinks
-    } = req.body;
+    const { name, email, service, message } = req.body;
 
     try {
         const enquiry = new Enquiry({
             name,
             email,
-            phone,
             service,
-            projectType,
-            budget,
-            timeline,
             message,
-            referenceLinks,
         });
 
         const createdEnquiry = await enquiry.save();
 
-        // Send email notification
+        // Send email notification (optional for now, but configured)
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -43,49 +28,14 @@ const createEnquiry = async (req, res) => {
 
         const mailOptions = {
             from: process.env.EMAIL_USER,
-            to: process.env.EMAIL_USER, // Admin receives notification
-            subject: `New Project Enquiry: ${projectType} from ${name}`,
-            text: `
-                New Enquiry Received!
-                
-                Client Details:
-                Name: ${name}
-                Email: ${email}
-                Phone: ${phone || 'Not provided'}
-                
-                Project Details:
-                Service: ${service}
-                Type: ${projectType}
-                Budget: ${budget}
-                Timeline: ${timeline}
-                
-                Message:
-                ${message}
-                
-                Reference Links:
-                ${referenceLinks && referenceLinks.length > 0 ? referenceLinks.join(', ') : 'None'}
-            `,
-            html: `
-                <h3>New Project Enquiry Received!</h3>
-                <p><strong>Client:</strong> ${name} (<a href="mailto:${email}">${email}</a>)</p>
-                <p><strong>Phone:</strong> ${phone || 'N/A'}</p>
-                <hr />
-                <h4>Project Details</h4>
-                <ul>
-                    <li><strong>Service:</strong> ${service}</li>
-                    <li><strong>Type:</strong> ${projectType}</li>
-                    <li><strong>Budget:</strong> ${budget}</li>
-                    <li><strong>Timeline:</strong> ${timeline}</li>
-                </ul>
-                <p><strong>Message:</strong></p>
-                <blockquote style="background: #f9f9f9; padding: 10px; border-left: 5px solid #ccc;">${message}</blockquote>
-                <p><strong>Reference Links:</strong> ${referenceLinks && referenceLinks.length > 0 ? referenceLinks.join(', ') : 'None'}</p>
-            `
+            to: process.env.EMAIL_USER, // User receives notification
+            subject: `New Enquiry from ${name}`,
+            text: `Name: ${name}\nEmail: ${email}\nService: ${service}\nMessage: ${message}`,
         };
 
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
-                console.log('Error sending email:', error);
+                console.log(error);
             } else {
                 console.log('Email sent: ' + info.response);
             }

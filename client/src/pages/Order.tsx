@@ -255,6 +255,15 @@ const Order = () => {
                 </div>
             </div>
 
+            <div className="bg-white/5 border border-white/10 rounded-lg p-4">
+                <label className="flex items-start gap-3 cursor-pointer">
+                    <input type="checkbox" className="mt-1 w-4 h-4 rounded border-gray-600 bg-gray-800 text-indigo-600 focus:ring-indigo-500" />
+                    <span className="text-sm text-gray-400">
+                        I agree to the <a href="/legal" target="_blank" className="text-indigo-400 hover:text-indigo-300 underline">Terms of Service</a> and <a href="/legal" target="_blank" className="text-indigo-400 hover:text-indigo-300 underline">Privacy Policy</a>. I understand that advance payments are subject to the Refund Policy.
+                    </span>
+                </label>
+            </div>
+
             <div className="flex justify-between pt-4">
                 <button
                     onClick={prevStep}

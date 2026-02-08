@@ -134,20 +134,11 @@ const Dashboard = () => {
                         <div className="space-y-4">
                             {recentEnquiries.map((enq: any) => (
                                 <div key={enq._id} className="p-4 bg-white/5 rounded-lg border border-white/5 flex justify-between items-center">
-                                    <div className="flex-1">
-                                        <div className="flex justify-between items-start mb-1">
-                                            <h4 className="font-bold text-white text-lg">{enq.name}</h4>
-                                            <span className={`text-xs px-2 py-1 rounded-full border ${enq.status === 'New' ? 'bg-green-500/20 text-green-400 border-green-500/30' : 'bg-gray-500/20 text-gray-400 border-gray-500/30'}`}>
-                                                {enq.status || 'New'}
-                                            </span>
-                                        </div>
-                                        <div className="grid grid-cols-2 gap-2 text-sm text-gray-400">
-                                            <span>{enq.service}</span>
-                                            <span>{enq.projectType}</span>
-                                            <span>{enq.budget}</span>
-                                            <span>{new Date(enq.createdAt).toLocaleDateString()}</span>
-                                        </div>
+                                    <div>
+                                        <h4 className="font-bold text-white">{enq.name}</h4>
+                                        <p className="text-sm text-gray-400">{enq.service}</p>
                                     </div>
+                                    <span className="text-xs text-gray-500">{new Date(enq.createdAt).toLocaleDateString()}</span>
                                 </div>
                             ))}
                         </div>
