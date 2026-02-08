@@ -1,15 +1,33 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
+import axios from 'axios';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, ExternalLink, Code, Target, Zap, Award } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Code, Target, Zap, Award, ArrowRight } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
-import { projects as projectsData } from '../data/projects';
 import NotFound from './NotFound';
+import Loader from '../components/Loader';
 
 const ProjectDetails = () => {
     const { id } = useParams();
-    const project = projectsData.find(p => p.id === id);
+    const [project, setProject] = useState<any>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
     const containerRef = useRef(null);
+
+    useEffect(() => {
+        const fetchProject = async () => {
+            try {
+                const { data } = await axios.get(`http://localhost:5000/api/projects/${id}`);
+                setProject(data);
+            } catch (err) {
+                console.error("Error fetching project:", err);
+                setError(true);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchProject();
+    }, [id]);
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -18,7 +36,8 @@ const ProjectDetails = () => {
 
     const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
-    if (!project) return <NotFound />;
+    if (loading) return <div className="h-screen flex items-center justify-center bg-black"><Loader /></div>;
+    if (error || !project) return <NotFound />;
 
     return (
         <div ref={containerRef} className="min-h-screen bg-black text-white selection:bg-indigo-500/30">
@@ -60,14 +79,14 @@ const ProjectDetails = () => {
                         className="flex flex-wrap gap-4 text-sm font-medium"
                     >
                         <span className="bg-white/10 px-3 py-1 rounded-full backdrop-blur-sm border border-white/10">
-                            {project.category}
+                            {project.categories[0]}
                         </span>
                     </motion.div>
                 </div>
-            </header>
+            </header >
 
             {/* Content */}
-            <main className="container mx-auto px-4 py-16 grid md:grid-cols-3 gap-12">
+            < main className="container mx-auto px-4 py-16 grid md:grid-cols-3 gap-12" >
                 <div className="md:col-span-2 space-y-12">
                     {/* Overview */}
                     <section>
@@ -121,7 +140,7 @@ const ProjectDetails = () => {
                         <section>
                             <h2 className="text-2xl font-bold mb-6 text-indigo-400">Project Gallery</h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {project.gallery.map((img, idx) => (
+                                {project.gallery.map((img: string, idx: number) => (
                                     <img
                                         key={idx}
                                         src={img}
@@ -141,7 +160,7 @@ const ProjectDetails = () => {
                             Technologies
                         </h3>
                         <div className="flex flex-wrap gap-2 mb-8">
-                            {project.technologies?.map((tech) => (
+                            {project.technologies?.map((tech: string) => (
                                 <span key={tech} className="bg-indigo-500/10 text-indigo-300 px-3 py-1 rounded-lg text-sm font-medium border border-indigo-500/20">
                                     {tech}
                                 </span>
@@ -171,8 +190,26 @@ const ProjectDetails = () => {
                         )}
                     </div>
                 </aside>
-            </main>
-        </div>
+            </main >
+
+            {/* Related Projects Section */}
+            <section className="border-t border-white/5 py-24 px-4 bg-zinc-900/30">
+                <div className="container mx-auto max-w-6xl">
+                    <h2 className="text-3xl font-bold mb-12 text-center">More Filtered Works</h2>
+                    <div className="grid md:grid-cols-2 gap-8">
+                        {/* More dynamic logic would fetch these from related endpoint */}
+                        <div className="md:col-span-2 text-center text-gray-500 italic py-10">
+                            Exploring similar masterworks...
+                        </div>
+                    </div>
+                    <div className="text-center mt-12">
+                        <Link to="/portfolio" className="btn-secondary inline-flex items-center">
+                            View Full Portfolio <ArrowRight className="ml-2 w-4 h-4" />
+                        </Link>
+                    </div>
+                </div>
+            </section>
+        </div >
     );
 };
 

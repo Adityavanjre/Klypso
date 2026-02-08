@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useContext, type ReactNode } from 'react';
+import { createContext, useState, useContext, type ReactNode } from 'react';
 import axios from 'axios';
 
 interface User {
@@ -23,22 +23,19 @@ const AuthContext = createContext<AuthContextType>({
     isLoading: true
 });
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     // ... context implementation
-    const [user, setUser] = useState<User | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
+    const [user, setUser] = useState<User | null>(() => {
         const userInfo = localStorage.getItem('userInfo');
-        if (userInfo) {
-            setUser(JSON.parse(userInfo));
-        }
-        setIsLoading(false);
-    }, []);
+        return userInfo ? JSON.parse(userInfo) : null;
+    });
+    const [isLoading, setIsLoading] = useState(false);
 
     const login = async (email: string, password: string) => {
+        setIsLoading(true);
         try {
             const { data } = await axios.post('http://localhost:5000/api/users/login', {
                 email,
@@ -46,8 +43,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             });
             setUser(data);
             localStorage.setItem('userInfo', JSON.stringify(data));
-        } catch (error: any) {
-            throw new Error(error.response?.data?.message || 'Login failed');
+        } catch (error: unknown) {
+            if (axios.isAxiosError(error) && error.response) {
+                throw new Error(error.response.data.message || 'Login failed');
+            } else if (error instanceof Error) {
+                throw new Error(error.message);
+            } else {
+                throw new Error('Login failed');
+            }
+        } finally {
+            setIsLoading(false);
         }
     };
 

@@ -13,6 +13,7 @@ interface SEOProps {
 const SEO = ({
   title,
   description,
+  keywords,
   canonical,
   image = '/og-image.jpg', // Default image in public folder
   type = 'website',

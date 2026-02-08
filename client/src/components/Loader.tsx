@@ -1,10 +1,16 @@
 import { motion } from 'framer-motion';
 
-const Loader = () => {
+interface LoaderProps {
+    size?: number;
+    className?: string;
+}
+
+const Loader = ({ size = 16, className = '' }: LoaderProps) => {
     return (
-        <div className="flex justify-center items-center h-64">
+        <div className={`flex justify-center items-center ${className}`}>
             <motion.div
-                className="w-16 h-16 border-4 border-indigo-500/30 border-t-indigo-500 rounded-full"
+                className={`border-4 border-indigo-500/30 border-t-indigo-500 rounded-full`}
+                style={{ width: size * 4, height: size * 4 }}
                 animate={{ rotate: 360 }}
                 transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
             />

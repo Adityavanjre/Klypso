@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import {
     Smartphone, TrendingUp, PenTool,
-    Monitor, Cloud, Shield
+    Monitor, Cloud, CheckCircle, Camera
 } from 'lucide-react';
 import SEO from '../components/SEO';
 
@@ -61,11 +61,109 @@ const Services = () => {
                         features={['DevOps', 'Serverless', 'Microservices']}
                     />
                     <ServiceDetailCard
-                        icon={<Shield className="text-red-400" size={40} />}
-                        title="Cybersecurity"
-                        description="Protecting your digital assets with robust security audits and implementation."
-                        features={['Audits', 'Encryption', 'Compliance']}
+                        icon={<TrendingUp className="text-orange-400" size={40} />}
+                        title="SEO & Content Strategy"
+                        description="Dominate search results with data-driven SEO workflows and compelling content narratives."
+                        features={['Technical SEO', 'Copywriting', 'Link Building']}
                     />
+                    <ServiceDetailCard
+                        icon={<Camera className="text-purple-400" size={40} />}
+                        title="Professional Photography"
+                        description="Capturing your brand's essence with high-end corporate, product, and event photography."
+                        features={['Weddings & Events', 'Pre-wedding & Baby Shower', 'Product & Commercial']}
+                    />
+
+                </div>
+
+                {/* Detailed Features / Why Choose Us */}
+                <div className="mb-24 px-4">
+                    <h2 className="text-3xl font-bold text-center mb-12">Why Partner With Klypso?</h2>
+                    <div className="grid md:grid-cols-2 gap-12">
+                        <div className="space-y-6">
+                            <FeatureRow title="Tailored Solutions" desc="We don't do cookie-cutter. Every solution is custom-architected to your specific business needs." />
+                            <FeatureRow title="Speed & Performance" desc="We obsess over milliseconds. Our sites load faster, rank higher, and convert better." />
+                            <FeatureRow title="Scalable Architecture" desc="Built for growth. Our systems are designed to handle millions of users without breaking a sweat." />
+                        </div>
+                        <div className="space-y-6">
+                            <FeatureRow title="Transparent Communication" desc="No jargon. No black boxes. We keep you in the loop at every stage of the development process." />
+                            <FeatureRow title="Post-Launch Support" desc="We don't just launch and leave. We provide ongoing support and maintenance to ensure long-term success." />
+                            <FeatureRow title="ROI Focused" desc="We focus on metrics that matter. Our strategies are designed to maximize your return on investment." />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Engagement Models */}
+                <div className="mb-24">
+                    <h2 className="text-3xl font-bold text-center mb-12">Engagement Models</h2>
+                    <div className="grid md:grid-cols-3 gap-8">
+                        <ModelCard
+                            title="Fixed Price"
+                            desc="Perfect for well-defined projects with clear requirements. We define the scope, timeline, and budget upfront."
+                            features={['Clear Deliverables', 'Fixed Budget', 'Defined Timeline']}
+                        />
+                        <ModelCard
+                            title="Time & Material"
+                            desc="Ideal for evolving projects. You pay for the time and resources used, offering maximum flexibility."
+                            features={['Flexible Scope', 'Pay-as-you-go', 'Agile Adaptation']}
+                        />
+                        <ModelCard
+                            title="Dedicated Team"
+                            desc="We become your remote tech department. A dedicated team of developers and designers working solely for you."
+                            features={['Full Control', 'Scalable Team', 'Long-term Partnership']}
+                        />
+                    </div>
+                </div>
+
+                {/* Photography Packages */}
+                <div className="mb-24 bg-zinc-900/30 p-8 md:p-12 rounded-3xl border border-white/5">
+                    <h2 className="text-3xl font-bold text-center mb-4">Photography Packages</h2>
+                    <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+                        Professional visual storytelling tailored to your needs. All packages include professional editing and a secure online gallery.
+                    </p>
+                    <div className="grid md:grid-cols-3 gap-8">
+                        <PackageCard
+                            name="The Essentials"
+                            price="Custom"
+                            desc="Perfect for headshots, small product shoots, or quick social media content updates."
+                            features={['2 Hour Session', '1 Location', '20 High-Res Edits', 'Online Gallery']}
+                        />
+                        <PackageCard
+                            name="Brand Narrative"
+                            price="Custom"
+                            desc="Comprehensive coverage for brands needing a full visual identity refresh or campaign."
+                            features={['Half-Day Shoot (4 Hrs)', '2 Locations', '50 High-Res Edits', 'Commercial License']}
+                            featured={true}
+                        />
+                        <PackageCard
+                            name="Event & Corporate"
+                            price="Custom"
+                            desc="Full-scale coverage for corporate events, conferences, or large weddings."
+                            features={['Full-Day Shoot (8 Hrs)', 'Multiple Photographers', 'Unlimited Photos', 'Same-Day Highlights']}
+                        />
+                    </div>
+                </div>
+
+                {/* FAQ Section */}
+                <div className="mb-24 max-w-3xl mx-auto">
+                    <h2 className="text-3xl font-bold text-center mb-12">Common Questions</h2>
+                    <div className="space-y-4">
+                        <FAQItem
+                            question="How do you ensure project quality?"
+                            answer="We follow a rigorous QA process including automated testing, peer code reviews, and user acceptance testing (UAT) before any deployment."
+                        />
+                        <FAQItem
+                            question="Do you provide post-launch support?"
+                            answer="Absolutely. We offer various maintenance packages to ensure your application stays secure, up-to-date, and performs optimally."
+                        />
+                        <FAQItem
+                            question="What is your typical timeline?"
+                            answer="Timelines vary by project scope. A standard brochure website might take 4-6 weeks, while a complex custom app could take 3-6 months. We provide detailed schedules during discovery."
+                        />
+                        <FAQItem
+                            question="Do I own the code?"
+                            answer="Yes. Once the invoices are paid, you own 100% of the Intellectual Property (IP), code, and assets we create for you."
+                        />
+                    </div>
                 </div>
 
                 {/* Process Section */}
@@ -86,7 +184,46 @@ const Services = () => {
     );
 };
 
-const ServiceDetailCard = ({ icon, title, description, features }: { icon: any, title: string, description: string, features: string[] }) => (
+const ModelCard = ({ title, desc, features }: { title: string, desc: string, features: string[] }) => (
+    <div className="bg-white/5 border border-white/10 p-8 rounded-2xl hover:bg-white/10 transition-colors">
+        <h3 className="text-xl font-bold mb-4 text-white">{title}</h3>
+        <p className="text-gray-400 text-sm mb-6 h-12">{desc}</p>
+        <ul className="space-y-3">
+            {features.map((f, i) => (
+                <li key={i} className="flex items-center text-sm text-gray-300">
+                    <div className="w-1.5 h-1.5 bg-indigo-500 rounded-full mr-2" />
+                    {f}
+                </li>
+            ))}
+        </ul>
+    </div>
+);
+
+const PackageCard = ({ name, price, desc, features, featured = false }: { name: string, price: string, desc: string, features: string[], featured?: boolean }) => (
+    <div className={`p-8 rounded-2xl border transition-all ${featured ? 'bg-indigo-900/20 border-indigo-500/50 scale-105' : 'bg-white/5 border-white/10'}`}>
+        {featured && <div className="text-xs font-bold text-indigo-400 uppercase tracking-widest mb-4">Most Popular</div>}
+        <h3 className="text-xl font-bold mb-2">{name}</h3>
+        <div className="text-2xl font-bold mb-4">{price}</div>
+        <p className="text-gray-400 text-sm mb-6">{desc}</p>
+        <ul className="space-y-3 pt-6 border-t border-white/10">
+            {features.map((f, i) => (
+                <li key={i} className="flex items-center text-sm text-gray-300">
+                    <CheckCircle size={14} className="text-green-500 mr-2" />
+                    {f}
+                </li>
+            ))}
+        </ul>
+    </div>
+);
+
+const FAQItem = ({ question, answer }: { question: string, answer: string }) => (
+    <div className="bg-white/5 border border-white/10 rounded-xl p-6">
+        <h3 className="font-bold text-lg mb-2 text-white">{question}</h3>
+        <p className="text-gray-400 text-sm leading-relaxed">{answer}</p>
+    </div>
+);
+
+const ServiceDetailCard = ({ icon, title, description, features }: { icon: React.ReactNode, title: string, description: string, features: string[] }) => (
     <motion.div
         whileHover={{ y: -10 }}
         className="bg-white/5 border border-white/10 p-8 rounded-2xl hover:bg-white/10 hover:border-indigo-500/30 transition-all duration-300 group"
@@ -116,6 +253,20 @@ const ProcessStep = ({ number, title, desc }: { number: string, title: string, d
         </div>
         <h3 className="text-xl font-bold mb-2 relative z-10">{title}</h3>
         <p className="text-gray-400 text-sm relative z-10">{desc}</p>
+    </div>
+);
+
+const FeatureRow = ({ title, desc }: { title: string, desc: string }) => (
+    <div className="flex gap-4">
+        <div className="mt-1">
+            <div className="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400">
+                <CheckCircle size={16} />
+            </div>
+        </div>
+        <div>
+            <h3 className="font-bold text-lg mb-1">{title}</h3>
+            <p className="text-gray-400 text-sm">{desc}</p>
+        </div>
     </div>
 );
 

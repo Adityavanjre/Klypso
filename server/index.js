@@ -25,6 +25,8 @@ app.use(limiter);
 const enquiryRoutes = require('./routes/enquiryRoutes');
 const projectRoutes = require('./routes/projectRoutes');
 const userRoutes = require('./routes/userRoutes');
+const blogRoutes = require('./routes/blogRoutes');
+const jobRoutes = require('./routes/jobRoutes');
 
 app.use((req, res, next) => {
     console.log(`Incoming request: ${req.method} ${req.url}`);
@@ -36,6 +38,8 @@ const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 app.use('/api/enquiries', enquiryRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/blogs', blogRoutes);
+app.use('/api/jobs', jobRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

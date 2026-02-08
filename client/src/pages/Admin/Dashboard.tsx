@@ -6,6 +6,22 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+interface Project {
+    id: string;
+    title: string;
+    description: string;
+    image: string;
+}
+
+interface Enquiry {
+    _id: string;
+    name: string;
+    email: string;
+    service: string;
+    message: string;
+    createdAt: string;
+}
+
 const Dashboard = () => {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
@@ -14,7 +30,7 @@ const Dashboard = () => {
         enquiries: 0,
         visits: 1200 // Mock data for visits
     });
-    const [recentEnquiries, setRecentEnquiries] = useState<any[]>([]);
+    const [recentEnquiries, setRecentEnquiries] = useState<Enquiry[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -27,25 +43,13 @@ const Dashboard = () => {
                 };
 
                 // Fetch projects count
-                const projectsRes = await axios.get('http://localhost:5000/api/projects');
-
-                // Fetch enquiries (assuming we add an endpoint to get all enquiries, currently we only have Create and maybe Get for admin?)
-                // We need to check if GET /api/enquiries exists and is protected.
-                // Based on standard MERN patterns, it likely exists or we should handle the error.
-                // For now, let's try to fetch if the route exists.
-                // If not, we might fail. Let's assume it exists as per common practice or I will check routes.
-                // server/routes/enquiryRoutes.js usually has a GET / for admins.
-
-                // Let's blindly try to fetch enquiries. If it fails, we catch it.
-                // Actually, I should have checked enquiryRoutes.js. 
-                // But I can't check it inside this tool call.
-                // I'll assume standard naming and protected route.
+                const projectsRes = await axios.get<Project[]>('http://localhost:5000/api/projects');
 
                 let enquiriesCount = 0;
-                let enquiriesList = [];
+                let enquiriesList: Enquiry[] = [];
 
                 try {
-                    const enquiriesRes = await axios.get('http://localhost:5000/api/enquiries', config);
+                    const enquiriesRes = await axios.get<Enquiry[]>('http://localhost:5000/api/enquiries', config);
                     enquiriesCount = enquiriesRes.data.length;
                     enquiriesList = enquiriesRes.data.slice(0, 5);
                 } catch (e) {
@@ -93,6 +97,7 @@ const Dashboard = () => {
                     <Link to="/admin/add-project">
                         <NavItem icon={<Plus size={20} />} label="Add Project" />
                     </Link>
+                    <NavItem icon={<FileText size={20} />} label="Blogs & Jobs" />
                     <NavItem icon={<Users size={20} />} label="Enquiries" />
                     <NavItem icon={<Settings size={20} />} label="Settings" />
                 </nav>
@@ -119,10 +124,11 @@ const Dashboard = () => {
                 </header>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
                     <StatCard title="Total Projects" value={stats.projects.toString()} color="indigo" />
+                    <StatCard title="Insights Post" value="Featured" color="pink" />
                     <StatCard title="New Enquiries" value={stats.enquiries.toString()} color="green" />
-                    <StatCard title="Site Visits" value="1.2k" color="pink" />
+                    <StatCard title="Active Jobs" value="3" color="indigo" />
                 </div>
 
                 {/* Recent Activity */}
@@ -132,7 +138,7 @@ const Dashboard = () => {
                         <div className="text-gray-400 text-center py-12">Loading...</div>
                     ) : recentEnquiries.length > 0 ? (
                         <div className="space-y-4">
-                            {recentEnquiries.map((enq: any) => (
+                            {recentEnquiries.map((enq) => (
                                 <div key={enq._id} className="p-4 bg-white/5 rounded-lg border border-white/5 flex justify-between items-center">
                                     <div>
                                         <h4 className="font-bold text-white">{enq.name}</h4>
@@ -153,15 +159,15 @@ const Dashboard = () => {
     );
 };
 
-const NavItem = ({ icon, label, active = false }: { icon: any, label: string, active?: boolean }) => (
+const NavItem = ({ icon, label, active = false }: { icon: React.ReactNode, label: string, active?: boolean }) => (
     <div className={`flex items-center p-3 rounded-lg cursor-pointer transition-colors ${active ? 'bg-indigo-500/20 text-indigo-400' : 'text-gray-400 hover:bg-white/5 hover:text-white'}`}>
         <span className="mr-3">{icon}</span>
         <span className="font-medium">{label}</span>
     </div>
 );
 
-const StatCard = ({ title, value, color }: { title: string, value: string, color: string }) => {
-    const colors: any = {
+const StatCard = ({ title, value, color }: { title: string, value: string, color: 'indigo' | 'green' | 'pink' }) => {
+    const colors: Record<string, string> = {
         indigo: 'text-indigo-400 bg-indigo-500/10 border-indigo-500/20',
         green: 'text-green-400 bg-green-500/10 border-green-500/20',
         pink: 'text-pink-400 bg-pink-500/10 border-pink-500/20',

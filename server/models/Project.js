@@ -9,13 +9,38 @@ const ProjectSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    fullDescription: {
+        type: String,
+    },
     image: {
         type: String,
         required: true,
     },
-    category: {
+    categories: {
+        type: [String],
+        default: ['General'],
+    },
+    challenge: {
         type: String,
-        default: 'General',
+    },
+    solution: {
+        type: String,
+    },
+    technologies: {
+        type: [String],
+        default: [],
+    },
+    impact: {
+        type: String,
+    },
+    testimonial: {
+        quote: String,
+        author: String,
+        role: String,
+    },
+    gallery: {
+        type: [String],
+        default: [],
     },
     link: {
         type: String,

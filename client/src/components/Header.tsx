@@ -13,6 +13,7 @@ const Header = () => {
     { name: 'About', path: '/about' },
     { name: 'Services', path: '/services' },
     { name: 'Portfolio', path: '/portfolio' },
+    { name: 'Insights', path: '/resources' },
     { name: 'Contact', path: '/contact' },
   ];
 
@@ -38,6 +39,12 @@ const Header = () => {
               {link.name}
             </NavLink>
           ))}
+          <NavLink
+            to="/order"
+            className="bg-white text-black px-5 py-2 rounded-full font-bold text-sm tracking-wide hover:bg-indigo-500 hover:text-white transition-all duration-300 transform hover:scale-105"
+          >
+            Start Project
+          </NavLink>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -73,6 +80,13 @@ const Header = () => {
                   {link.name}
                 </NavLink>
               ))}
+              <NavLink
+                to="/order"
+                onClick={() => setIsOpen(false)}
+                className="bg-white text-black px-8 py-3 rounded-full font-bold text-xl tracking-wide mt-4"
+              >
+                Start Project
+              </NavLink>
             </nav>
           </motion.div>
         )}

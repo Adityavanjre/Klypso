@@ -4,7 +4,7 @@ export const projects: Project[] = [
     {
         id: 'lumina-fashion',
         title: 'Lumina Fashion',
-        category: 'E-Commerce',
+        categories: ['Web', 'Design', 'E-Commerce'],
         image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1170&auto=format&fit=crop',
         description: 'A bespoke e-commerce experience for a luxury fashion house.',
         fullDescription: 'Lumina Fashion represents the pinnacle of digital luxury retail. We were approached to completely overhaul their outdated online presence and create a storefront that matched the elegance of their physical boutiques. The goal was to reduce friction, increase average order value, and tell the brand story effectively.',
@@ -25,7 +25,7 @@ export const projects: Project[] = [
     {
         id: 'nexus-health',
         title: 'Nexus Health',
-        category: 'Healthcare',
+        categories: ['App', 'Web', 'Healthcare'],
         image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1170&auto=format&fit=crop',
         description: 'A HIPAA-compliant telemedicine platform connecting patients with specialists.',
         fullDescription: 'Nexus Health needed a secure, reliable platform to facilitate remote doctor-patient consultations during the pandemic and beyond. Security and ease of use were paramount.',
@@ -46,7 +46,7 @@ export const projects: Project[] = [
     {
         id: 'estate-prime',
         title: 'EstatePrime',
-        category: 'Real Estate',
+        categories: ['Web', 'Cloud', 'Real Estate'],
         image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1073&auto=format&fit=crop',
         description: 'A high-performance real estate portal processing over 100,000 listings daily.',
         fullDescription: 'EstatePrime aimed to disrupt the real estate market with a platform that offered virtual tours and instant valuation estimates.',
@@ -62,7 +62,7 @@ export const projects: Project[] = [
     {
         id: 'finvault',
         title: 'FinVault',
-        category: 'FinTech',
+        categories: ['Web', 'Cloud', 'FinTech'],
         image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1170&auto=format&fit=crop',
         description: 'A secure, bank-grade financial dashboard for high-net-worth individuals.',
         fullDescription: 'FinVault required a fortress-like application for users to manage diverse investment portfolios. Trust and data visualization were key components.',
@@ -78,7 +78,7 @@ export const projects: Project[] = [
     {
         id: 'culina-app',
         title: 'Culina',
-        category: 'Hospitality',
+        categories: ['App', 'Design', 'Hospitality'],
         image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1170&auto=format&fit=crop',
         description: 'A vibrant, interactive app for a global restaurant chain.',
         fullDescription: 'Culina wanted to digitize the dining experience without losing the personal touch. They needed an app for reservations, ordering, and loyalty rewards.',
@@ -94,7 +94,7 @@ export const projects: Project[] = [
     {
         id: 'ecotrack-iot',
         title: 'EcoTrack',
-        category: 'IoT / Enterprise',
+        categories: ['Web', 'Cloud', 'IoT'],
         image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1169&auto=format&fit=crop',
         description: 'An IoT-enabled dashboard for monitoring industrial energy consumption.',
         fullDescription: 'EcoTrack helps large manufacturing plants monitor their energy usage in real-time to identify wastage and optimize efficiency.',
@@ -105,6 +105,86 @@ export const projects: Project[] = [
         gallery: [
             'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1170&auto=format&fit=crop',
             'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1170&auto=format&fit=crop'
+        ]
+    },
+    {
+        id: 'zenith-apparel-shoot',
+        title: 'Zenith Apparel',
+        categories: ['Photography', 'Design'],
+        image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1020&auto=format&fit=crop',
+        description: 'High-fashion editorial photoshoot for a new sustainable clothing line.',
+        fullDescription: 'Zenith Apparel needed a visual language that spoke to their core values of sustainability and modern elegance. We conducted a full-day editorial shoot in natural light to highlight the organic textures of their fabrics.',
+        challenge: 'Capturing the texture and drape of the clothing while maintaining a consistent "golden hour" lighting aesthetic throughout the day.',
+        solution: 'We used a combination of natural light control and subtle reflectors. The post-processing focused on color grading that enhanced the earth tones of the collection.',
+        technologies: ['Sony A7R IV', 'Profound Lighting', 'Adobe Lightroom', 'Capture One'],
+        impact: 'The campaign images led to a 300% increase in social media engagement for the brand launch.',
+        gallery: [
+            'https://images.unsplash.com/photo-1529139574466-a302d27f3d9f?q=80&w=1170&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1503342394128-c104d54dba01?q=80&w=1170&auto=format&fit=crop'
+        ]
+    },
+    {
+        id: 'eternal-vows-wedding',
+        title: 'Eternal Vows',
+        categories: ['Photography', 'Event'],
+        image: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1170&auto=format&fit=crop',
+        description: 'Cinematic wedding photography capturing the raw emotion and beauty of your special day.',
+        fullDescription: 'We believe every wedding tells a unique love story. Our team of photographers specializes in candid, documentary-style wedding photography that captures the fleeting moments you\'ll cherish forever. From the intimate preparations to the grand celebration, we are there to document it all.',
+        challenge: 'Capturing low-light reception moments without intrusive flash, while coordinating with videographers to not miss key events.',
+        solution: 'We used prime lenses with wide apertures to capture ambient light naturally. Our team coordinated seamlessly with the video crew using silent hand signals to ensure full coverage without obstruction.',
+        technologies: ['Sony A7R IV', 'Godox Lighting', 'Prime Lenses', 'Drone Photography'],
+        impact: 'Delivered a gallery of 800+ edited images within 2 weeks. Featured in \'Bridal Magazine 2024\'.',
+        gallery: [
+            'https://images.unsplash.com/photo-1511285560982-1351cdeb9821?q=80&w=1170&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1623943361546-3485038b3408?q=80&w=1000&auto=format&fit=crop'
+        ]
+    },
+    {
+        id: 'techsummit-2025',
+        title: 'TechSummit 2025',
+        categories: ['Photography', 'Event'],
+        image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1170&auto=format&fit=crop',
+        description: 'Comprehensive coverage for Asia\'s largest technology conference.',
+        fullDescription: 'TechSummit required a photography team that could move fast and deliver images in real-time for social media updates. We covered keynotes, breakout sessions, and networking events for over 5000 attendees.',
+        challenge: 'The venue had mixed lighting conditions (stage lights vs. exhibition halls) and a need for instant delivery of keynote speaker photos.',
+        solution: 'We set up a dedicated editing station on-site. Photographers utilized wireless tethering to send images directly to the editor for immediate processing and upload.',
+        technologies: ['Canon R5', 'Wireless Tethering', 'Lightroom Mobile', 'Live Series'],
+        impact: 'Real-time social media posts generated 500k impressions during the 2-day event.',
+        gallery: [
+            'https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=1170&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=1112&auto=format&fit=crop'
+        ]
+    },
+    {
+        id: 'urban-romance',
+        title: 'Urban Romance',
+        categories: ['Photography', 'Design'],
+        image: 'https://images.unsplash.com/photo-1550275994-fa4782352848?q=80&w=1170&auto=format&fit=crop',
+        description: 'A stylized pre-wedding shoot set against the city skyline.',
+        fullDescription: 'The couple wanted a modern, edgy vibe for their Save-the-Date cards. We scouted architectural landmarks and rooftop bars to create a chic, editorial-style photo series that broke away from traditional clichés.',
+        challenge: 'Managing crowds at popular public locations and timing the golden hour perfectly across multiple shoot spots.',
+        solution: 'We planned a precise itinerary and secured rooftop permissions in advance. We used off-camera flash to balance the couple against the bright city lights.',
+        technologies: ['Nikon Z9', 'Off-Camera Flash', 'Urban Scouting', 'Styling Assistant'],
+        impact: 'The \'Save the Date\' video reel created from the stills went viral on Instagram Reels.',
+        gallery: [
+            'https://images.unsplash.com/photo-1516054712128-472d25088921?q=80&w=1152&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1494774157365-9e04c6720e47?q=80&w=1170&auto=format&fit=crop'
+        ]
+    },
+    {
+        id: 'new-beginnings',
+        title: 'New Beginnings',
+        categories: ['Photography', 'Event'],
+        image: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?q=80&w=1170&auto=format&fit=crop',
+        description: 'Celebrating the joy of motherhood with a tender baby shower session.',
+        fullDescription: 'We captured the anticipation and joy of expecting parents in a serene outdoor setting. The focus was on natural light, soft textures, and genuine emotions of family and friends.',
+        challenge: 'The weather was unpredictable, with intermittent rain showers threatening the outdoor session.',
+        solution: 'We used the overcast sky to our advantage as a giant softbox, creating soft, flattering light. We also had a backup studio location ready just in case.',
+        technologies: ['Fujifilm GFX 100', 'Natural Light', 'Soft Focus Lenses'],
+        impact: 'The family ordered a large-format canvas print layout for their nursery.',
+        gallery: [
+            'https://images.unsplash.com/photo-1565507722961-0b5c14102c79?q=80&w=1036&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1456314810688-661d9ac5f7c3?q=80&w=1170&auto=format&fit=crop'
         ]
     }
 ];

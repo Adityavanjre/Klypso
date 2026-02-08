@@ -1,13 +1,27 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
+import axios from 'axios';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Code, Send, Layout, Smartphone, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import Testimonials from '../components/Testimonials';
-import { projects } from '../data/projects';
+import BrandTicker from '../components/BrandTicker';
 
 const Home = () => {
+    const [projects, setProjects] = useState([]);
     const heroRef = useRef(null);
+
+    useEffect(() => {
+        const fetchProjects = async () => {
+            try {
+                const { data } = await axios.get('http://localhost:5000/api/projects');
+                setProjects(data);
+            } catch (err) {
+                console.error("Error fetching projects:", err);
+            }
+        };
+        fetchProjects();
+    }, []);
     const { scrollYProgress } = useScroll({
         target: heroRef,
         offset: ["0 0", "1 1"]
@@ -79,13 +93,13 @@ const Home = () => {
                     </div>
 
                     <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter mb-6 bg-gradient-to-r from-white via-indigo-200 to-indigo-400 bg-clip-text text-transparent">
-                        We Create Only <br />
-                        <span className="italic text-indigo-500">Exceptional</span> Experiences.
+                        Engineering Digital <br />
+                        <span className="italic text-indigo-500">Masterpieces.</span>
                     </h1>
 
                     <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                        Klypso is a premium agency specializing in high-performance web development,
-                        app creation, and digital strategy. We turn your vision into a digital masterpiece.
+                        We are a collective of architects, designers, and strategists. We don't just write code;
+                        we build the robust digital infrastructure that powers your business growth.
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
@@ -111,6 +125,8 @@ const Home = () => {
                 </motion.div>
             </section>
 
+            <BrandTicker />
+
             {/* Services Preview */}
             <section className="py-24 px-4 bg-black relative">
                 <div className="container mx-auto max-w-6xl">
@@ -124,22 +140,33 @@ const Home = () => {
                         <p className="text-gray-400 max-w-2xl mx-auto">We deliver a full suite of digital services designed to elevate your brand.</p>
                     </motion.div>
 
+
                     <div className="grid md:grid-cols-3 gap-8">
                         <ServiceCard
                             icon={<Layout size={32} className="text-indigo-400" />}
                             title="Web Development"
-                            desc="Stunning, responsive websites built with modern technologies like React and Next.js."
+                            desc="We build scalable, high-performance web applications using the MERN stack, Next.js, and TypeScript. Our code is clean, modular, and built for the future."
                         />
                         <ServiceCard
                             icon={<Smartphone size={32} className="text-pink-400" />}
                             title="App Development"
-                            desc="Native and cross-platform mobile apps providing seamless user experiences."
+                            desc="Native-quality mobile experiences with React Native. We focus on smooth animations, offline-first architecture, and cross-platform consistency."
                         />
                         <ServiceCard
                             icon={<TrendingUp size={32} className="text-green-400" />}
                             title="Digital Strategy"
-                            desc="Data-driven marketing and SEO strategies to grow your online presence."
+                            desc="We integrate technical SEO, content marketing, and data analytics to drive measurable growth. We don't just guess; we rely on data."
                         />
+                    </div>
+
+                    {/* Tech Stack Preview */}
+                    <div className="mt-20 pt-10 border-t border-white/5">
+                        <h3 className="text-center text-xl font-semibold mb-8 text-gray-400">Powering Solutions With Modern Tech</h3>
+                        <div className="flex flex-wrap justify-center gap-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+                            {['React', 'Next.js', 'Node.js', 'AWS', 'MongoDB', 'TypeScript', 'Docker', 'GraphQL'].map(tech => (
+                                <span key={tech} className="text-lg font-bold text-white/40 hover:text-white transition-colors cursor-default">{tech}</span>
+                            ))}
+                        </div>
                     </div>
                     <div className="text-center mt-12">
                         <Link to="/services" className="text-indigo-400 hover:text-indigo-300 font-semibold group inline-flex items-center">
@@ -176,8 +203,8 @@ const Home = () => {
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-8">
-                        {projects.slice(0, 2).map((project, index) => (
-                            <Link to={`/project/${project.id}`} key={index}>
+                        {projects.slice(0, 2).map((project: any, index: number) => (
+                            <Link to={`/project/${project._id || project.id}`} key={index}>
                                 <motion.div
                                     whileHover={{ y: -10 }}
                                     className="group relative h-80 rounded-2xl overflow-hidden cursor-pointer"
@@ -189,7 +216,7 @@ const Home = () => {
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-8 flex flex-col justify-end">
                                         <h3 className="text-2xl font-bold mb-1">{project.title}</h3>
-                                        <p className="text-gray-300 text-sm">{project.category}</p>
+                                        <p className="text-gray-300 text-sm">{project.categories ? project.categories[0] : 'Web Design'}</p>
                                     </div>
                                 </motion.div>
                             </Link>
@@ -226,7 +253,7 @@ const Home = () => {
                     </motion.div>
                 </div>
             </section>
-        </div>
+        </div >
     );
 };
 
@@ -237,7 +264,7 @@ const StatItem = ({ number, label }: { number: string, label: string }) => (
     </div>
 );
 
-const ServiceCard = ({ icon, title, desc }: { icon: any, title: string, desc: string }) => (
+const ServiceCard = ({ icon, title, desc }: { icon: React.ReactNode, title: string, desc: string }) => (
     <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

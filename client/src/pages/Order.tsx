@@ -122,13 +122,14 @@ const Order = () => {
                         name="service"
                         value={formData.service}
                         onChange={handleChange}
-                        className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500 transition-colors appearance-none"
+                        className="w-full bg-black text-white border border-white/10 rounded-lg p-3 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all appearance-none"
                     >
-                        <option value="Website Development & Integration">Website Development</option>
+                        <option value="Web Development">Web Development</option>
                         <option value="App Development">App Development</option>
+                        <option value="SEO & Content Strategy">SEO & Content Strategy</option>
+                        <option value="Professional Photography">Professional Photography</option>
                         <option value="Digital Marketing">Digital Marketing</option>
-                        <option value="Social Media Management">Social Media</option>
-                        <option value="Creative Content">Creative Content</option>
+                        <option value="UI/UX Design">UI/UX Design</option>
                         <option value="Other">Other</option>
                     </select>
                 </div>

@@ -10,7 +10,7 @@ export interface Project {
   impact?: string;
   gallery?: string[];
   image: string;
-  category: string;
+  categories: string[];
   link?: string;
   testimonial?: {
     quote: string;
@@ -27,4 +27,23 @@ export interface Enquiry {
   service: string;
   message: string;
   createdAt?: string;
+}
+export interface BlogPost {
+  _id: string;
+  title: string;
+  excerpt: string;
+  author: string;
+  date: string;
+  category: string;
+  image: string;
+  content?: string;
+}
+
+export interface JobOpening {
+  _id: string;
+  role: string;
+  type: string;
+  location: string;
+  description: string;
+  requirements?: string[];
 }

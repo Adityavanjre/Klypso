@@ -4,13 +4,12 @@ import { motion } from 'framer-motion';
 import { Send, CheckCircle, AlertCircle } from 'lucide-react';
 
 const services = [
-    'Website Development & Integration',
+    'Web Development',
     'App Development',
-    'Social Media Management',
+    'SEO & Content Strategy',
+    'Professional Photography',
     'Digital Marketing',
-    'Creative Content',
-    'Content Creation',
-    'Photography',
+    'UI/UX Design',
     'Other',
 ];
 
@@ -106,7 +105,7 @@ const Contact = () => {
                             name="service"
                             value={formData.service}
                             onChange={handleChange}
-                            className="w-full bg-black/50 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500 transition-colors appearance-none"
+                            className="w-full bg-black/50 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all appearance-none"
                         >
                             {services.map((svc) => (
                                 <option key={svc} value={svc} className="bg-gray-900 text-white">{svc}</option>

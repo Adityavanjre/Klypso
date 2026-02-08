@@ -4,6 +4,19 @@ const { MongoMemoryServer } = require('mongodb-memory-server');
 let mongod = null;
 
 const connectDB = async () => {
+    // 1. Try to connect to persistent MongoDB if URI is provided
+    if (process.env.MONGO_URI) {
+        try {
+            const conn = await mongoose.connect(process.env.MONGO_URI);
+            console.log(`MongoDB Connected (Persistent): ${conn.connection.host}`);
+            return;
+        } catch (err) {
+            console.error(`Failed to connect to persistent DB: ${err.message}`);
+            console.log('Falling back to In-Memory Database...');
+        }
+    }
+
+    // 2. Fallback to In-Memory Database
     try {
         console.log('Attempting to start MongoDB Memory Server...');
         mongod = await MongoMemoryServer.create({
@@ -17,12 +30,12 @@ const connectDB = async () => {
 
         const conn = await mongoose.connect(uri);
 
-        console.log(`MongoDB Connected: ${conn.connection.host}`);
+        console.log(`MongoDB Connected (Memory): ${conn.connection.host}`);
 
         // Seed admin user on start since data is volatile
         await createAdminSafely();
     } catch (error) {
-        console.error(`MongoDB Connection Error: ${error.message}`);
+        console.error(`MongoDB Memory Server Error: ${error.message}`);
         // If port 27017 is taken, try dynamic port
         if (error.code === 'EADDRINUSE' || error.message.includes('port')) {
             console.log('Port 27017 busy, trying dynamic port...');
@@ -31,14 +44,17 @@ const connectDB = async () => {
                 const uri = mongod.getUri();
                 console.log(`MongoDB Memory Server started at: ${uri}`);
                 const conn = await mongoose.connect(uri);
-                console.log(`MongoDB Connected: ${conn.connection.host}`);
+                console.log(`MongoDB Connected (Memory): ${conn.connection.host}`);
                 await createAdminSafely();
             } catch (retryError) {
                 console.error(`Retry failed: ${retryError.message}`);
                 process.exit(1);
             }
         } else {
-            process.exit(1);
+            console.error(error);
+            // Don't exit process, maybe the persistent DB worked?
+            // Actually if we are here, everything failed.
+            if (!mongoose.connection.readyState) process.exit(1);
         }
     }
 };

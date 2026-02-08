@@ -21,6 +21,7 @@ const Legal = () => {
             <h2 className="text-3xl font-bold text-white mb-6">Terms of Service</h2>
             <div className="prose prose-invert max-w-none text-gray-300">
               <p>Last updated: {new Date().toLocaleDateString()}</p>
+
               <h3 className="text-xl font-semibold text-white mt-8 mb-4">1. Acceptance of Terms</h3>
               <p>
                 By accessing and using the Klypso website and services, you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you may not use our services.
@@ -28,24 +29,39 @@ const Legal = () => {
 
               <h3 className="text-xl font-semibold text-white mt-8 mb-4">2. Services</h3>
               <p>
-                Klypso provides digital services including but not limited to Web Development, App Development, Digital Marketing, and SEO. We reserve the right to modify, suspend, or discontinue any aspect of our services at any time.
+                Klypso provides digital services including but not limited to Web Development, App Development, Digital Marketing, SEO & Content Strategy, and Professional Photography. We reserve the right to modify, suspend, or discontinue any aspect of our services at any time.
               </p>
 
-              <h3 className="text-xl font-semibold text-white mt-8 mb-4">3. Intellectual Property</h3>
+              <h3 className="text-xl font-semibold text-white mt-8 mb-4">3. User Accounts</h3>
+              <p>
+                When you create an account with us, you must provide us information that is accurate, complete, and current at all times. Failure to do so constitutes a breach of the Terms, which may result in immediate termination of your account on our Service.
+              </p>
+
+              <h3 className="text-xl font-semibold text-white mt-8 mb-4">4. Intellectual Property</h3>
               <p>
                 <strong>Client Ownership:</strong> Upon full payment, the client is granted rights to the final deliverables as specified in the project agreement.
                 <br />
                 <strong>Klypso Ownership:</strong> We retain the right to showcase completed projects in our portfolio unless a Non-Disclosure Agreement (NDA) is signed. Underlying reusable code libraries and tools remain the property of Klypso.
               </p>
 
-              <h3 className="text-xl font-semibold text-white mt-8 mb-4">4. Client Obligations</h3>
+              <h3 className="text-xl font-semibold text-white mt-8 mb-4">5. Client Obligations</h3>
               <p>
                 You agree to provide all necessary assets, content, and feedback in a timely manner. Delays in providing these materials may result in project timeline extensions.
               </p>
 
-              <h3 className="text-xl font-semibold text-white mt-8 mb-4">5. Limitation of Liability</h3>
+              <h3 className="text-xl font-semibold text-white mt-8 mb-4">6. Limitation of Liability</h3>
               <p>
-                Klypso shall not be liable for any indirect, incidental, special, or consequential damages arising out of or in connection with the use of our services or deliverables.
+                In no event shall Klypso, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use the Service.
+              </p>
+
+              <h3 className="text-xl font-semibold text-white mt-8 mb-4">7. Governing Law</h3>
+              <p>
+                These Terms shall be governed and construed in accordance with the laws of India, without regard to its conflict of law provisions. Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights.
+              </p>
+
+              <h3 className="text-xl font-semibold text-white mt-8 mb-4">8. Contact Us</h3>
+              <p>
+                If you have any questions about these Terms, please contact us at <a href="mailto:legal@klypso.agency" className="text-indigo-400 hover:text-indigo-300">legal@klypso.agency</a>.
               </p>
             </div>
           </div>
@@ -61,7 +77,8 @@ const Legal = () => {
               <ul className="list-disc pl-5 space-y-2">
                 <li><strong>Personal Information:</strong> Name, email address, phone number, and company details provided via forms.</li>
                 <li><strong>Project Data:</strong> Requirements, specifications, and files shared for project execution.</li>
-                <li><strong>Usage Data:</strong> Anonymous analytics data to improve website performance.</li>
+                <li><strong>Usage Data:</strong> Anonymous analytics data (such as IP address, browser type, pages visited) to improve website performance.</li>
+                <li><strong>Cookies:</strong> We use cookies to store session information and user preferences.</li>
               </ul>
 
               <h3 className="text-xl font-semibold text-white mt-8 mb-4">2. How We Use Your Data</h3>
@@ -72,13 +89,23 @@ const Legal = () => {
                 <li>Communicating regarding your project enquiries.</li>
                 <li>Processing payments and invoicing.</li>
                 <li>Delivering agreed-upon services.</li>
-                <li>Improving our service offerings.</li>
+                <li>Improving our service offerings and customer experience.</li>
               </ul>
               <p className="mt-4">We <strong>never</strong> sell your personal data to third parties.</p>
 
               <h3 className="text-xl font-semibold text-white mt-8 mb-4">3. Data Security</h3>
               <p>
-                We implement industry-standard security measures to protect your information. However, no method of transmission over the internet is 100% secure.
+                We implement industry-standard security measures to protect your information, including encryption and secure servers. However, no method of transmission over the internet is 100% secure.
+              </p>
+
+              <h3 className="text-xl font-semibold text-white mt-8 mb-4">4. Data Retention</h3>
+              <p>
+                We retain your personal information only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use your information to the extent necessary to comply with our legal obligations, resolve disputes, and enforce our policies.
+              </p>
+
+              <h3 className="text-xl font-semibold text-white mt-8 mb-4">5. Your Rights</h3>
+              <p>
+                You have the right to access, update, or delete the information we have on you. Whenever made possible, you can access, update or request deletion of your Personal Data directly within your account settings section. If you are unable to perform these actions yourself, please contact us to assist you.
               </p>
             </div>
           </div>
@@ -163,8 +190,8 @@ const Legal = () => {
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
                   className={`w-full flex items-center justify-between p-4 rounded-xl transition-all ${activeTab === tab.id
-                      ? 'bg-green-600 text-white shadow-lg shadow-green-900/20'
-                      : 'bg-zinc-900 text-gray-400 hover:bg-zinc-800 hover:text-white'
+                    ? 'bg-green-600 text-white shadow-lg shadow-green-900/20'
+                    : 'bg-zinc-900 text-gray-400 hover:bg-zinc-800 hover:text-white'
                     }`}
                 >
                   <div className="flex items-center gap-3">

@@ -12,18 +12,30 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Legal from './pages/Legal';
 import Order from './pages/Order';
+import Blog from './pages/Blog';
+import BlogDetails from './pages/BlogDetails';
+import Careers from './pages/Careers';
 import NotFound from './pages/NotFound';
 import Login from './pages/Login';
 import Dashboard from './pages/Admin/Dashboard';
 import AddProject from './pages/Admin/AddProject';
 import AdminRoute from './components/AdminRoute';
 
+import CustomCursor from './components/CustomCursor';
+import ScrollProgress from './components/ScrollProgress';
+import CookieConsent from './components/CookieConsent';
+import WhatsAppWidget from './components/WhatsAppWidget';
+
 function App() {
   const location = useLocation();
   const isAuthPage = location.pathname.startsWith('/admin') || location.pathname === '/login';
 
   return (
-    <div className="flex flex-col min-h-screen bg-black text-white font-sans">
+    <div className="flex flex-col min-h-screen bg-black text-white font-sans cursor-none md:cursor-default">
+      <CustomCursor />
+      <ScrollProgress />
+      <CookieConsent />
+      <WhatsAppWidget />
       {!isAuthPage && <Header />}
       <ScrollToTop />
       {!isAuthPage && <ChatWidget />}
@@ -37,6 +49,9 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/legal" element={<Legal />} />
           <Route path="/order" element={<Order />} />
+          <Route path="/resources" element={<Blog />} />
+          <Route path="/insights/:id" element={<BlogDetails />} />
+          <Route path="/careers" element={<Careers />} />
 
           <Route path="/login" element={<Login />} />
 

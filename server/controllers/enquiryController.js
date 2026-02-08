@@ -5,19 +5,34 @@ const nodemailer = require('nodemailer');
 // @route   POST /api/enquiries
 // @access  Public
 const createEnquiry = async (req, res) => {
-    const { name, email, service, message } = req.body;
+    const {
+        name,
+        email,
+        phone,
+        service,
+        projectType,
+        budget,
+        timeline,
+        message,
+        referenceLinks
+    } = req.body;
 
     try {
         const enquiry = new Enquiry({
             name,
             email,
+            phone,
             service,
+            projectType,
+            budget,
+            timeline,
             message,
+            referenceLinks,
         });
 
         const createdEnquiry = await enquiry.save();
 
-        // Send email notification (optional for now, but configured)
+        // Send email notification
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -28,14 +43,33 @@ const createEnquiry = async (req, res) => {
 
         const mailOptions = {
             from: process.env.EMAIL_USER,
-            to: process.env.EMAIL_USER, // User receives notification
-            subject: `New Enquiry from ${name}`,
-            text: `Name: ${name}\nEmail: ${email}\nService: ${service}\nMessage: ${message}`,
+            to: process.env.EMAIL_USER, // Admin receives notification
+            subject: `New Project Inquiry: ${service} from ${name}`,
+            text: `
+You have a new enquiry from Klypso Website:
+
+Name: ${name}
+Email: ${email}
+Phone: ${phone || 'N/A'}
+Service: ${service}
+Project Type: ${projectType || 'N/A'}
+Budget: ${budget || 'N/A'}
+Timeline: ${timeline || 'N/A'}
+
+Message:
+${message}
+
+Reference Links:
+${referenceLinks && referenceLinks.length > 0 ? referenceLinks.join('\n') : 'None'}
+
+---
+View in Dashboard: http://localhost:5173/admin
+            `,
         };
 
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
-                console.log(error);
+                console.log('Error sending email:', error);
             } else {
                 console.log('Email sent: ' + info.response);
             }
@@ -43,6 +77,7 @@ const createEnquiry = async (req, res) => {
 
         res.status(201).json(createdEnquiry);
     } catch (error) {
+        console.error('Error creating enquiry:', error);
         res.status(400).json({ message: error.message });
     }
 };
