@@ -25,9 +25,7 @@ function App() {
     <div className="flex flex-col min-h-screen bg-black text-white font-sans">
       <Header />
       <ScrollToTop />
-      <div className="fixed bottom-8 left-8 z-50">
-        <ChatWidget />
-      </div>
+      <ChatWidget />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
