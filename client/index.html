@@ -10,7 +10,9 @@
 
 <body>
   <!-- Netlify Hidden Form for Static Detection -->
-  <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+  <!-- Netlify Hidden Form for Static Detection -->
+  <form name="contact" netlify hidden>
+    <input type="hidden" name="form-name" value="contact" />
     <input type="text" name="name" />
     <input type="email" name="email" />
     <select name="service"></select>

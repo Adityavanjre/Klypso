@@ -50,10 +50,9 @@ const Footer = () => {
                 <a href="tel:+919449734414" className="hover:text-amber-400 transition-colors">+91 9449734414</a>
               </li>
               <li className="flex items-start gap-3">
-                <span className="block text-white">A:</span>
+                <span className="block text-white">L:</span>
                 <span>
-                  123 Innovation Dr,<br />
-                  Tech Valley, CA 94043
+                  Bangalore, India
                 </span>
               </li>
             </ul>
