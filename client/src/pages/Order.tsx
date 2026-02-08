@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight, CheckCircle, CreditCard, ShieldCheck, ChevronRight, ChevronLeft, Link as LinkIcon, AlertCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle, CreditCard, ChevronRight, ChevronLeft, Link as LinkIcon, AlertCircle } from 'lucide-react';
 import axios from 'axios';
 
 const Order = () => {
@@ -220,6 +220,8 @@ const Order = () => {
         </motion.div>
     );
 
+    const [agreed, setAgreed] = useState(false);
+
     const renderStep2_Review = () => (
         <motion.div
             initial={{ opacity: 0, x: 20 }}
@@ -257,7 +259,12 @@ const Order = () => {
 
             <div className="bg-white/5 border border-white/10 rounded-lg p-4">
                 <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" className="mt-1 w-4 h-4 rounded border-gray-600 bg-gray-800 text-indigo-600 focus:ring-indigo-500" />
+                    <input
+                        type="checkbox"
+                        checked={agreed}
+                        onChange={(e) => setAgreed(e.target.checked)}
+                        className="mt-1 w-4 h-4 rounded border-gray-600 bg-gray-800 text-indigo-600 focus:ring-indigo-500"
+                    />
                     <span className="text-sm text-gray-400">
                         I agree to the <a href="/legal" target="_blank" className="text-indigo-400 hover:text-indigo-300 underline">Terms of Service</a> and <a href="/legal" target="_blank" className="text-indigo-400 hover:text-indigo-300 underline">Privacy Policy</a>. I understand that advance payments are subject to the Refund Policy.
                     </span>
@@ -273,8 +280,8 @@ const Order = () => {
                 </button>
                 <button
                     onClick={handleSubmitRequirements}
-                    disabled={loading}
-                    className="btn-primary px-8 py-3 flex items-center gap-2"
+                    disabled={loading || !agreed}
+                    className={`btn-primary px-8 py-3 flex items-center gap-2 ${(!agreed || loading) ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
                     {loading ? 'Submitting...' : 'Submit & Continue to Payment'}
                     {!loading && <CreditCard size={18} />}
