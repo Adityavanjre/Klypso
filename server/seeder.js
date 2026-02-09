@@ -9,100 +9,266 @@ dotenv.config({ path: path.join(__dirname, '.env') });
 
 const projects = [
     {
-        title: 'Lumina Premium Retail',
-        description: 'A multi-sensory e-commerce ecosystem for luxury apparel.',
-        fullDescription: 'Lumina required a digital flagship store that mirrored the tactile elegance of their physical boutiques. We engineered a headless architecture that prioritizes visual fidelity without sacrificing load performance, integrating high-definition video backgrounds and seamless transition logic.',
-        categories: ['Web Architecture', 'Visual Assets & Photo'],
-        image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1600&auto=format&fit=crop',
-        challenge: 'Maintaining high-resolution visual quality while achieving sub-200ms page transitions across global regions.',
-        solution: 'Developed a custom Next.js storefront with granular image optimization and an edge-cached content layer.',
-        technologies: ['React', 'Next.js', 'Shopify Hydrogen', 'Tailwind CSS', 'Framer Motion'],
-        impact: 'Boosted conversion rates by 42% and reduced average time-to-first-byte by 65%.',
-        testimonial: {
-            quote: "The team at Klypso delivered a digital experience that actually feels like our brand. It's rare to find engineers with this much design intuition.",
-            author: "Elena Rossi",
-            role: "Global Creative Director"
-        },
+        title: 'Vantage Logistics Core',
+        description: 'Enterprise-grade fleet intelligence dashboard handling 50k+ daily assets.',
+        fullDescription: 'Vantage required a complete digital transformation of their legacy logistics infrastructure. We architected a real-time command center that aggregates data from IoT sensors across their global fleet. The system processes streams of location, fuel, and diagnostic data to predict maintenance needs and optimize routes in real-time.',
+        challenge: 'The legacy system suffered from 5-minute data latency, resulting in $2M/year in fuel inefficiencies. They needed sub-second updates.',
+        solution: 'We implemented a custom WebSocket engine on Node.js utilizing Redis streams for high-throughput data ingestion, fronted by a high-performance React dashboard using WebGL for map rendering.',
+        client: 'Vantage Global Logistics',
+        date: '2024',
+        image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2000',
+        categories: ['Web', 'Cloud'],
         gallery: [
-            'https://images.unsplash.com/photo-1441984969233-389a846fbb2a?q=80&w=1200&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1200&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1200&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1490481651871-ab5cf0db69?q=80&w=1200&auto=format&fit=crop'
+            "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1504384308090-c54be38550dd?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1555421689-491a97ff2040?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&q=80&w=2000"
         ],
-        services: ['Headless E-commerce', 'UX/UI Engineering', 'Performance Optimization'],
-        link: ''
+        services: ["System Architecture", "Real-time Infrastructure", "UX Design"],
+        technologies: ["React", "Mapbox GL", "Node.js", "Redis", "Docker"],
+        impact: "Reduced fuel costs by 18% in Q1. Incident response time cut by 60%.",
+        testimonial: {
+            quote: "The level of clarity this system provides is unprecedented in our industry. Klypso didn't just build a dashboard; they built our central nervous system.",
+            author: "James H.",
+            role: "COO, Vantage Logistics"
+        },
+        link: "#",
+        results: ["18% Fuel Cost Reduction", "Sub-second Data Latency", "50k+ Assets Tracked"]
     },
     {
-        title: 'Horizon Urban Estates',
-        description: 'Immersive visual narrative for prime architectural developments.',
-        fullDescription: 'For Horizon, we moved beyond standard real estate listings into digital storytelling. Combining low-altitude drone cinematography with a minimal web interface, we created a platform where the architecture is the interface.',
-        categories: ['Professional Photography', 'Web Architecture'],
-        image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1600&auto=format&fit=crop',
-        challenge: 'Representing massive scale and intricate detail of urban developments within a standard mobile browser experience.',
-        solution: 'Built a specialized gallery engine supporting 8K textures and interactive 360-degree environmental spans.',
-        technologies: ['React', 'WebGL', 'Three.js', 'Cloudinary API', 'GSM (Global Site Mesh)'],
-        impact: 'Generated 400% more high-intent enquiries for pre-construction phases compared to previous campaigns.',
+        title: 'Aura Financial',
+        description: 'Next-gen mobile banking interface for high-net-worth individuals.',
+        fullDescription: 'Aura is a digital-first private bank. They needed a mobile experience that felt as premium as their service. We built a React Native application that prioritizes security without sacrificing fluidity. Features include biometric transaction signing, real-time portfolio analysis, and a concierge chat interface.',
+        challenge: 'Creating a seamless, 60fps experience while adhering to strict banking security compliance standards (SOC2 / GDPR).',
+        solution: "A React Native codebase with native modules for cryptography. We used a 'security-first' design pattern where sensitive data is never stored in the UI layer.",
+        client: 'Aura Private Bank',
+        date: '2023',
+        image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=2000',
+        categories: ['App', 'Design'],
+        gallery: [
+            "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1616077168079-7e09a677fb2c?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1611974765270-ca12586343bb?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1579621970563-ebec7560eb3e?auto=format&fit=crop&q=80&w=2000"
+        ],
+        services: ["Mobile Engineering", "Security Audit", "Interface Design"],
+        technologies: ["React Native", "TypeScript", "Node.js", "GraphQL"],
+        impact: "$400M in assets under management processed through the app in year one.",
         testimonial: {
-            quote: "Klypso's photography and web implementation made our properties sell before we even broke ground.",
-            author: "Marcus Thorne",
+            quote: "Our clients expect perfection. Klypso delivered an app that feels solid, secure, and incredibly fast.",
+            author: "Elena R.",
+            role: "Product Director, Aura"
+        },
+        link: "#",
+        results: ["$400M AUM Processed", "4.9 App Store Rating", "Bank-Grade Encryption"]
+    },
+    {
+        title: 'Carbon Trace AI',
+        description: 'SaaS platform for calculating and visualizing corporate carbon footprints.',
+        fullDescription: 'With upcoming ESG regulations, enterprises need accurate reporting. Carbon Trace creates a digital twin of a company\'s supply chain to calculate emissions. We built the frontend visualization layer that turns millions of rows of supply chain data into actionable insights.',
+        challenge: 'Rendering massive datasets in the browser without crashing the client.',
+        solution: 'We utilized D3.js and Web Workers to offload calculation from the main thread, ensuring the UI remains responsive even when crunching terabytes of data.',
+        client: 'GreenMetrics Corp',
+        date: '2024',
+        image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2000',
+        categories: ['Web', 'Cloud'],
+        gallery: [
+            "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1581093458791-9f302e683837?auto=format&fit=crop&q=80&w=2000"
+        ],
+        services: ["Data Visualization", "Full Stack Dev", "Cloud Architecture"],
+        technologies: ["Vue.js", "Python", "AWS Lambda", "D3.js"],
+        impact: "Adopted by 3 Fortune 500 companies for their 2025 sustainability reports.",
+        testimonial: {
+            quote: "Complex data became beautiful logic. This tool is now essential to our compliance strategy.",
+            author: "Dr. Aris K.",
+            role: "Chief Sustainability Officer"
+        },
+        link: "#",
+        results: ["Fortune 500 Adoption", "Zero Downtime Launch", "Real-time Emissions Tracking"]
+    },
+    {
+        title: 'Lumina Studios',
+        description: 'Immersive portfolio site for an award-winning architectural firm.',
+        fullDescription: 'Lumina creates physical spaces that defy convention. Their digital presence needed to reflect that. We built a site that breaks the traditional grid, using fluid WebGL transitions and micro-interactions to treat each project reveal like a cinematic premiere.',
+        challenge: 'Balancing heavy high-resolution imagery with load performance.',
+        solution: 'Advanced image piping with adaptive streaming and a custom orchestrator for pre-loading assets based on user intent.',
+        client: 'Lumina Architecture',
+        date: '2023',
+        image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=2000',
+        categories: ['Web', 'Design'],
+        gallery: [
+            "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&q=80&w=2000"
+        ],
+        services: ["Creative Direction", "Web Development", "3D Implementation"],
+        technologies: ["Next.js", "Framer Motion", "WebGL", "Sanity CMS"],
+        impact: "Time-on-site increased by 300%. Direct inquiries for commercial projects doubled.",
+        testimonial: {
+            quote: "It's not a website; it's an exhibition. Klypso understood our aesthetic language perfectly.",
+            author: "Maria S.",
             role: "Principal Architect"
         },
-        gallery: [
-            'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1600585154340-be6199f7f009?q=80&w=1200&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1200&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop'
-        ],
-        services: ['Architectural Photography', 'Immersive Web Experience', 'Visual Narrative'],
-        link: ''
+        link: "#",
+        results: ["300% Time-on-Site", "Awwwards Nominee", "Doubled Inquiries"]
     },
     {
-        title: 'Vanguard Security Systems',
-        description: 'High-stake engineering for global cyber-defense infrastructure.',
-        fullDescription: 'A completely overhauled dashboard and monitoring system for real-time threat detection. Vanguard required a UI that could display high-density information without cognitive fatigue, utilizing a carefully designed dark-mode color schema.',
-        categories: ['Intelligence Systems', 'Web Architecture'],
-        image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1600&auto=format&fit=crop',
-        challenge: 'Synchronizing massive data streams from global firewalls into a unified, actionable heat-map.',
-        solution: 'Architected a serverless backend with WebSockets for real-time reactivity and a Canvas-based rendering engine.',
-        technologies: ['Node.js', 'Socket.io', 'AWS Lambda', 'D3.js', 'React'],
-        impact: 'Reduced mean-time-to-resolution (MTTR) by 45% for critical security breaches.',
-        testimonial: {
-            quote: "The most intuitive security dashboard we've ever operated. It turns noise into intelligence.",
-            author: "Sarah Jenkins",
-            role: "Head of Operations"
-        },
+        title: 'Revoke E-Com',
+        description: 'Headless commerce migration for a streetwear giant.',
+        fullDescription: 'Revoke needed to scale past their monolithic platform limitations. We migrated them to a headless Shopify Plus setup with a custom storefront. This allowed for rich merchandising, drop-culture countdowns, and instant page loads that boosted conversion rates.',
+        challenge: 'Migrating 100k+ SKUs and maintaining SEO rankings during a platform switch.',
+        solution: 'A meticulous redirection strategy and a Next.js frontend that pre-renders key PLP/PDP pages for instant SEO indexing.',
+        client: 'Revoke Clothing',
+        date: '2024',
+        image: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&q=80&w=2000',
+        categories: ['Web', 'Marketing'],
         gallery: [
-            'https://images.unsplash.com/photo-1558494949-ef010cbdcc51?q=80&w=1200&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1200&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1551288049-bbda4833ff72?q=80&w=1200&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop'
+            "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?auto=format&fit=crop&q=80&w=2000"
         ],
-        services: ['Dashboard Engineering', 'Real-time Data Visualization', 'Cyber-defense UI'],
-        link: ''
+        services: ["E-Commerce Dev", "SEO Strategy", "Migration"],
+        technologies: ["Shopify Plus", "Hydrogen", "React", "Vercel"],
+        impact: "Conversion rate jumped from 1.2% to 2.8% post-launch. Black Friday traffic handled with 0% downtime.",
+        testimonial: {
+            quote: "We finally have a site that moves as fast as our drops do. The ROI was immediate.",
+            author: "Tariq J.",
+            role: "Head of Digital"
+        },
+        link: "#",
+        results: ["2.8% Conversion Rate", "100k+ SKU Migration", "0% Downtime"]
     },
     {
-        title: 'Bolt Logistics Hub',
-        description: 'Full-spectrum operational suite for modern freight systems.',
-        fullDescription: 'Bolt needed an end-to-end platform for fleet tracking, warehouse automation, and predictive maintenance. We integrated IoT sensors with a sleek MERN-based dashboard to give management total visibility.',
-        categories: ['Intelligence Systems', 'Web Architecture'],
-        image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1600&auto=format&fit=crop',
-        challenge: 'Legacy system integration involving 20+ different APIs and hardware sensors.',
-        solution: 'Built a middleware orchestration layer that normalizes data flows into a unified React interface.',
-        technologies: ['MongoDB', 'Express', 'React', 'Node.js', 'Redis', 'IoT-Gateway'],
-        impact: 'Eliminated manual tracking errors by 92% and optimized fuel efficiency by 18%.',
-        testimonial: {
-            quote: "The Bolt Hub is the nervous system of our operations. We couldn't scale without it.",
-            author: "David Varkey",
-            role: "CEO, Bolt"
-        },
+        title: 'MediSync Portal',
+        description: 'Provider-facing portal for managing patient telemetry.',
+        fullDescription: 'MediSync creates IoT heart monitors. They needed a portal for doctors to view live telemetry from patients at home. We built a HIPAA-compliant dashboard that alerts doctors to anomalies in real-time, reducing hospital readmission rates.',
+        challenge: 'Displaying live ECG waves in a browser with medical-grade accuracy.',
+        solution: 'Canvas API for high-performance rendering of waveform data, coupled with encrypted WebSockets.',
+        client: 'MediSync Health',
+        date: '2023',
+        image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=2000',
+        categories: ['App', 'Web'],
         gallery: [
-            'https://images.unsplash.com/photo-1566576721346-d4a3b4eaad5b?q=80&w=1200&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=1200&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1580674684081-7617fbf3d745?q=80&w=1200&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1200&auto=format&fit=crop'
+            "https://images.unsplash.com/photo-1576091160550-217358c7db81?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1516549655169-df83a092fc43?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1584982751601-97dcc096654c?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&q=80&w=2000"
         ],
-        services: ['IoT Integration', 'Logistics Management Suite', 'Real-time Tracking'],
-        link: ''
+        services: ["Healthcare Dev", "Compliance Validation", "Frontend Eng"],
+        technologies: ["React", "Canvas API", "Node.js", "FHIR"],
+        impact: "Hospital readmissions for heart failure patients reduced by 12%.",
+        testimonial: {
+            quote: "This tool saves lives. The reliability and clarity of the data visualization are world-class.",
+            author: "Dr. Sarah L.",
+            role: "Medical Director"
+        },
+        link: "#",
+        results: ["12% Reduced Readmissions", "HIPAA Compliant", "Real-time Telemetry"]
+    },
+    {
+        title: 'CipherGuard Protocol',
+        description: 'Zero-trust security infrastructure for decentralized finance.',
+        fullDescription: 'In the world of DeFi, security is the product. CipherGuard needed a visual identity and a dashboard that conveyed impenetrability. We built a dark-mode-first, audit-ready interface that allows institutional investors to verify protocol solvencies on-chain.',
+        challenge: 'Translating complex blockchain proofs into trust-building visual indicators for non-technical investors.',
+        solution: 'Designed a unique "Shield" visualization grammar that updates in real-time as blocks are confirmed.',
+        client: 'CipherGuard DAO',
+        date: '2024',
+        image: 'https://images.unsplash.com/photo-1639322537228-ad71c429d243?auto=format&fit=crop&q=80&w=2000',
+        categories: ['Cloud', 'Web'],
+        gallery: [
+            "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1642104704074-907c0698cbd9?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1644089857253-3889156641b8?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=2000"
+        ],
+        services: ["Blockchain Dev", "UI Engineering", "Cybersecurity"],
+        technologies: ["Solidity", "React", "Ethers.js", "The Graph"],
+        impact: "$1.2B Total Value Locked (TVL) achieved within 3 months of launch.",
+        testimonial: {
+            quote: "Klypso understood that trust is visual. They made our security visible.",
+            author: "Anon Founder",
+            role: "Core Contributor"
+        },
+        link: "#",
+        results: ["$1.2B TVL", "Zero Exploits", "Audit Grade UI"]
+    },
+    {
+        title: 'Neon Horizon Brand',
+        description: 'Rebranding a legacy media conglomerate for the streaming era.',
+        fullDescription: 'Pacific Media was a giant with an aging face. They needed a rebrand that screamed "future" to compete with Netflix and Hulu. We delivered "Neon Horizon"—a fluid, liquid-motion identity system that adapts to every screen size, from cinema to smartwatch.',
+        challenge: 'Unifying 40 disparate sub-brands under one cohesive visual language.',
+        solution: 'A generative design system based on "liquid light" that generates unique but consistently branded assets for every show.',
+        client: 'Pacific Media Group',
+        date: '2023',
+        image: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=2000',
+        categories: ['Design', 'Marketing'],
+        gallery: [
+            "https://images.unsplash.com/photo-1634152962476-4b8a00e1915c?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=2000"
+        ],
+        services: ["Brand Identity", "Motion Design", "Design Systems"],
+        technologies: ["Adobe CC", "WebGL", "Lottie", "Figma"],
+        impact: "Brand sentiment score increased by 65% among Gen Z demographics.",
+        testimonial: {
+            quote: "We didn't just get a logo; we got a living, breathing visual language.",
+            author: "Jessica Wu",
+            role: "CMO, Pacific Media"
+        },
+        link: "#",
+        results: ["65% Sentiment Uplift", "Unified 40 Sub-brands", "Clio Award Winner"]
+    },
+    {
+        title: 'Kyoto Monochrome',
+        description: 'A study of silence and structure in Japan\'s ancient capital.',
+        fullDescription: 'In a world of noise, we sought silence. This photographic anthology documents the interplay between traditional machiya architecture and modern urban encroachment in Kyoto. Shot entirely on medium format film, this series explores how the old world bleeds into the new, creating a visual stillness that has been featured in exhibitions worldwide.',
+        challenge: 'Capturing the essence of "Ma" (negative space) in a bustling metropolis.',
+        solution: 'High-contrast monochrome processing with a focus on shadow depth and architectural lines.',
+        client: 'Gallery Momiji',
+        date: '2023',
+        image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80&w=2000',
+        categories: ['Photography', 'Design'],
+        gallery: [
+            "https://images.unsplash.com/photo-1480796927426-f609979314bd?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1528360983277-13d9b152c6d7?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1534274988754-5d519d1e4ca5?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&q=80&w=2000",
+            "https://images.unsplash.com/photo-1624253321171-1be53e12f5f4?auto=format&fit=crop&q=80&w=2000"
+        ],
+        services: ["Art Direction", "Photography", "Exhibition Design"],
+        technologies: ["Hasselblad H6D", "Phase One", "Darkroom"],
+        impact: "Sold out gallery exhibition in Tokyo and New York.",
+        testimonial: {
+            quote: "Klypso sees what others miss. They don't just take photos; they capture silence.",
+            author: "Kenji T.",
+            role: "Curator"
+        },
+        link: "#",
+        results: ["Sold Out Exhibition", "Published in Monocle", "International Awards"]
     }
 ];
 

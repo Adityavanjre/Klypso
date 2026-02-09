@@ -7,6 +7,7 @@ import ChatWidget from './components/ChatWidget';
 import Home from './pages/Home';
 import Services from './pages/Services';
 import Portfolio from './pages/Portfolio';
+import Photography from './pages/Photography';
 import ProjectDetails from './pages/ProjectDetails';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -42,6 +43,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
           <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/photography" element={<Photography />} />
           <Route path="/project/:id" element={<ProjectDetails />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
