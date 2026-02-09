@@ -1,0 +1,158 @@
+[
+  {
+    "id": "1",
+    "title": "Neon Bank Fintech Dashboard",
+    "category": "App Development",
+    "description": "A high-performance trading dashboard with real-time data visualization.",
+    "fullDescription": "Neon Bank required a complete overhaul of their customer-facing trading platform. We built a Next.js application with WebSockets for sub-millisecond data updates and D3.js for complex financial charting. The system handles over 50k concurrent connections with zero latency issues.",
+    "challenge": "Legacy infrastructure was causing 2-second delays in quote updates, unacceptable for high-frequency traders.",
+    "solution": "We implemented a custom WebSocket engine on Node.js and optimized the React frontend with Web Workers to offload heavy computations.",
+    "client": "Neon Financial Group",
+    "date": "2024",
+    "image": "bg-gradient-to-br from-indigo-900 to-purple-900",
+    "gallery": [
+      "https://images.unsplash.com/photo-1611974765270-ca12586343bb?q=80&w=1000&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop"
+    ],
+    "services": ["UI/UX Design", "Frontend Engineering", "Real-time Infrastructure"],
+    "technologies": ["React", "Next.js", "TypeScript", "Node.js", "WebSockets"],
+    "impact": "300ms faster load times and 40% increase in daily active users within the first month.",
+    "testimonial": {
+      "quote": "Klypso transformed our platform. The speed update is night and day.",
+      "author": "Sarah Jenkins",
+      "role": "CTO, Neon Bank"
+    },
+    "link": "#",
+    "results": ["300ms faster load times", "40% increase in daily active users"]
+  },
+  {
+    "id": "2",
+    "title": "Solar Eco Monitoring",
+    "category": "Web Development",
+    "description": "Sustainable energy monitoring PWA for residential use.",
+    "fullDescription": "We developed a Progressive Web App (PWA) that connects to IoT solar inverters, allowing homeowners to track their energy production and consumption in real-time. Offline capabilities ensure data access even during outages.",
+    "challenge": "Users needed to access data in remote areas with poor connectivity.",
+    "solution": "A robust offline-first architecture using Service Workers and IndexedDB for local caching.",
+    "client": "EcoStream Energy",
+    "date": "2023",
+    "image": "bg-gradient-to-br from-green-500 to-emerald-700",
+    "gallery": [
+      "https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=1000&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?q=80&w=1000&auto=format&fit=crop"
+    ],
+    "services": ["PWA Development", "IoT Integration", "Cloud Sync"],
+    "technologies": ["Vue.js", "PWA", "Firebase", "IoT"],
+    "impact": "Awarded Best Green Tech App 2023. Used by over 50,000 households.",
+    "testimonial": {
+      "quote": "Our customers love the app. It's fast, reliable, and looks beautiful.",
+      "author": "David Chen",
+      "role": "Product Lead, EcoStream"
+    },
+    "link": "#",
+    "results": ["Awarded Best Green Tech App 2023", "50k+ downloads"]
+  },
+  {
+    "id": "3",
+    "title": "Cyber Shield Audit Platform",
+    "category": "Security",
+    "description": "Enterprise-grade cybersecurity audit platform.",
+    "fullDescription": "A robust SaaS platform for conducting automated security audits and compliance checks for enterprise infrastructure. Features automated reporting and real-time threat detection.",
+    "challenge": "Manual audits were taking weeks. Automated reports needed to be instant and accurate.",
+    "solution": "Python-based scanning engines integrated with a React dashboard for real-time visualization.",
+    "client": "Shield Corp",
+    "date": "2024",
+    "image": "bg-gradient-to-br from-red-500 to-orange-600",
+    "gallery": [
+      "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=1000&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1000&auto=format&fit=crop"
+    ],
+    "services": ["Backend Security", "Dashboard Design", "Compliance Logic"],
+    "technologies": ["Python", "Django", "React", "PostgreSQL"],
+    "impact": "Trusted by Fortune 500 companies. Reduced audit time by 90%.",
+    "testimonial": {
+      "quote": "Efficiency is our priority. Klypso delivered a tool that saves us thousands of hours.",
+      "author": "Markus V.",
+      "role": "CISO, Shield Corp"
+    },
+    "link": "#",
+    "results": ["Trusted by Fortune 500 companies", "SOC2 Compliant"]
+  },
+  {
+    "id": "4",
+    "title": "Lumina VR Showroom",
+    "category": "AR/VR",
+    "description": "Immersive virtual reality showroom for real estate.",
+    "fullDescription": "Lumina wanted to revolutionize property viewing. We created a VR experience that allows potential buyers to walk through properties from anywhere in the world using WebGL and WebXR standards.",
+    "challenge": "Delivering high-fidelity 3D assets over the web without long load times.",
+    "solution": "Draco compression for 3D models and aggressive texture optimization pipelines.",
+    "client": "Lumina Real Estate",
+    "date": "2024",
+    "image": "bg-gradient-to-br from-blue-400 to-cyan-500",
+    "gallery": [
+      "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=1000&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1626379961319-2158651a9b0c?q=80&w=1000&auto=format&fit=crop"
+    ],
+    "services": ["3D Modeling", "WebXR Development", "Interactive Design"],
+    "technologies": ["Unity", "C#", "Oculus SDK", "WebGL"],
+    "impact": "Sales cycle reduced by 30%. Featured in TechCrunch.",
+    "testimonial": {
+      "quote": "The most immersive web experience we've ever seen. Sales are up.",
+      "author": "Elena R.",
+      "role": "VP Sales, Lumina"
+    },
+    "link": "#",
+    "results": ["Sales cycle reduced by 30%", "Featured in TechCrunch"]
+  },
+  {
+    "id": "5",
+    "title": "Flow CRM AI",
+    "category": "Data",
+    "description": "AI-powered customer relationship management tool.",
+    "fullDescription": "Flow CRM needed to predict customer churn. We implemented machine learning models to analyze customer behavior and provide actionable insights to sales teams directly within their dashboard.",
+    "challenge": "Integrating Python ML models with a Node.js backend seamlessly.",
+    "solution": "Microservices architecture using FastAPI for the model serving and Express for the main API.",
+    "client": "Flow Systems",
+    "date": "2023",
+    "image": "bg-gradient-to-br from-teal-500 to-blue-600",
+    "gallery": [
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop"
+    ],
+    "services": ["Machine Learning", "Data Engineering", "Full Stack Dev"],
+    "technologies": ["Python", "TensorFlow", "React", "FastAPI"],
+    "impact": "25% reduction in churn. Acquired by major tech conglomerate.",
+    "testimonial": {
+      "quote": "The predictive accuracy is frighteningly good. A game changer.",
+      "author": "Tom H.",
+      "role": "CEO, Flow Systems"
+    },
+    "link": "#",
+    "results": ["25% reduction in churn", "Integration with Salesforce"]
+  },
+  {
+    "id": "6",
+    "title": "Zenith Telehealth",
+    "category": "App Development",
+    "description": "Telemedicine app connecting patients with specialists.",
+    "fullDescription": "Zenith aims to make healthcare accessible. We built a HIPAA-compliant mobile app featuring secure video calls, e-prescriptions, and appointment scheduling.",
+    "challenge": "Ensuring end-to-end encryption and HIPAA compliance for video streams.",
+    "solution": "WebRTC custom implementation with encrypted signaling and secure storage.",
+    "client": "Zenith Health",
+    "date": "2024",
+    "image": "bg-gradient-to-br from-pink-500 to-rose-600",
+    "gallery": [
+      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1000&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1576091160550-217358c7db81?q=80&w=1000&auto=format&fit=crop"
+    ],
+    "services": ["Mobile Development", "Security Audit", "Video Infrastructure"],
+    "technologies": ["React Native", "WebRTC", "Node.js", "MongoDB"],
+    "impact": "10k+ consultations in first month. 5-star rating on App Store.",
+    "testimonial": {
+      "quote": "Stable, secure, and easy for our patients to use. Perfect execution.",
+      "author": "Dr. A. Gupta",
+      "role": "Medical Director"
+    },
+    "link": "#",
+    "results": ["10k+ consultations in first month", "5-star rating on App Store"]
+  }
+]

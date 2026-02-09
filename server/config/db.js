@@ -7,7 +7,9 @@ const connectDB = async () => {
     // 1. Try to connect to persistent MongoDB if URI is provided
     if (process.env.MONGO_URI) {
         try {
-            const conn = await mongoose.connect(process.env.MONGO_URI);
+            const conn = await mongoose.connect(process.env.MONGO_URI, {
+                serverSelectionTimeoutMS: 2000 // 2 second timeout before fallback
+            });
             console.log(`MongoDB Connected (Persistent): ${conn.connection.host}`);
             return;
         } catch (err) {
@@ -62,6 +64,10 @@ const connectDB = async () => {
 const createAdminSafely = async () => {
     try {
         const User = require('../models/User');
+        const Project = require('../models/Project');
+        const Blog = require('../models/Blog');
+        const Job = require('../models/Job');
+
         const userExists = await User.findOne({ email: 'admin@klypso.agency' });
 
         if (!userExists) {
@@ -72,6 +78,17 @@ const createAdminSafely = async () => {
                 isAdmin: true,
             });
             console.log('Admin user seeded in memory database.');
+        }
+
+        // Check if projects exist, if not seed them
+        const projectCount = await Project.countDocuments();
+        if (projectCount === 0) {
+            const { projects, blogs, jobs } = require('../seeder.js');
+            console.log('Seeding initial project, blog, and job data...');
+            await Project.insertMany(projects);
+            await Blog.insertMany(blogs);
+            await Job.insertMany(jobs);
+            console.log('Data successfully seeded to memory database.');
         }
     } catch (err) {
         console.error('Error seeding admin:', err.message);

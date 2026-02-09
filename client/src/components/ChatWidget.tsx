@@ -8,22 +8,31 @@ const ChatWidget = () => {
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
 
     return (
-        <motion.a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            whileHover={{ scale: 1.1 }}
-            transition={{ delay: 1, type: "spring", stiffness: 260, damping: 20 }}
-            className="fixed bottom-8 left-8 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-[0_0_20px_rgba(37,211,102,0.5)] flex items-center justify-center hover:bg-[#20bd5a] transition-colors group"
-            aria-label="Chat on WhatsApp"
-        >
-            <MessageCircle size={28} className="fill-current" />
-            <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 ease-in-out whitespace-nowrap ml-0 group-hover:ml-3 text-sm font-bold tracking-wide">
-                Chat with us
-            </span>
-        </motion.a>
+        <div className="fixed bottom-10 left-10 z-50 flex items-center group">
+            <motion.a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                className="relative bg-[#25D366] text-white p-4 rounded-[1.2rem] shadow-[0_10px_30px_rgba(37,211,102,0.4)] flex items-center justify-center hover:bg-[#20bd5a] transition-all duration-300 z-10"
+                aria-label="Chat on WhatsApp"
+            >
+                <div className="absolute inset-0 rounded-[1.2rem] animate-pulse bg-[#25D366] opacity-50 -z-10 blur-xl" />
+                <MessageCircle size={24} className="fill-white" />
+            </motion.a>
+
+            <motion.div
+                initial={{ opacity: 0, x: -10, scale: 0.95 }}
+                whileInView={{ opacity: 0 }} // Default hidden
+                whileHover={{ opacity: 1, x: 0, scale: 1 }} // Fallback if group hover fails
+                className="ml-4 bg-zinc-900/90 backdrop-blur-xl border border-white/10 text-white text-[10px] font-black uppercase tracking-[0.2em] px-5 py-3 rounded-2xl opacity-0 group-hover:opacity-100 group-hover:translate-x-0 -translate-x-4 transition-all duration-500 pointer-events-none shadow-2xl whitespace-nowrap border-l-indigo-500/50 border-l-2"
+            >
+                Connect with us
+            </motion.div>
+        </div>
     );
 };
 

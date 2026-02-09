@@ -42,6 +42,10 @@ const ProjectSchema = new mongoose.Schema({
         type: [String],
         default: [],
     },
+    services: {
+        type: [String],
+        default: [],
+    },
     link: {
         type: String,
     },

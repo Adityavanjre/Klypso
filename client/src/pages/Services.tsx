@@ -1,182 +1,230 @@
 import { motion } from 'framer-motion';
 import {
     Smartphone, TrendingUp, PenTool,
-    Monitor, Cloud, CheckCircle, Camera
+    Code, Shield, CheckCircle, Monitor,
+    Camera, Cpu, Globe, Zap, Search,
+    Layers, Users, BarChart
 } from 'lucide-react';
 import SEO from '../components/SEO';
 
 const Services = () => {
     return (
-        <section className="min-h-screen bg-black text-white pt-24 pb-12 px-4 overflow-hidden">
+        <section className="min-h-screen bg-black text-white pt-32 pb-12 px-4 relative overflow-hidden">
+            {/* Mesh Background */}
+            <div className="absolute top-0 left-0 w-[50rem] h-[50rem] bg-indigo-500/5 rounded-full blur-[120px] -z-10" />
+            <div className="absolute top-[20%] right-0 w-[40rem] h-[40rem] bg-purple-500/5 rounded-full blur-[120px] -z-10" />
+
             <SEO
-                title="Our Services | Klypso"
+                title="Our Expertise | Klypso Collective"
                 description="Explore our comprehensive range of digital services including web development, app creation, and strategic marketing."
             />
 
-            <div className="container mx-auto">
+            <div className="container mx-auto max-w-7xl relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="text-center mb-20"
+                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                    className="text-center mb-32"
                 >
-                    <h1 className="text-4xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 mb-6">
-                        Digital Mastery
+                    <div className="inline-block px-4 py-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 backdrop-blur-md mb-8">
+                        <span className="text-[10px] md:text-xs font-black tracking-[0.2em] text-indigo-300 uppercase">
+                            The Expertise
+                        </span>
+                    </div>
+                    <h1 className="text-6xl md:text-9xl font-black mb-10 tracking-tighter leading-[0.8] italic font-serif">
+                        Digital <br />
+                        <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent not-italic font-sans inline-block mt-4">
+                            Mastery.
+                        </span>
                     </h1>
-                    <p className="max-w-2xl mx-auto text-xl text-gray-400">
-                        We don't just build software; we engineer digital ecosystems tailored for growth and impact.
+                    <p className="max-w-3xl mx-auto text-xl md:text-2xl text-gray-300 font-light leading-relaxed">
+                        We don't just build software; we engineer high-performance digital ecosystems
+                        that serve as the backbone for premium brands.
                     </p>
                 </motion.div>
 
                 {/* Main Services Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-40">
                     <ServiceDetailCard
-                        icon={<Monitor className="text-indigo-400" size={40} />}
-                        title="Web Development"
-                        description="Custom, high-performance websites built with React, Next.js, and modern frameworks. SEO-ready and fully responsive."
-                        features={['SPA & PWA', 'E-commerce', 'CMS Integration']}
+                        icon={<Code size={32} />}
+                        title="Web Systems"
+                        description="Custom, high-performance engines built with Next.js and TypeScript. We prioritize speed, security, and sub-second interactions."
+                        features={['SPA & PWA Architecture', 'Headless Commerce', 'Platform Integration', 'Real-time Systems']}
                     />
                     <ServiceDetailCard
-                        icon={<Smartphone className="text-pink-400" size={40} />}
-                        title="App Development"
-                        description="Native and cross-platform mobile applications for iOS and Android that provide seamless user experiences."
-                        features={['React Native', 'Flutter', 'UI/UX Design']}
+                        icon={<Smartphone size={32} />}
+                        title="Mobile Platforms"
+                        description="Native-grade experiences for iOS and Android. Smooth animations, offline-first reliability, and stunning UI."
+                        features={['React Native Mastery', 'Custom Animation Engine', 'Cross-Platform Unity', 'Biometric Security']}
                     />
                     <ServiceDetailCard
-                        icon={<TrendingUp className="text-green-400" size={40} />}
+                        icon={<TrendingUp size={32} />}
+                        title="Growth Intelligence"
+                        description="Data-driven tactical plans. We integrate E-E-A-T SEO and advanced analytics to ensure measurable ROI."
+                        features={['Technical SEO Audits', 'Conversion Psychology', 'Strategic Content', 'Data Visualization']}
+                    />
+                    <ServiceDetailCard
+                        icon={<PenTool size={32} />}
+                        title="Visual Identity"
+                        description="Crafting high-end digital aesthetics that resonate. From immersive UI to bold brand narratives."
+                        features={['System Design', 'Intuitive Interfaces', 'Motion Direction', '3D Asset Creation']}
+                    />
+                    <ServiceDetailCard
+                        icon={<Shield size={32} />}
+                        title="Architecture"
+                        description="Scalable cloud infrastructure. High-availability systems designed to handle millions of transactions."
+                        features={['AWS/Google Cloud', 'Microservices Architecture', 'Edge Computing', 'Cybersecurity Ops']}
+                    />
+                    <ServiceDetailCard
+                        icon={<Monitor size={32} />}
+                        title="Omnichannel"
+                        description="Connecting your brand across every digital touchpoint. A unified experience for your users."
+                        features={['Social Integration', 'API Ecosystems', 'Multi-Region Support', 'CRM Syncing']}
+                    />
+                    <ServiceDetailCard
+                        icon={<Camera size={32} />}
+                        title="Bespoke Photography"
+                        description="Professional-grade visual capture for products, architecture, and cinematic brand narratives."
+                        features={['Studio Product Shots', 'Architectural Stills', 'Brand Storytelling', 'Aerial Cinematography']}
+                    />
+                    <ServiceDetailCard
+                        icon={<Globe size={32} />}
                         title="Digital Marketing"
-                        description="Data-driven strategies to boost your online presence, traffic, and conversions."
-                        features={['SEO/SEM', 'Social Media', 'Content Strategy']}
+                        description="Data-driven marketing strategies that amplify reach and maximize engagement across all channels."
+                        features={['PPC & Ad Ops', 'Social Engineering', 'Email Logic', 'Influencer Strategy']}
                     />
                     <ServiceDetailCard
-                        icon={<PenTool className="text-yellow-400" size={40} />}
-                        title="Creative Design"
-                        description="Brand identity, logo design, and UI/UX prototyping that tells your story visually."
-                        features={['Branding', 'Prototyping', 'Visual Assets']}
+                        icon={<Cpu size={32} />}
+                        title="Intel Systems"
+                        description="Advanced AI and machine learning integrations to automate workflows and drive intelligence."
+                        features={['AI Integration', 'Data Science', 'Automated Ops', 'Neural Interfaces']}
                     />
-                    <ServiceDetailCard
-                        icon={<Cloud className="text-cyan-400" size={40} />}
-                        title="Cloud Solutions"
-                        description="Scalable cloud infrastructure setup and management on AWS, Google Cloud, or Azure."
-                        features={['DevOps', 'Serverless', 'Microservices']}
-                    />
-                    <ServiceDetailCard
-                        icon={<TrendingUp className="text-orange-400" size={40} />}
-                        title="SEO & Content Strategy"
-                        description="Dominate search results with data-driven SEO workflows and compelling content narratives."
-                        features={['Technical SEO', 'Copywriting', 'Link Building']}
-                    />
-                    <ServiceDetailCard
-                        icon={<Camera className="text-purple-400" size={40} />}
-                        title="Professional Photography"
-                        description="Capturing your brand's essence with high-end corporate, product, and event photography."
-                        features={['Weddings & Events', 'Pre-wedding & Baby Shower', 'Product & Commercial']}
-                    />
-
                 </div>
 
-                {/* Detailed Features / Why Choose Us */}
-                <div className="mb-24 px-4">
-                    <h2 className="text-3xl font-bold text-center mb-12">Why Partner With Klypso?</h2>
-                    <div className="grid md:grid-cols-2 gap-12">
-                        <div className="space-y-6">
-                            <FeatureRow title="Tailored Solutions" desc="We don't do cookie-cutter. Every solution is custom-architected to your specific business needs." />
-                            <FeatureRow title="Speed & Performance" desc="We obsess over milliseconds. Our sites load faster, rank higher, and convert better." />
-                            <FeatureRow title="Scalable Architecture" desc="Built for growth. Our systems are designed to handle millions of users without breaking a sweat." />
-                        </div>
-                        <div className="space-y-6">
-                            <FeatureRow title="Transparent Communication" desc="No jargon. No black boxes. We keep you in the loop at every stage of the development process." />
-                            <FeatureRow title="Post-Launch Support" desc="We don't just launch and leave. We provide ongoing support and maintenance to ensure long-term success." />
-                            <FeatureRow title="ROI Focused" desc="We focus on metrics that matter. Our strategies are designed to maximize your return on investment." />
-                        </div>
-                    </div>
-                </div>
-
-                {/* Engagement Models */}
-                <div className="mb-24">
-                    <h2 className="text-3xl font-bold text-center mb-12">Engagement Models</h2>
-                    <div className="grid md:grid-cols-3 gap-8">
-                        <ModelCard
-                            title="Fixed Price"
-                            desc="Perfect for well-defined projects with clear requirements. We define the scope, timeline, and budget upfront."
-                            features={['Clear Deliverables', 'Fixed Budget', 'Defined Timeline']}
-                        />
-                        <ModelCard
-                            title="Time & Material"
-                            desc="Ideal for evolving projects. You pay for the time and resources used, offering maximum flexibility."
-                            features={['Flexible Scope', 'Pay-as-you-go', 'Agile Adaptation']}
-                        />
-                        <ModelCard
-                            title="Dedicated Team"
-                            desc="We become your remote tech department. A dedicated team of developers and designers working solely for you."
-                            features={['Full Control', 'Scalable Team', 'Long-term Partnership']}
-                        />
-                    </div>
-                </div>
-
-                {/* Photography Packages */}
-                <div className="mb-24 bg-zinc-900/30 p-8 md:p-12 rounded-3xl border border-white/5">
-                    <h2 className="text-3xl font-bold text-center mb-4">Photography Packages</h2>
-                    <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
-                        Professional visual storytelling tailored to your needs. All packages include professional editing and a secure online gallery.
-                    </p>
-                    <div className="grid md:grid-cols-3 gap-8">
-                        <PackageCard
-                            name="The Essentials"
-                            price="Custom"
-                            desc="Perfect for headshots, small product shoots, or quick social media content updates."
-                            features={['2 Hour Session', '1 Location', '20 High-Res Edits', 'Online Gallery']}
-                        />
-                        <PackageCard
-                            name="Brand Narrative"
-                            price="Custom"
-                            desc="Comprehensive coverage for brands needing a full visual identity refresh or campaign."
-                            features={['Half-Day Shoot (4 Hrs)', '2 Locations', '50 High-Res Edits', 'Commercial License']}
-                            featured={true}
-                        />
-                        <PackageCard
-                            name="Event & Corporate"
-                            price="Custom"
-                            desc="Full-scale coverage for corporate events, conferences, or large weddings."
-                            features={['Full-Day Shoot (8 Hrs)', 'Multiple Photographers', 'Unlimited Photos', 'Same-Day Highlights']}
-                        />
-                    </div>
-                </div>
-
-                {/* FAQ Section */}
-                <div className="mb-24 max-w-3xl mx-auto">
-                    <h2 className="text-3xl font-bold text-center mb-12">Common Questions</h2>
+                {/* Detailed Workflow / Process */}
+                <div className="mb-40">
+                    <h2 className="text-4xl md:text-7xl font-black mb-24 text-center tracking-tighter italic font-serif">The <span className="not-italic font-sans text-indigo-500">Forge</span> Protocol.</h2>
                     <div className="space-y-4">
+                        <ProcessRow
+                            number="01"
+                            title="Discovery & Intelligence"
+                            desc="We begin with a deep dive into your business logic, market position, and user psychology. No line of code is written until we fully understand the mission."
+                            icon={<Search className="text-indigo-400" />}
+                        />
+                        <ProcessRow
+                            number="02"
+                            title="Architecture & Blueprint"
+                            desc="Our architects design a scalable, secure, and future-proof schema. We map out every interaction to ensure a seamless flow and optimal performance."
+                            icon={<Layers className="text-purple-400" />}
+                        />
+                        <ProcessRow
+                            number="03"
+                            title="Rapid Development (Sprints)"
+                            desc="Using agile methodologies, we forge your product in two-week sprints. You see progress every step of the way through our live staging environments."
+                            icon={<Zap className="text-indigo-400" />}
+                        />
+                        <ProcessRow
+                            number="04"
+                            title="Quality Control & QA"
+                            desc="Every component undergoes rigorous testing—automated units, security audits, and performance stress tests—to ensure it's boardroom-ready."
+                            icon={<Shield className="text-pink-400" />}
+                        />
+                        <ProcessRow
+                            number="05"
+                            title="Deployment & Scaling"
+                            desc="We launch with precision. But we don't stop there. We monitor performance and iterate based on real-world data to drive continuous growth."
+                            icon={<Globe className="text-indigo-400" />}
+                        />
+                    </div>
+                </div>
+
+                {/* Tech Stack Deep Dive */}
+                <div className="mb-40 grid lg:grid-cols-2 gap-20 items-center">
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        <h2 className="text-4xl md:text-6xl font-black mb-10 tracking-tighter italic font-serif">The <br /><span className="not-italic font-sans text-indigo-500">Infrastructure.</span></h2>
+                        <p className="text-gray-400 text-lg font-light leading-relaxed mb-10">
+                            We don't settle for "good enough". Our tech choices are based on rigorous performance benchmarks and security audits.
+                            We build systems that scale horizontally without compromising on user experience.
+                        </p>
+                        <div className="grid grid-cols-2 gap-8">
+                            <TechFeature title="React / Next.js" desc="SSR & ISR optimization for sub-second LCP." />
+                            <TechFeature title="Node / Go" desc="High-concurrency backends for real-time logic." />
+                            <TechFeature title="Redis / K8s" desc="Architected for sub-millisecond edge delivery." />
+                            <TechFeature title="PostgreSQL" desc="Transactional integrity for high-stakes data." />
+                        </div>
+                    </motion.div>
+                    <div className="relative">
+                        <div className="absolute inset-0 bg-indigo-600/10 blur-[120px] rounded-full" />
+                        <div className="relative grid grid-cols-2 gap-4">
+                            {[1, 2, 3, 4].map((i) => (
+                                <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: i * 0.1 }}
+                                    className="aspect-square bg-zinc-900 border border-white/5 rounded-3xl p-8 flex flex-col justify-end group hover:border-indigo-500/30 transition-all shadow-2xl"
+                                >
+                                    <div className="w-12 h-12 rounded-xl bg-white/5 mb-4 group-hover:bg-indigo-500/20 transition-all" />
+                                    <div className="h-2 w-12 bg-white/10 rounded-full mb-2" />
+                                    <div className="h-2 w-20 bg-white/5 rounded-full" />
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Engagement Models - Section Wrapper */}
+                <div className="relative p-12 md:p-32 rounded-[4rem] bg-zinc-900 border border-white/5 overflow-hidden mb-40 text-left">
+                    <div className="absolute top-0 right-0 w-[50rem] h-[50rem] bg-indigo-500/5 rounded-full blur-[100px] -z-10" />
+
+                    <h2 className="text-4xl md:text-6xl font-black mb-24 text-center tracking-tighter">Partnership Models</h2>
+                    <div className="grid md:grid-cols-3 gap-12">
+                        <ModelCard
+                            icon={<Users className="w-8 h-8 mb-6 text-indigo-400" />}
+                            title="Fixed Objective"
+                            desc="Optimized for well-defined projects. Budget and timeline locked in for precision delivery. Ideal for MVPs and targeted launches."
+                        />
+                        <ModelCard
+                            icon={<BarChart className="w-8 h-8 mb-6 text-purple-400" />}
+                            title="Strategic Flow"
+                            desc="Ideal for scaling products. Dynamic resource allocation that evolves with your product needs. Pay for performance and agility."
+                        />
+                        <ModelCard
+                            icon={<Shield className="w-8 h-8 mb-6 text-indigo-400" />}
+                            title="Embedded Core"
+                            desc="A dedicated elite division that functions as your internal tech headquarters. Deep integration with your executive team."
+                        />
+                    </div>
+                </div>
+
+                {/* FAQ - Styled as a focused support center */}
+                <div className="max-w-4xl mx-auto mb-40">
+                    <div className="text-center mb-20">
+                        <h2 className="text-4xl font-black mb-4">Intelligence & FAQ</h2>
+                        <p className="text-gray-400">Everything you need to know about starting your journey with us.</p>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-6">
                         <FAQItem
                             question="How do you ensure project quality?"
-                            answer="We follow a rigorous QA process including automated testing, peer code reviews, and user acceptance testing (UAT) before any deployment."
+                            answer="We follow a rigorous protocol including automated CI/CD, peer code reviews, and end-to-end performance testing. Every line of code is audited."
                         />
                         <FAQItem
-                            question="Do you provide post-launch support?"
-                            answer="Absolutely. We offer various maintenance packages to ensure your application stays secure, up-to-date, and performs optimally."
+                            question="Do you provide lifecycle support?"
+                            answer="Our partnership doesn't end at launch. We provide tactical maintenance and iterative enhancements to ensure your continued dominance."
                         />
                         <FAQItem
-                            question="What is your typical timeline?"
-                            answer="Timelines vary by project scope. A standard brochure website might take 4-6 weeks, while a complex custom app could take 3-6 months. We provide detailed schedules during discovery."
+                            question="What is the standard timeline?"
+                            answer="Bespoke systems typically span 4-12 weeks based on complexity. We provide a granular roadmap during our discovery phase."
                         />
                         <FAQItem
-                            question="Do I own the code?"
-                            answer="Yes. Once the invoices are paid, you own 100% of the Intellectual Property (IP), code, and assets we create for you."
+                            question="Who owns the source code?"
+                            answer="You do. 100%. Upon completion, all intellectual property, assets, and source protocols are transferred to your control forever."
                         />
-                    </div>
-                </div>
-
-                {/* Process Section */}
-                <div className="bg-white/5 border border-white/10 rounded-3xl p-12 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/20 rounded-full blur-[100px] -z-10" />
-
-                    <h2 className="text-3xl font-bold mb-12 text-center">How We Work</h2>
-
-                    <div className="grid md:grid-cols-4 gap-8">
-                        <ProcessStep number="01" title="Discovery" desc="We dive deep into your goals and market to define the roadmap." />
-                        <ProcessStep number="02" title="Design" desc="Crafting intuitive and stunning interfaces that users love." />
-                        <ProcessStep number="03" title="Develop" desc="Writing clean, efficient, and scalable code." />
-                        <ProcessStep number="04" title="Launch" desc="Deploying your solution and monitoring its success." />
                     </div>
                 </div>
             </div>
@@ -184,61 +232,22 @@ const Services = () => {
     );
 };
 
-const ModelCard = ({ title, desc, features }: { title: string, desc: string, features: string[] }) => (
-    <div className="bg-white/5 border border-white/10 p-8 rounded-2xl hover:bg-white/10 transition-colors">
-        <h3 className="text-xl font-bold mb-4 text-white">{title}</h3>
-        <p className="text-gray-400 text-sm mb-6 h-12">{desc}</p>
-        <ul className="space-y-3">
-            {features.map((f, i) => (
-                <li key={i} className="flex items-center text-sm text-gray-300">
-                    <div className="w-1.5 h-1.5 bg-indigo-500 rounded-full mr-2" />
-                    {f}
-                </li>
-            ))}
-        </ul>
-    </div>
-);
-
-const PackageCard = ({ name, price, desc, features, featured = false }: { name: string, price: string, desc: string, features: string[], featured?: boolean }) => (
-    <div className={`p-8 rounded-2xl border transition-all ${featured ? 'bg-indigo-900/20 border-indigo-500/50 scale-105' : 'bg-white/5 border-white/10'}`}>
-        {featured && <div className="text-xs font-bold text-indigo-400 uppercase tracking-widest mb-4">Most Popular</div>}
-        <h3 className="text-xl font-bold mb-2">{name}</h3>
-        <div className="text-2xl font-bold mb-4">{price}</div>
-        <p className="text-gray-400 text-sm mb-6">{desc}</p>
-        <ul className="space-y-3 pt-6 border-t border-white/10">
-            {features.map((f, i) => (
-                <li key={i} className="flex items-center text-sm text-gray-300">
-                    <CheckCircle size={14} className="text-green-500 mr-2" />
-                    {f}
-                </li>
-            ))}
-        </ul>
-    </div>
-);
-
-const FAQItem = ({ question, answer }: { question: string, answer: string }) => (
-    <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-        <h3 className="font-bold text-lg mb-2 text-white">{question}</h3>
-        <p className="text-gray-400 text-sm leading-relaxed">{answer}</p>
-    </div>
-);
-
 const ServiceDetailCard = ({ icon, title, description, features }: { icon: React.ReactNode, title: string, description: string, features: string[] }) => (
     <motion.div
         whileHover={{ y: -10 }}
-        className="bg-white/5 border border-white/10 p-8 rounded-2xl hover:bg-white/10 hover:border-indigo-500/30 transition-all duration-300 group"
+        className="group bg-white/[0.02] border border-white/10 p-12 rounded-[2.5rem] backdrop-blur-sm hover:bg-white/[0.05] hover:border-indigo-500/30 transition-all duration-500 relative flex flex-col h-full"
     >
-        <div className="bg-white/5 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 text-3xl group-hover:scale-110 transition-transform">
-            {icon}
+        <div className="w-16 h-16 rounded-2xl bg-indigo-600/20 flex items-center justify-center mb-10 group-hover:scale-110 group-hover:bg-indigo-600/30 transition-all duration-500 shadow-2xl">
+            <div className="text-indigo-400">{icon}</div>
         </div>
-        <h3 className="text-2xl font-bold mb-4">{title}</h3>
-        <p className="text-gray-400 mb-6 leading-relaxed">
+        <h3 className="text-3xl font-bold mb-6 tracking-tight text-white">{title}</h3>
+        <p className="text-gray-400 mb-10 leading-relaxed font-light flex-grow">
             {description}
         </p>
-        <ul className="space-y-2">
+        <ul className="space-y-4">
             {features.map((feature, idx) => (
-                <li key={idx} className="flex items-center text-sm text-gray-300">
-                    <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full mr-2" />
+                <li key={idx} className="flex items-center text-sm font-bold tracking-wide text-gray-300/80">
+                    <CheckCircle size={16} className="text-indigo-500 mr-3 shrink-0" />
                     {feature}
                 </li>
             ))}
@@ -246,27 +255,47 @@ const ServiceDetailCard = ({ icon, title, description, features }: { icon: React
     </motion.div>
 );
 
-const ProcessStep = ({ number, title, desc }: { number: string, title: string, desc: string }) => (
-    <div className="text-center relative">
-        <div className="text-6xl font-black text-white/5 mb-4 absolute -top-8 left-1/2 -translate-x-1/2 select-none">
+const ProcessRow = ({ number, title, desc, icon }: { number: string, title: string, desc: string, icon: React.ReactNode }) => (
+    <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        className="group flex flex-col md:flex-row items-start gap-8 p-10 rounded-[2.5rem] border border-white/5 hover:bg-white/5 transition-all duration-500"
+    >
+        <div className="text-6xl font-black text-white/5 group-hover:text-indigo-500/20 transition-colors select-none">
             {number}
         </div>
-        <h3 className="text-xl font-bold mb-2 relative z-10">{title}</h3>
-        <p className="text-gray-400 text-sm relative z-10">{desc}</p>
+        <div className="flex-1">
+            <div className="flex items-center gap-4 mb-4">
+                <div className="p-3 bg-white/5 rounded-xl text-indigo-400 group-hover:bg-indigo-500/20 transition-all">
+                    {icon}
+                </div>
+                <h3 className="text-2xl font-black text-white tracking-tight">{title}</h3>
+            </div>
+            <p className="text-gray-400 text-lg font-light leading-relaxed max-w-4xl">{desc}</p>
+        </div>
+    </motion.div>
+);
+
+const ModelCard = ({ title, desc, icon }: { title: string, desc: string, icon: React.ReactNode }) => (
+    <div className="relative group p-10 bg-white/5 rounded-3xl border border-white/5 hover:border-indigo-500/30 transition-all duration-500">
+        <div className="group-hover:scale-110 transition-transform duration-500">{icon}</div>
+        <h3 className="text-2xl font-black mb-6 text-white group-hover:text-indigo-400 transition-colors uppercase tracking-widest text-sm">{title}</h3>
+        <p className="text-gray-400 leading-relaxed font-light">{desc}</p>
     </div>
 );
 
-const FeatureRow = ({ title, desc }: { title: string, desc: string }) => (
-    <div className="flex gap-4">
-        <div className="mt-1">
-            <div className="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400">
-                <CheckCircle size={16} />
-            </div>
-        </div>
-        <div>
-            <h3 className="font-bold text-lg mb-1">{title}</h3>
-            <p className="text-gray-400 text-sm">{desc}</p>
-        </div>
+const FAQItem = ({ question, answer }: { question: string, answer: string }) => (
+    <div className="bg-white/[0.03] border border-white/10 rounded-3xl p-10 hover:bg-white/[0.06] transition-colors">
+        <h3 className="text-xl font-bold mb-4 text-white">{question}</h3>
+        <p className="text-gray-400 text-sm leading-relaxed font-light">{answer}</p>
+    </div>
+);
+
+const TechFeature = ({ title, desc }: { title: string, desc: string }) => (
+    <div className="space-y-2">
+        <h4 className="text-white font-bold text-sm tracking-tight">{title}</h4>
+        <p className="text-gray-500 text-xs leading-relaxed">{desc}</p>
     </div>
 );
 

@@ -24,7 +24,6 @@ import AdminRoute from './components/AdminRoute';
 import CustomCursor from './components/CustomCursor';
 import ScrollProgress from './components/ScrollProgress';
 import CookieConsent from './components/CookieConsent';
-import WhatsAppWidget from './components/WhatsAppWidget';
 
 function App() {
   const location = useLocation();
@@ -35,7 +34,6 @@ function App() {
       <CustomCursor />
       <ScrollProgress />
       <CookieConsent />
-      <WhatsAppWidget />
       {!isAuthPage && <Header />}
       <ScrollToTop />
       {!isAuthPage && <ChatWidget />}
