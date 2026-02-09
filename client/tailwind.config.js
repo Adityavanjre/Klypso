@@ -7,12 +7,25 @@ export default {
     theme: {
         extend: {
             colors: {
-                primary: "#6366f1",
-                secondary: "#ec4899",
+                primary: "#C5A059", // Champagne Gold
+                secondary: "#7C3AED", // Royal Violet
+                bg: "#0A0A0B",
+                surface: "#121214",
             },
             fontFamily: {
-                sans: ['Inter', 'sans-serif'],
+                sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                heading: ['Outfit', 'sans-serif'],
+                display: ['Playfair Display', 'serif'],
             },
+            animation: {
+                'infinite-scroll': 'infinite-scroll 25s linear infinite',
+            },
+            keyframes: {
+                'infinite-scroll': {
+                    from: { transform: 'translateX(0)' },
+                    to: { transform: 'translateX(-50%)' },
+                }
+            }
         },
     },
     plugins: [],

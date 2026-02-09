@@ -4,8 +4,8 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useParams, Link } from 'react-router-dom';
 import {
     ArrowLeft, ExternalLink, Target,
-    Zap, Award, ArrowRight, Layers,
-    Cpu, CheckCircle
+    Zap, ArrowRight, Layers,
+    Cpu, CheckCircle, Crown
 } from 'lucide-react';
 import SEO from '../components/SEO';
 import projectsData from '../data/projects.json';
@@ -25,7 +25,6 @@ const ProjectDetails = () => {
                 const { data } = await axios.get(`http://localhost:5000/api/projects/${id}`, { timeout: 1500 });
                 setProject(data);
             } catch (err) {
-                // Fallback to local JSON if backend fails
                 const localProject = (projectsData as any[]).find(p => p.id === id || p._id === id);
                 if (localProject) {
                     setProject(localProject);
@@ -47,17 +46,19 @@ const ProjectDetails = () => {
     const y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
     const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-    if (loading) return <div className="h-screen flex items-center justify-center bg-black"><Loader /></div>;
+    if (loading) return <div className="h-screen flex items-center justify-center bg-[#0A0A0B]"><Loader /></div>;
     if (error || !project) return <NotFound />;
 
     return (
-        <div ref={containerRef} className="min-h-screen bg-black text-white selection:bg-indigo-500/30 overflow-x-hidden">
+        <div ref={containerRef} className="min-h-screen bg-[#0A0A0B] text-white selection:bg-[#C5A059]/30 overflow-x-hidden">
             <SEO
-                title={`${project.title} | Global Masterwork`}
+                title={`${project.title} | Technical Case Study`}
                 description={project.description}
             />
 
-            {/* Hero Section */}
+            <div className="noise" />
+
+            {/* Hero Section - The Project Header */}
             <header className="relative h-screen flex items-end justify-start p-8 md:p-32 overflow-hidden">
                 <motion.div
                     style={{ y }}
@@ -66,97 +67,98 @@ const ProjectDetails = () => {
                     <img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover scale-110"
+                        className="w-full h-full object-cover grayscale brightness-50"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/20" />
-                    <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B] via-[#0A0A0B]/60 to-transparent" />
                 </motion.div>
 
-                <motion.div style={{ opacity }} className="relative z-10 max-w-5xl">
-                    <Link to="/portfolio" className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-white mb-12 transition-all backdrop-blur-md group">
-                        <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
-                        <span className="text-[10px] font-black uppercase tracking-widest">Return to Portfolio</span>
+                <motion.div style={{ opacity }} className="relative z-10 max-w-6xl">
+                    <Link to="/portfolio" className="inline-flex items-center gap-4 px-8 py-4 rounded-full bg-black/40 border border-white/10 text-zinc-500 hover:text-white mb-16 transition-all backdrop-blur-2xl group">
+                        <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+                        <span className="text-[10px] font-black uppercase tracking-[0.4em]">Back to Projects</span>
                     </Link>
 
-                    <div className="flex flex-wrap gap-4 mb-8">
+                    <div className="flex gap-4 mb-10">
                         {project.categories?.map((cat: string) => (
-                            <span key={cat} className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-400 bg-indigo-500/10 px-6 py-2 rounded-full border border-indigo-500/20 backdrop-blur-md">
+                            <span key={cat} className="text-[9px] font-black uppercase tracking-[0.4em] text-[#C5A059] bg-[#C5A059]/10 px-6 py-2 rounded-xl border border-[#C5A059]/20 backdrop-blur-md">
                                 {cat}
                             </span>
                         ))}
                     </div>
 
-                    <h1 className="text-6xl md:text-[10vw] font-black mb-8 tracking-tighter leading-[0.8] italic font-serif">
+                    <h1 className="text-6xl md:text-[8vw] font-bold mb-10 tracking-tight leading-[0.85] font-heading">
                         {project.title.split(' ')[0]} <br />
-                        <span className="not-italic font-sans text-white/20">{project.title.split(' ').slice(1).join(' ')}</span>
+                        <span className="font-display italic font-light text-[#C5A059]">{project.title.split(' ').slice(1).join(' ')}</span>
                     </h1>
 
-                    <p className="max-w-2xl text-xl md:text-2xl text-gray-300 font-light leading-relaxed mb-12">
+                    <p className="max-w-3xl text-xl md:text-2xl text-zinc-500 font-medium leading-relaxed mb-16 tracking-tight">
                         {project.description}
                     </p>
                 </motion.div>
 
-                <div className="absolute bottom-12 right-12 hidden md:flex items-center gap-6">
+                <div className="absolute bottom-20 right-20 hidden lg:flex items-center gap-10">
                     <div className="text-right">
-                        <div className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500 mb-1">Status</div>
-                        <div className="text-sm font-bold text-white uppercase tracking-widest">Protocol Active</div>
+                        <div className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-700 mb-2">Project Status</div>
+                        <div className="text-lg font-bold text-white tracking-widest uppercase font-heading">Case Study Live</div>
                     </div>
-                    <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center animate-bounce">
-                        <ArrowRight size={20} className="rotate-90 text-indigo-500" />
+                    <div className="w-16 h-16 rounded-full border border-[#C5A059]/30 flex items-center justify-center animate-bounce shadow-2xl shadow-[#C5A059]/10">
+                        <ArrowRight size={24} className="rotate-90 text-[#C5A059]" />
                     </div>
                 </div>
             </header>
 
             {/* Main Content Integration */}
-            <main className="container mx-auto px-4 py-32 relative">
-                <div className="grid lg:grid-cols-12 gap-20">
-                    <div className="lg:col-span-8 space-y-32">
-                        {/* Detailed Briefing */}
+            <main className="container mx-auto px-6 py-40 relative">
+                <div className="grid lg:grid-cols-12 gap-32">
+                    <div className="lg:col-span-8 space-y-60">
+                        {/* Detailed Project Info */}
                         <section className="relative">
-                            <div className="absolute -left-12 top-0 text-[10vw] font-black text-white/[0.02] -z-10 select-none">01</div>
-                            <h2 className="text-4xl md:text-6xl font-black mb-12 tracking-tighter italic font-serif">The <span className="not-italic font-sans text-indigo-500">Briefing.</span></h2>
-                            <div className="prose prose-invert prose-2xl max-w-none">
-                                <p className="text-gray-300 font-light leading-relaxed">
-                                    {project.fullDescription || project.description}
+                            <h2 className="text-4xl md:text-7xl font-bold mb-16 tracking-tighter leading-none font-heading flex items-center gap-6">
+                                <span className="text-[#C5A059] italic font-display font-medium">01.</span> Overview
+                            </h2>
+                            <div className="text-zinc-500 text-xl font-medium leading-loose max-w-4xl">
+                                {project.fullDescription || project.description}
+                            </div>
+                        </section>
+
+                        {/* Implementation details */}
+                        <section className="grid md:grid-cols-2 gap-16">
+                            <div className="premium-card p-16 group relative overflow-hidden">
+                                <Target className="text-[#C5A059] mb-10" size={40} />
+                                <h3 className="text-[10px] font-black mb-8 uppercase tracking-[0.4em] text-zinc-600">The Challenge</h3>
+                                <p className="text-zinc-400 font-medium leading-relaxed text-lg">
+                                    {project.challenge || "Building a high-performance solution that aligns with the brand's vision and performance goals."}
+                                </p>
+                            </div>
+                            <div className="premium-card p-16 group relative overflow-hidden bg-[#121214]">
+                                <Zap className="text-[#C5A059] mb-10" size={40} />
+                                <h3 className="text-[10px] font-black mb-8 uppercase tracking-[0.4em] text-zinc-600">The Solution</h3>
+                                <p className="text-zinc-400 font-medium leading-relaxed text-lg">
+                                    {project.solution || "Leveraging modern technologies to deliver a fast, secure, and intuitive user experience."}
                                 </p>
                             </div>
                         </section>
 
-                        {/* Tactical Execution (Challenge/Solution) */}
-                        <section className="grid md:grid-cols-2 gap-12">
-                            <div className="p-12 rounded-[3rem] bg-zinc-900 border border-white/5 relative group hover:border-red-500/20 transition-all duration-500">
-                                <Target className="text-red-500 mb-8" size={32} />
-                                <h3 className="text-2xl font-black mb-6 uppercase tracking-widest text-sm">Strategic Friction</h3>
-                                <p className="text-gray-400 font-light leading-relaxed text-lg">
-                                    {project.challenge || "Analyzing core system complexities and market disruptions."}
-                                </p>
-                            </div>
-                            <div className="p-12 rounded-[3rem] bg-zinc-900 border border-white/5 relative group hover:border-green-500/20 transition-all duration-500">
-                                <Zap className="text-green-500 mb-8" size={32} />
-                                <h3 className="text-2xl font-black mb-6 uppercase tracking-widest text-sm">Architectural Fluidity</h3>
-                                <p className="text-gray-400 font-light leading-relaxed text-lg">
-                                    {project.solution || "Engineering reactive components and seamless integration protocols."}
-                                </p>
-                            </div>
-                        </section>
-
-                        {/* Visual Evidence (Gallery) */}
+                        {/* Visual Gallery */}
                         {project.gallery && project.gallery.length > 0 && (
-                            <section>
-                                <h2 className="text-4xl md:text-6xl font-black mb-16 tracking-tighter italic font-serif">Visual <span className="not-italic font-sans text-indigo-500">Evidence.</span></h2>
+                            <section className="space-y-16">
+                                <div className="flex items-center gap-6 mb-12">
+                                    <div className="h-[1px] w-12 bg-[#C5A059]/40" />
+                                    <h2 className="text-4xl md:text-5xl font-bold tracking-tight font-heading">Gallery</h2>
+                                </div>
                                 <div className="space-y-12">
                                     {project.gallery.map((img: string, idx: number) => (
                                         <motion.div
                                             key={idx}
-                                            initial={{ opacity: 0, scale: 0.95 }}
-                                            whileInView={{ opacity: 1, scale: 1 }}
+                                            initial={{ opacity: 0, y: 50 }}
+                                            whileInView={{ opacity: 1, y: 0 }}
                                             viewport={{ once: true }}
-                                            className="rounded-[3rem] overflow-hidden border border-white/5 group"
+                                            className="rounded-[3rem] overflow-hidden border border-white/5 group shadow-3xl bg-[#121214]"
                                         >
                                             <img
                                                 src={img}
-                                                alt={`Evidence ${idx + 1}`}
-                                                className="w-full object-cover group-hover:scale-105 transition-all duration-[2s] ease-[0.16, 1, 0.3, 1]"
+                                                alt={`Project Showcase ${idx + 1}`}
+                                                className="w-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-1000"
                                             />
                                         </motion.div>
                                     ))}
@@ -165,15 +167,12 @@ const ProjectDetails = () => {
                         )}
                     </div>
 
-                    {/* Technical Registry (Sidebar) */}
-                    <div className="lg:col-span-4 lg:sticky lg:top-32 lg:h-fit space-y-12">
-                        <RegistryCard
-                            icon={<Cpu className="text-indigo-400" />}
-                            title="Tech Stack"
-                        >
+                    {/* Technical Stats (Sidebar) */}
+                    <div className="lg:col-span-4 space-y-16">
+                        <RegistryCard icon={<Cpu className="text-[#C5A059]" />} title="Technology Stack">
                             <div className="flex flex-wrap gap-2">
                                 {project.technologies?.map((tech: string) => (
-                                    <span key={tech} className="bg-white/5 text-gray-400 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest border border-white/5 hover:border-indigo-500/30 hover:text-white transition-all">
+                                    <span key={tech} className="bg-black/40 border border-white/5 text-zinc-500 px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest hover:border-[#C5A059]/30 hover:text-white transition-all">
                                         {tech}
                                     </span>
                                 ))}
@@ -181,14 +180,11 @@ const ProjectDetails = () => {
                         </RegistryCard>
 
                         {project.services && project.services.length > 0 && (
-                            <RegistryCard
-                                icon={<CheckCircle className="text-green-400" />}
-                                title="Services Provided"
-                            >
-                                <div className="space-y-3">
+                            <RegistryCard icon={<CheckCircle className="text-[#C5A059]" />} title="Services Included">
+                                <div className="space-y-4">
                                     {project.services.map((service: string) => (
-                                        <div key={service} className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-gray-400">
-                                            <div className="w-1 h-1 bg-indigo-500 rounded-full" />
+                                        <div key={service} className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500">
+                                            <div className="w-1.5 h-1.5 bg-[#C5A059] rounded-full shadow-[0_0_10px_#C5A059]" />
                                             {service}
                                         </div>
                                     ))}
@@ -197,40 +193,34 @@ const ProjectDetails = () => {
                         )}
 
                         {project.impact && (
-                            <RegistryCard
-                                icon={<Layers className="text-purple-400" />}
-                                title="Benchmark Impact"
-                            >
-                                <p className="text-gray-300 font-light italic leading-relaxed">"{project.impact}"</p>
+                            <RegistryCard icon={<Layers className="text-[#C5A059]" />} title="Project Impact">
+                                <p className="text-zinc-400 font-medium italic leading-relaxed text-lg">"{project.impact}"</p>
                             </RegistryCard>
                         )}
 
                         {project.testimonial && (
-                            <div className="p-10 rounded-[2.5rem] bg-indigo-600/5 border border-indigo-500/10 relative">
-                                <Award className="absolute -top-6 -right-6 text-indigo-500/20" size={80} />
-                                <p className="text-gray-300 italic mb-8 relative z-10 font-serif text-lg leading-relaxed">"{project.testimonial.quote}"</p>
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-indigo-500/20 border border-indigo-500/20 flex items-center justify-center font-black text-indigo-400">
+                            <div className="premium-card p-12 relative overflow-hidden">
+                                <div className="absolute top-0 right-0 p-10 opacity-5">
+                                    <Crown size={80} />
+                                </div>
+                                <p className="text-zinc-300 italic mb-10 relative z-10 font-display text-xl leading-relaxed">"{project.testimonial.quote}"</p>
+                                <div className="flex items-center gap-6">
+                                    <div className="w-14 h-14 rounded-2xl bg-[#C5A059]/10 border border-[#C5A059]/30 flex items-center justify-center font-black text-[#C5A059] text-lg">
                                         {project.testimonial.author[0]}
                                     </div>
                                     <div>
-                                        <div className="text-sm font-black uppercase tracking-widest text-white">{project.testimonial.author}</div>
-                                        <div className="text-[10px] uppercase tracking-widest text-indigo-400/60 font-black">{project.testimonial.role}</div>
+                                        <div className="text-sm font-bold uppercase tracking-[0.2em] text-white font-heading">{project.testimonial.author}</div>
+                                        <div className="text-[9px] uppercase tracking-[0.4em] text-[#C5A059] font-black mt-1">{project.testimonial.role}</div>
                                     </div>
                                 </div>
                             </div>
                         )}
 
                         {project.link && (
-                            <a
-                                href={project.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="block group"
-                            >
-                                <div className="bg-white text-black p-8 rounded-3xl flex items-center justify-between group-hover:bg-indigo-600 group-hover:text-white transition-all duration-500 shadow-xl">
-                                    <span className="font-black uppercase tracking-[0.2em] text-xs">Access Production</span>
-                                    <ExternalLink size={24} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                            <a href={project.link} target="_blank" rel="noopener noreferrer" className="block group mt-8">
+                                <div className="bg-[#C5A059] text-black py-6 px-10 rounded-2xl flex items-center justify-between hover:bg-white transition-all duration-700 shadow-2xl shadow-[#C5A059]/10">
+                                    <span className="font-black uppercase tracking-[0.3em] text-[10px]">Visit Live Project</span>
+                                    <ExternalLink size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                                 </div>
                             </a>
                         )}
@@ -238,18 +228,12 @@ const ProjectDetails = () => {
                 </div>
             </main>
 
-            {/* Massive Call to Collaboration */}
-            <section className="py-40 border-t border-white/5 bg-zinc-950 overflow-hidden relative">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[30vw] font-black text-white/[0.02] whitespace-nowrap select-none pointer-events-none">
-                    NEXT CHAPTER
-                </div>
-                <div className="container mx-auto px-4 text-center relative z-10">
-                    <h2 className="text-4xl md:text-8xl font-black mb-12 tracking-tighter">Ready to Forge <br /><span className="text-indigo-500">Your Identity?</span></h2>
-                    <Link
-                        to="/contact"
-                        className="inline-flex items-center gap-6 text-xl md:text-3xl font-black uppercase tracking-[0.3em] hover:text-indigo-400 transition-all duration-700 group"
-                    >
-                        Initiate Briefing <ArrowRight size={32} className="group-hover:translate-x-4 transition-transform text-indigo-500" />
+            {/* Massive Footer CTA */}
+            <section className="py-60 border-t border-white/5 bg-black overflow-hidden relative text-center">
+                <div className="container mx-auto px-6 max-w-7xl relative z-10">
+                    <h2 className="text-5xl md:text-[10rem] font-bold mb-16 tracking-tight leading-none font-heading">Start Your <br /><span className="font-display italic font-light text-[#C5A059]">Legacy.</span></h2>
+                    <Link to="/contact" className="btn-lux px-20 h-24 text-lg">
+                        Start a Conversation
                     </Link>
                 </div>
             </section>
@@ -257,13 +241,13 @@ const ProjectDetails = () => {
     );
 };
 
-const RegistryCard = ({ icon, title, children }: { icon: React.ReactNode, title: string, children: React.ReactNode }) => (
-    <div className="p-10 rounded-[2.5rem] bg-zinc-900 border border-white/5 space-y-6">
-        <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center">
+const RegistryCard = ({ icon, title, children }: any) => (
+    <div className="premium-card p-12 space-y-8 bg-[#121214]">
+        <div className="flex items-center gap-4 border-b border-white/5 pb-8">
+            <div className="w-12 h-12 rounded-2xl bg-white/[0.02] border border-white/5 flex items-center justify-center">
                 {icon}
             </div>
-            <h3 className="font-black text-[10px] uppercase tracking-[0.4em] text-gray-500">{title}</h3>
+            <h3 className="font-black text-[10px] uppercase tracking-[0.5em] text-zinc-600">{title}</h3>
         </div>
         <div>
             {children}

@@ -13,7 +13,7 @@
     "gallery": [
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2000",
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2000",
-      "https://images.unsplash.com/photo-1504384308090-c54be38550dd?auto=format&fit=crop&q=80&w=2000",
+      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2000",
       "https://images.unsplash.com/photo-1555421689-491a97ff2040?auto=format&fit=crop&q=80&w=2000",
       "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000",
       "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&q=80&w=2000"
@@ -42,11 +42,11 @@
     "image": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=2000",
     "gallery": [
       "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&q=80&w=2000",
-      "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&q=80&w=2000",
+      "https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&q=80&w=2000",
       "https://images.unsplash.com/photo-1616077168079-7e09a677fb2c?auto=format&fit=crop&q=80&w=2000",
       "https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?auto=format&fit=crop&q=80&w=2000",
-      "https://images.unsplash.com/photo-1611974765270-ca12586343bb?auto=format&fit=crop&q=80&w=2000",
-      "https://images.unsplash.com/photo-1579621970563-ebec7560eb3e?auto=format&fit=crop&q=80&w=2000"
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2000",
+      "https://images.unsplash.com/photo-1565514020176-dbf2277f0c3e?auto=format&fit=crop&q=80&w=2000"
     ],
     "services": ["Mobile Engineering", "Security Audit", "Interface Design"],
     "technologies": ["React Native", "TypeScript", "Node.js", "GraphQL"],
@@ -76,7 +76,7 @@
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2000",
       "https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?auto=format&fit=crop&q=80&w=2000",
       "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&q=80&w=2000",
-      "https://images.unsplash.com/photo-1581093458791-9f302e683837?auto=format&fit=crop&q=80&w=2000"
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2000"
     ],
     "services": ["Data Visualization", "Full Stack Dev", "Cloud Architecture"],
     "technologies": ["Vue.js", "Python", "AWS Lambda", "D3.js"],
@@ -161,10 +161,10 @@
     "date": "2023",
     "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=2000",
     "gallery": [
-      "https://images.unsplash.com/photo-1576091160550-217358c7db81?auto=format&fit=crop&q=80&w=2000",
+      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=2000",
       "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&q=80&w=2000",
-      "https://images.unsplash.com/photo-1516549655169-df83a092fc43?auto=format&fit=crop&q=80&w=2000",
-      "https://images.unsplash.com/photo-1584982751601-97dcc096654c?auto=format&fit=crop&q=80&w=2000",
+      "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&q=80&w=2000",
+      "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=2000",
       "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&q=80&w=2000",
       "https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&q=80&w=2000"
     ],
@@ -189,13 +189,13 @@
     "solution": "Designed a unique 'Shield' visualization grammar that updates in real-time as blocks are confirmed.",
     "client": "CipherGuard DAO",
     "date": "2024",
-    "image": "https://images.unsplash.com/photo-1639322537228-ad71c429d243?auto=format&fit=crop&q=80&w=2000",
+    "image": "https://images.unsplash.com/photo-1620325867502-221cfb5faa5f?auto=format&fit=crop&q=80&w=2000",
     "gallery": [
       "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&q=80&w=2000",
       "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&q=80&w=2000",
       "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2000",
       "https://images.unsplash.com/photo-1642104704074-907c0698cbd9?auto=format&fit=crop&q=80&w=2000",
-      "https://images.unsplash.com/photo-1644089857253-3889156641b8?auto=format&fit=crop&q=80&w=2000",
+      "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&q=80&w=2000",
       "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=2000"
     ],
     "services": ["Blockchain Dev", "UI Engineering", "Cybersecurity"],
@@ -253,8 +253,8 @@
     "gallery": [
       "https://images.unsplash.com/photo-1480796927426-f609979314bd?auto=format&fit=crop&q=80&w=2000",
       "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&q=80&w=2000",
-      "https://images.unsplash.com/photo-1528360983277-13d9b152c6d7?auto=format&fit=crop&q=80&w=2000",
-      "https://images.unsplash.com/photo-1534274988754-5d519d1e4ca5?auto=format&fit=crop&q=80&w=2000",
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80&w=2000",
+      "https://images.unsplash.com/photo-1480796927426-f609979314bd?auto=format&fit=crop&q=80&w=2000",
       "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&q=80&w=2000",
       "https://images.unsplash.com/photo-1624253321171-1be53e12f5f4?auto=format&fit=crop&q=80&w=2000"
     ],

@@ -1,168 +1,156 @@
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { Target, Zap } from 'lucide-react';
+import { Crown, Shield, Star } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const About = () => {
     return (
-        <section className="min-h-screen bg-black text-white pt-32 pb-12 px-4 relative overflow-hidden">
+        <section className="min-h-screen bg-[#0A0A0B] text-white pt-48 pb-32 px-4 relative overflow-hidden">
             <Helmet>
-                <title>Our Ethos | Klypso Collective</title>
-                <meta name="description" content="Learn about Klypso, our mission, values, and the team driving digital innovation." />
+                <title>The Heritage | Klypso Elite Collective</title>
+                <meta name="description" content="Inside the private digital agency crafting masterpieces for the world's most ambitious brands." />
             </Helmet>
 
-            {/* Mesh Background */}
-            <div className="absolute top-0 right-0 w-[50rem] h-[50rem] bg-indigo-500/5 rounded-full blur-[120px] -z-10" />
-            <div className="absolute bottom-0 left-0 w-[50rem] h-[50rem] bg-purple-500/5 rounded-full blur-[120px] -z-10" />
+            <SEO
+                title="The Elite Standard | About Klypso"
+                description="We are a private collective of high-integrity engineers and artists dedicated to digital superiority."
+            />
 
-            <div className="container mx-auto max-w-6xl relative z-10">
-                {/* Hero Section */}
+            {/* Noise Overlay */}
+            <div className="noise" />
+
+            {/* Atmosphere */}
+            <div className="absolute top-[-10%] right-[-10%] w-[60rem] h-[60rem] bg-[#C5A059]/5 rounded-full blur-[200px]" />
+            <div className="absolute bottom-[-10%] left-[-10%] w-[50rem] h-[50rem] bg-[#7C3AED]/3 rounded-full blur-[200px]" />
+
+            <div className="container mx-auto max-w-7xl relative z-10">
+                {/* Hero section with massive editorial style */}
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="text-center mb-32"
+                    transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                    className="text-center mb-60"
                 >
-                    <div className="inline-block px-4 py-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 backdrop-blur-md mb-8">
-                        <span className="text-[10px] md:text-xs font-black tracking-[0.2em] text-indigo-300 uppercase">
-                            The Collective
+                    <div className="flex items-center justify-center gap-4 mb-10">
+                        <div className="h-[1px] w-12 bg-[#C5A059]/40" />
+                        <span className="text-[10px] font-black tracking-[0.5em] text-[#C5A059] uppercase">
+                            Our Story & Ethos
                         </span>
+                        <div className="h-[1px] w-12 bg-[#C5A059]/40" />
                     </div>
-                    <h1 className="text-6xl md:text-9xl font-black mb-10 tracking-tighter leading-none italic font-serif">
-                        We Are <br />
-                        <span className="bg-gradient-to-r from-indigo-500 via-purple-400 to-pink-500 bg-clip-text text-transparent not-italic font-sans inline-block mt-4">
-                            Klypso.
-                        </span>
+                    <h1 className="text-6xl md:text-[11rem] font-bold mb-12 tracking-tight leading-[0.8] font-heading">
+                        Built on <br />
+                        <span className="font-display italic font-light text-[#C5A059]">Craftsmanship.</span>
                     </h1>
-                    <p className="max-w-3xl mx-auto text-xl md:text-2xl text-gray-300 font-light leading-relaxed">
-                        A collective of visionaries, creators, and engineers dedicated to redefining the digital landscape.
-                        We don't just build websites; we craft immersive digital ecosystems that resonate.
+                    <p className="max-w-4xl mx-auto text-xl md:text-2xl text-zinc-500 font-medium leading-relaxed tracking-tight">
+                        Klypso is a specialized digital agency born from a passion for detail. We partner with ambitious brands to build <span className="text-white">superior web systems</span> and <span className="text-white">visual identities</span> that define their industry standards.
                     </p>
                 </motion.div>
 
-                {/* Mission & Vision with Glassmorphism */}
-                <div className="grid md:grid-cols-2 gap-10 mb-32">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="group bg-white/[0.02] border border-white/10 p-12 rounded-[2.5rem] backdrop-blur-md hover:bg-white/[0.05] transition-all duration-500 relative overflow-hidden"
-                    >
-                        <div className="absolute -top-10 -right-10 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl group-hover:bg-indigo-500/20 transition-colors" />
-                        <div className="w-16 h-16 rounded-2xl bg-indigo-600/20 flex items-center justify-center mb-8 shadow-2xl">
-                            <Target className="w-8 h-8 text-indigo-400" />
-                        </div>
-                        <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
-                        <p className="text-gray-400 leading-relaxed text-lg font-light">
-                            To empower businesses with cutting-edge digital solutions that drive growth, enhance brand value,
-                            and create meaningful connections with their audience. We strive to bridge the gap between
-                            imagination and reality through technology.
-                        </p>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 }}
-                        className="group bg-white/[0.02] border border-white/10 p-12 rounded-[2.5rem] backdrop-blur-md hover:bg-white/[0.05] transition-all duration-500 relative overflow-hidden"
-                    >
-                        <div className="absolute -top-10 -right-10 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl group-hover:bg-purple-500/20 transition-colors" />
-                        <div className="w-16 h-16 rounded-2xl bg-purple-600/20 flex items-center justify-center mb-8 shadow-2xl">
-                            <Zap className="w-8 h-8 text-purple-400" />
-                        </div>
-                        <h2 className="text-3xl font-bold mb-6">Our Vision</h2>
-                        <p className="text-gray-400 leading-relaxed text-lg font-light">
-                            To be the leading catalyst for digital transformation, setting new standards for design aesthetics,
-                            performance, and user experience. We envision a web that is faster, more beautiful, and
-                            universally accessible.
-                        </p>
-                    </motion.div>
-                </div>
-
-                {/* Our Ethos / Three Pillars */}
-                <div className="grid md:grid-cols-3 gap-8 mb-32">
-                    <EthosCard
-                        title="Absolute Precision"
-                        desc="We believe in the beauty of the decimal point. Every pixel, every millisecond of load time, and every line of code is scrutinized for optimal performance."
-                    />
-                    <EthosCard
-                        title="Radical Transparency"
-                        desc="No black boxes. Our partners have full access to our sprint cycles, staging environments, and logic. We build in the light."
-                    />
-                    <EthosCard
-                        title="Future Obsession"
-                        desc="We don't build for today's limitations. We architect for tomorrow's infrastructure, ensuring your legacy remains dominant as technology evolves."
-                    />
-                </div>
-
-                {/* Our Story / Origin */}
-                <div className="grid md:grid-cols-2 gap-20 items-center mb-40">
+                {/* Core Philosophy Cards */}
+                <div className="grid md:grid-cols-2 gap-12 mb-60">
                     <motion.div
                         initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
+                        className="premium-card p-16 group relative overflow-hidden"
                     >
-                        <h2 className="text-4xl md:text-6xl font-black mb-8 tracking-tighter italic font-serif">A Kinetic <br /><span className="not-italic font-sans text-indigo-500">Origin.</span></h2>
-                        <div className="space-y-6 text-gray-400 text-lg font-light leading-relaxed">
-                            <p>
-                                Klypso was founded in the pursuit of a simpler truth: that digital products should be as powerful as they are beautiful.
-                                We saw a landscape filled with over-engineered monoliths and under-performing templates.
-                            </p>
-                            <p>
-                                We decided to build a different kind of collective. One where engineering rigour meets high-end design.
-                                We don't scale by headcount; we scale by talent. Every member of our collective is a master of their craft.
-                            </p>
-                            <p>
-                                Today, Klypso serves as the technical headquarters for brands ready to break the status quo.
-                                We are the silent engine behind successful launches and digital dominance.
-                            </p>
-                        </div>
+                        <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#C5A059]/10 rounded-full blur-3xl group-hover:bg-[#C5A059]/20 transition-colors" />
+                        <Crown className="w-16 h-16 text-[#C5A059] mb-12 opacity-80" />
+                        <h2 className="text-4xl font-bold mb-8 tracking-tight font-heading">Quality Without Compromise</h2>
+                        <p className="text-zinc-500 leading-relaxed text-lg font-medium">
+                            We believe that every pixel and every line of code should serve a purpose. Our design philosophy is simple: create digital experiences that are as functional as they are beautiful, ensuring long-term value for our clients.
+                        </p>
                     </motion.div>
+
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        className="relative aspect-square rounded-[3rem] overflow-hidden bg-zinc-900 border border-white/5 shadow-2xl"
+                        initial={{ opacity: 0, x: 30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        className="premium-card p-16 group relative overflow-hidden"
                     >
-                        <img
-                            src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
-                            alt="Klypso Studio"
-                            className="w-full h-full object-cover opacity-60 grayscale"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/20 to-transparent" />
+                        <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#7C3AED]/10 rounded-full blur-3xl group-hover:bg-[#7C3AED]/20 transition-colors" />
+                        <Shield className="w-16 h-16 text-[#7C3AED] mb-12 opacity-80" />
+                        <h2 className="text-4xl font-bold mb-8 tracking-tight font-heading">Technical Integrity</h2>
+                        <p className="text-zinc-500 leading-relaxed text-lg font-medium">
+                            Performance, security, and scalability are at the core of our engineering. We build resilient digital ecosystems using modern technologies like the MERN stack, ensuring your brand is prepared for the future.
+                        </p>
                     </motion.div>
                 </div>
 
-                {/* Engineering Lifecycle / Process */}
-                <div className="relative p-12 md:p-32 rounded-[4rem] bg-zinc-900 border border-white/5 overflow-hidden mb-32">
-                    <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-indigo-500/5 rounded-full blur-[100px] -z-10" />
-                    <h2 className="text-3xl md:text-5xl font-black mb-16 text-center">Engineering Lifecycle</h2>
-                    <div className="grid md:grid-cols-4 gap-12">
-                        <ProcessStep number="01" title="Discovery" desc="Deep synchronization with your brand goals and user ecosystem." />
-                        <ProcessStep number="02" title="Blueprint" desc="Architecting intuitive interfaces and high-performance schemas." />
-                        <ProcessStep number="03" title="Forge" desc="Crafting robust code with obsessive attention to detail." />
-                        <ProcessStep number="04" title="Ignite" desc="Precision launch followed by continuous evolution." />
+                {/* The Story - High Contrast */}
+                <div className="grid lg:grid-cols-2 gap-32 items-center mb-60">
+                    <div className="space-y-12">
+                        <h2 className="text-5xl md:text-8xl font-bold tracking-tighter leading-none font-heading">A Partnership <br /><span className="font-display italic font-light text-[#C5A059]">Built to Last.</span></h2>
+                        <div className="space-y-8 text-zinc-400 text-lg font-medium leading-relaxed">
+                            <p>
+                                Founded in 2024, Klypso was established to provide a more intentional alternative to high-volume, template-based agencies. We chose to focus on high-end craft, delivering bespoke solutions that prioritize quality over quantity.
+                            </p>
+                            <p>
+                                We operate as a dedicated team for each of our clients. By limiting the number of projects we take on, we ensure that every partnership receives our full creative and technical attention, resulting in exceptional outcomes.
+                            </p>
+                            <div className="pt-12 flex items-center gap-8">
+                                <div className="flex flex-col">
+                                    <span className="text-4xl font-bold text-white font-heading">25+</span>
+                                    <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[#C5A059]">Global Projects</span>
+                                </div>
+                                <div className="w-[1px] h-12 bg-white/5" />
+                                <div className="flex flex-col">
+                                    <span className="text-4xl font-bold text-white font-heading">25+</span>
+                                    <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[#C5A059]">Experts</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <div className="relative group p-4 border border-white/5 rounded-[4rem]">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            className="aspect-[4/5] rounded-[3rem] overflow-hidden bg-[#121214]"
+                        >
+                            <img
+                                src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?q=80&w=2069&auto=format&fit=crop"
+                                alt="Modern Digital Agency Workspace"
+                                className="w-full h-full object-cover grayscale brightness-50 group-hover:scale-105 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-1000"
+                            />
+                        </motion.div>
+                        {/* Status Plate */}
+                        <div className="absolute -bottom-6 -right-6 bg-[#C5A059] text-black px-10 py-10 rounded-3xl shadow-3xl rotate-3 group-hover:rotate-0 transition-transform">
+                            <div className="flex flex-col items-center">
+                                <Star className="mb-4" size={32} />
+                                <span className="text-[10px] font-black uppercase tracking-[0.4em]">Agency Status</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* The Values Section */}
+                <div className="relative p-12 md:p-32 rounded-[4rem] bg-[#121214] border border-white/5 overflow-hidden mb-60">
+                    <div className="absolute top-0 right-0 w-[50rem] h-[50rem] bg-[#C5A059]/3 rounded-full blur-[150px] -z-10" />
+                    <h2 className="text-4xl md:text-7xl font-bold mb-24 text-center font-heading tracking-tight underline underline-offset-8 decoration-[#C5A059]/30">Our Values</h2>
+                    <div className="grid md:grid-cols-4 gap-16">
+                        <ProcessStep number="01" title="Transparency" desc="Clear communication and honest feedback at every step." />
+                        <ProcessStep number="02" title="Innovation" desc="Constantly exploring new technologies and design trends." />
+                        <ProcessStep number="03" title="Dedication" desc="Going above and beyond to ensure project success." />
+                        <ProcessStep number="04" title="Precision" desc="Meticulous attention to detail in design and code." />
+                    </div>
+                </div>
+
+                {/* Engagement CTA */}
+                <div className="text-center">
+                    <h3 className="text-4xl md:text-7xl font-bold mb-16 tracking-tight font-heading">Let's Create <span className="font-display italic font-light text-[#C5A059]">Together.</span></h3>
+                    <a href="/contact" className="btn-lux px-16 h-20 text-md">Start a Project</a>
                 </div>
             </div>
         </section>
     );
 };
 
-const EthosCard = ({ title, desc }: { title: string, desc: string }) => (
-    <div className="p-10 rounded-[2rem] bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] transition-all duration-500">
-        <h3 className="text-xl font-black mb-4 text-indigo-400 uppercase tracking-widest text-[10px]">{title}</h3>
-        <p className="text-gray-400 font-light leading-relaxed">{desc}</p>
-    </div>
-);
-
-const ProcessStep = ({ number, title, desc }: { number: string, title: string, desc: string }) => (
-    <div className="text-center relative">
-        <div className="text-8xl font-black text-white/[0.03] mb-4 absolute -top-12 left-1/2 -translate-x-1/2 select-none">
+const ProcessStep = ({ number, title, desc }: any) => (
+    <div className="text-center relative group">
+        <div className="text-9xl font-bold text-white/[0.02] mb-6 absolute -top-16 left-1/2 -translate-x-1/2 group-hover:text-[#C5A059]/5 transition-colors font-heading select-none">
             {number}
         </div>
-        <h3 className="text-xl font-black mb-3 relative z-10 text-white tracking-tight">{title}</h3>
-        <p className="text-gray-400 text-sm relative z-10 font-light leading-relaxed">{desc}</p>
+        <h3 className="text-2xl font-bold mb-4 relative z-10 text-white font-heading tracking-tight">{title}</h3>
+        <p className="text-zinc-500 text-sm relative z-10 font-medium leading-relaxed tracking-tight">{desc}</p>
     </div>
 );
 

@@ -17,7 +17,7 @@ const BlogSchema = new mongoose.Schema({
     category: {
         type: String,
         required: true,
-        enum: ['Tech', 'Design', 'Marketing', 'Business', 'Agency', 'Culture', 'Architecture', 'Strategy', 'Insights'],
+        enum: ['Tech', 'Design', 'Marketing', 'Business', 'Agency', 'Culture', 'Architecture', 'Strategy', 'Insights', 'Engineering', 'Security', 'Web3', 'FinTech'],
     },
     image: {
         type: String,
@@ -31,10 +31,26 @@ const BlogSchema = new mongoose.Schema({
         type: String, // Full markdown or HTML content
         required: false,
     },
-    createdAt: {
-        type: Date,
-        default: Date.now,
+    readTime: {
+        type: String, // e.g., "5 min read"
+        default: '3 min read'
     },
+    tags: [{
+        type: String
+    }],
+    slug: {
+        type: String,
+        required: true,
+        unique: true,
+        index: true
+    },
+    status: {
+        type: String,
+        enum: ['draft', 'published'],
+        default: 'draft'
+    }
+}, {
+    timestamps: true
 });
 
 module.exports = mongoose.model('Blog', BlogSchema);

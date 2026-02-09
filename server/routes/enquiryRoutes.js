@@ -7,4 +7,7 @@ router.route('/')
     .post(createEnquiry)
     .get(protect, admin, getEnquiries);
 
+router.route('/:id')
+    .delete(protect, admin, require('../controllers/enquiryController').deleteEnquiry);
+
 module.exports = router;

@@ -1,11 +1,12 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Save } from 'lucide-react';
+import { Save, Loader2, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import axios from 'axios';
 
-const AddProject = () => {
+const EditProject = () => {
+    const { id } = useParams();
     const navigate = useNavigate();
     const { user } = useAuth();
 
@@ -27,12 +28,41 @@ const AddProject = () => {
     const [role, setRole] = useState('');
     const [gallery, setGallery] = useState('');
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [saving, setSaving] = useState(false);
     const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        const fetchProject = async () => {
+            try {
+                const { data } = await axios.get(`http://localhost:5000/api/projects/${id}`);
+                setTitle(data.title);
+                setDescription(data.description);
+                setFullDescription(data.fullDescription || '');
+                setCategory(data.categories?.[0] || 'Web');
+                setImage(data.image);
+                setLink(data.link || '');
+                setChallenge(data.challenge || '');
+                setSolution(data.solution || '');
+                setTechnologies(data.technologies?.join(', ') || '');
+                setImpact(data.impact || '');
+                setQuote(data.testimonial?.quote || '');
+                setAuthor(data.testimonial?.author || '');
+                setRole(data.testimonial?.role || '');
+                setGallery(data.gallery?.join(', ') || '');
+            } catch (err) {
+                setError('Failed to fetch project details');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProject();
+    }, [id]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setLoading(true);
+        setSaving(true);
         setError(null);
 
         try {
@@ -43,7 +73,7 @@ const AddProject = () => {
                 },
             };
 
-            await axios.post('http://localhost:5000/api/projects', {
+            await axios.put(`http://localhost:5000/api/projects/${id}`, {
                 title,
                 description,
                 fullDescription,
@@ -52,25 +82,27 @@ const AddProject = () => {
                 link,
                 challenge,
                 solution,
-                technologies: technologies.split(',').map(t => t.trim()),
+                technologies: technologies.split(',').map(t => t.trim()).filter(t => t !== ''),
                 impact,
                 testimonial: { quote, author, role },
                 gallery: gallery.split(',').map(g => g.trim()).filter(g => g !== '')
             }, config);
 
-            navigate('/admin');
-        } catch (err: unknown) {
-            if (axios.isAxiosError(err) && err.response) {
-                setError(err.response.data.message || 'Failed to create project');
-            } else if (err instanceof Error) {
-                setError(err.message);
-            } else {
-                setError('Failed to create project');
-            }
+            navigate('/admin/projects');
+        } catch (err: any) {
+            setError(err.response?.data?.message || 'Failed to update project');
         } finally {
-            setLoading(false);
+            setSaving(false);
         }
     };
+
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center h-64">
+                <Loader2 className="w-8 h-8 animate-spin text-indigo-500" />
+            </div>
+        );
+    }
 
     return (
         <div className="max-w-4xl mx-auto">
@@ -79,10 +111,18 @@ const AddProject = () => {
                 animate={{ opacity: 1, y: 0 }}
             >
                 <div className="bg-zinc-900/50 border border-white/10 rounded-2xl p-8">
-                    <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                        <span className="w-2 h-8 bg-indigo-500 rounded-full inline-block"></span>
-                        Create New Project
-                    </h2>
+                    <div className="flex justify-between items-center mb-6">
+                        <h2 className="text-2xl font-bold flex items-center gap-3">
+                            <span className="w-2 h-8 bg-indigo-500 rounded-full inline-block"></span>
+                            Edit Project
+                        </h2>
+                        <button
+                            onClick={() => navigate('/admin/projects')}
+                            className="text-gray-400 hover:text-white flex items-center gap-2 text-sm transition-colors"
+                        >
+                            <ArrowLeft size={16} /> Cancel
+                        </button>
+                    </div>
 
                     {error && (
                         <div className="bg-red-500/10 border border-red-500/20 text-red-500 p-3 rounded-lg mb-6">
@@ -248,13 +288,13 @@ const AddProject = () => {
 
                         <button
                             type="submit"
-                            disabled={loading}
-                            className="w-full btn-primary py-3 rounded-lg flex items-center justify-center font-bold mt-8"
+                            disabled={saving}
+                            className="w-full bg-indigo-600 hover:bg-indigo-500 py-3 rounded-lg flex items-center justify-center font-bold mt-8 transition-colors disabled:opacity-50"
                         >
-                            {loading ? 'Creating...' : (
+                            {saving ? 'Updating...' : (
                                 <>
                                     <Save size={20} className="mr-2" />
-                                    Create Project
+                                    Update Project
                                 </>
                             )}
                         </button>
@@ -265,4 +305,4 @@ const AddProject = () => {
     );
 };
 
-export default AddProject;
+export default EditProject;

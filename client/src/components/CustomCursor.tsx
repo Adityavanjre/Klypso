@@ -36,24 +36,25 @@ const CustomCursor = () => {
     }, [cursorX, cursorY]);
 
     return (
-        <div className="pointer-events-none fixed inset-0 z-[9999] hidden md:block">
+        <div className="pointer-events-none fixed inset-0 z-[99999] hidden md:block">
             {/* Main Dot */}
             <motion.div
-                className="absolute w-4 h-4 bg-white rounded-full mix-blend-difference"
+                className="absolute w-3 h-3 bg-[#C5A059] rounded-full shadow-[0_0_15px_#C5A059]"
                 style={{
                     translateX: cursorX,
                     translateY: cursorY,
-                    scale: isHovering ? 0.5 : 1
+                    scale: isHovering ? 0.3 : 1
                 }}
             />
             {/* Trailing Ring */}
             <motion.div
-                className="absolute w-8 h-8 border border-white rounded-full mix-blend-difference"
+                className="absolute w-10 h-10 border border-[#C5A059]/30 rounded-full"
                 style={{
                     translateX: cursorXSpring,
                     translateY: cursorYSpring,
-                    scale: isHovering ? 1.5 : 1,
-                    opacity: isHovering ? 0.8 : 0.4
+                    scale: isHovering ? 2 : 1,
+                    opacity: isHovering ? 0.8 : 0.4,
+                    borderWidth: isHovering ? '1px' : '0.5px'
                 }}
             />
         </div>

@@ -17,11 +17,11 @@ const ChatWidget = () => {
                 animate={{ scale: 1 }}
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 transition={{ type: "spring", stiffness: 260, damping: 20 }}
-                className="relative bg-[#25D366] text-white p-4 rounded-[1.2rem] shadow-[0_10px_30px_rgba(37,211,102,0.4)] flex items-center justify-center hover:bg-[#20bd5a] transition-all duration-300 z-10"
+                className="relative bg-[#C5A059] text-black p-4 rounded-[1.2rem] shadow-[0_10px_30px_rgba(197,160,89,0.2)] flex items-center justify-center hover:bg-[#D4AF37] transition-all duration-300 z-10"
                 aria-label="Chat on WhatsApp"
             >
-                <div className="absolute inset-0 rounded-[1.2rem] animate-pulse bg-[#25D366] opacity-50 -z-10 blur-xl" />
-                <MessageCircle size={24} className="fill-white" />
+                <div className="absolute inset-0 rounded-[1.2rem] animate-pulse bg-[#C5A059] opacity-30 -z-10 blur-xl" />
+                <MessageCircle size={24} className="fill-black" />
             </motion.a>
 
             <motion.div

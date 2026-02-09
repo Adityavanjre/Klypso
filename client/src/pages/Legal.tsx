@@ -176,8 +176,8 @@ const Legal = () => {
           animate={{ opacity: 1, y: 0 }}
           className="mb-12 text-center"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Legal Center</h1>
-          <p className="text-gray-400">Everything you need to know about our policies and agreements.</p>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 font-heading">Legal & Privacy</h1>
+          <p className="text-gray-400 font-medium">Everything you need to know about our policies and agreements.</p>
         </motion.div>
 
         <div className="grid md:grid-cols-4 gap-8">
@@ -189,29 +189,36 @@ const Legal = () => {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`w-full flex items-center justify-between p-4 rounded-xl transition-all ${activeTab === tab.id
-                    ? 'bg-green-600 text-white shadow-lg shadow-green-900/20'
-                    : 'bg-zinc-900 text-gray-400 hover:bg-zinc-800 hover:text-white'
+                  className={`w-full flex items-center justify-between p-7 rounded-2xl transition-all duration-500 border ${activeTab === tab.id
+                    ? 'bg-[#C5A059] text-black border-[#C5A059] shadow-[0_0_30px_rgba(197,160,89,0.1)]'
+                    : 'bg-[#121214] border-white/5 text-zinc-500 hover:border-[#C5A059]/30 hover:text-white'
                     }`}
                 >
-                  <div className="flex items-center gap-3">
-                    <Icon size={18} />
-                    <span className="font-medium text-sm">{tab.label}</span>
+                  <div className="flex items-center gap-5">
+                    <Icon size={18} className={activeTab === tab.id ? 'text-black' : 'group-hover:text-[#C5A059]'} />
+                    <span className="font-bold text-[10px] uppercase tracking-[0.2em]">{tab.label}</span>
                   </div>
-                  {activeTab === tab.id && <ChevronRight size={16} />}
+                  {activeTab === tab.id && <ChevronRight size={14} />}
                 </button>
               );
             })}
           </div>
 
           {/* Content Area */}
-          <div className="md:col-span-3 bg-zinc-900/50 border border-white/5 rounded-3xl p-8 md:p-12 min-h-[600px]">
+          <div className="md:col-span-3 bg-[#121214] border border-white/5 rounded-[3rem] p-12 md:p-20 min-h-[700px] shadow-3xl">
             <motion.div
               key={activeTab}
-              initial={{ opacity: 0, x: 10 }}
+              initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.5 }}
+              className="prose prose-invert prose-gold max-w-none"
             >
+              <div className="flex items-center gap-4 mb-12">
+                <div className="h-[1px] w-8 bg-[#C5A059]/40" />
+                <span className="text-[10px] font-black tracking-[0.4em] text-[#C5A059] uppercase">
+                  Legal Policies
+                </span>
+              </div>
               {renderContent()}
             </motion.div>
           </div>

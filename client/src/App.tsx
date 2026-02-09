@@ -16,10 +16,20 @@ import Order from './pages/Order';
 import Blog from './pages/Blog';
 import BlogDetails from './pages/BlogDetails';
 import Careers from './pages/Careers';
+import Apply from './pages/Apply';
 import NotFound from './pages/NotFound';
 import Login from './pages/Login';
+import AdminLayout from './components/AdminLayout';
 import Dashboard from './pages/Admin/Dashboard';
 import AddProject from './pages/Admin/AddProject';
+import ManageProjects from './pages/Admin/ManageProjects';
+import ManageEnquiries from './pages/Admin/ManageEnquiries';
+import ManageBlogs from './pages/Admin/ManageBlogs';
+import AddBlog from './pages/Admin/AddBlog';
+import EditBlog from './pages/Admin/EditBlog';
+import ManageCareers from './pages/Admin/ManageCareers';
+import AddJob from './pages/Admin/AddJob';
+import EditProject from './pages/Admin/EditProject';
 import AdminRoute from './components/AdminRoute';
 
 import CustomCursor from './components/CustomCursor';
@@ -52,12 +62,23 @@ function App() {
           <Route path="/resources" element={<Blog />} />
           <Route path="/insights/:id" element={<BlogDetails />} />
           <Route path="/careers" element={<Careers />} />
+          <Route path="/apply" element={<Apply />} />
 
           <Route path="/login" element={<Login />} />
 
           <Route path="/admin" element={<AdminRoute />}>
-            <Route index element={<Dashboard />} />
-            <Route path="add-project" element={<AddProject />} />
+            <Route element={<AdminLayout />}>
+              <Route index element={<Dashboard />} />
+              <Route path="add-project" element={<AddProject />} />
+              <Route path="projects" element={<ManageProjects />} />
+              <Route path="edit-project/:id" element={<EditProject />} />
+              <Route path="enquiries" element={<ManageEnquiries />} />
+              <Route path="blogs" element={<ManageBlogs />} />
+              <Route path="add-blog" element={<AddBlog />} />
+              <Route path="edit-blog/:id" element={<EditBlog />} />
+              <Route path="careers" element={<ManageCareers />} />
+              <Route path="add-job" element={<AddJob />} />
+            </Route>
           </Route>
 
           <Route path="*" element={<NotFound />} />
