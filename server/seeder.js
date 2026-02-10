@@ -477,7 +477,7 @@ const importData = async () => {
         await Blog.insertMany(blogs);
         await Job.insertMany(jobs);
         console.log('Elite Data Injected Sucessfully!');
-        process.exit();
+        if (require.main === module) process.exit();
     } catch (error) {
         console.error(`${error}`);
         process.exit(1);
