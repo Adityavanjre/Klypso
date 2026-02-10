@@ -11,7 +11,11 @@ const connectDB = async () => {
 
     // 1. Try to connect to persistent MongoDB
     try {
-        console.log('Connecting to MongoDB Atlas...');
+        const sanitizedUri = process.env.MONGO_URI
+            ? process.env.MONGO_URI.replace(/:([^@]+)@/, ':****@')
+            : 'MISSING';
+        console.log(`Connecting to: ${sanitizedUri}`);
+
         await mongoose.connect(process.env.MONGO_URI, {
             serverSelectionTimeoutMS: 5000,
         });
