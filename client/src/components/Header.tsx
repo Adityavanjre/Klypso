@@ -43,7 +43,7 @@ const Header = () => {
   return (
     <header className={`fixed w-full top-0 z-[100] transition-all duration-700 py-6 pointer-events-none lg:pointer-events-auto ${hidden ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100'}`}>
       <div className={`container mx-auto px-4 transition-all duration-700 pointer-events-auto ${scrolled ? 'max-w-6xl' : 'max-w-7xl'}`}>
-        <div className={`flex justify-between items-center transition-all duration-700 px-10 py-5 ${scrolled
+        <div className={`flex justify-between items-center transition-all duration-700 px-6 lg:px-10 py-5 ${scrolled
           ? 'bg-[#0A0A0B]/80 backdrop-blur-3xl border border-white/5 shadow-2xl rounded-[2.5rem]'
           : 'bg-transparent border border-transparent'
           }`}>

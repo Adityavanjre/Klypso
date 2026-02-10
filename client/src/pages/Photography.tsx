@@ -95,7 +95,7 @@ const Photography = () => {
                                     </span>
                                     <div className="h-[1px] w-12 bg-[#C5A059]/40" />
                                 </div>
-                                <h1 className="text-6xl md:text-[10rem] font-bold mb-12 tracking-tight leading-[0.85] font-heading">
+                                <h1 className="text-5xl sm:text-7xl md:text-[10rem] font-bold mb-12 tracking-tight leading-[0.85] font-heading">
                                     Capture <br />
                                     <span className="font-display italic font-light text-[#C5A059]">Soul.</span>
                                 </h1>
@@ -152,7 +152,7 @@ const Photography = () => {
                                     >
                                         <ArrowLeft size={16} /> Back to Albums
                                     </button>
-                                    <h1 className="text-6xl md:text-[10rem] font-bold text-white tracking-tight leading-[0.85] font-heading">
+                                    <h1 className="text-5xl sm:text-7xl md:text-[10rem] font-bold text-white tracking-tight leading-[0.85] font-heading">
                                         {albums.find(a => a.id === activeAlbum)?.title}
                                     </h1>
                                 </div>
@@ -235,12 +235,12 @@ const Photography = () => {
                             onClick={(e) => e.stopPropagation()}
                         />
 
-                        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-8 bg-black/40 backdrop-blur-2xl px-10 py-5 rounded-full border border-white/10">
-                            <button onClick={(e) => { e.stopPropagation(); setLightboxIndex((lightboxIndex - 1 + displayedPhotos.length) % displayedPhotos.length) }} className="text-zinc-500 hover:text-[#C5A059] transition-colors"><ChevronLeft size={32} /></button>
+                        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-4 sm:gap-8 bg-black/40 backdrop-blur-2xl px-6 sm:px-10 py-5 rounded-full border border-white/10">
+                            <button onClick={(e) => { e.stopPropagation(); setLightboxIndex((lightboxIndex - 1 + displayedPhotos.length) % displayedPhotos.length) }} className="text-zinc-500 hover:text-[#C5A059] transition-colors"><ChevronLeft size={24} className="sm:w-8 sm:h-8" /></button>
                             <div className="w-[1px] h-6 bg-white/10" />
-                            <span className="text-xs font-black text-white tracking-[0.3em]">{lightboxIndex + 1} / {displayedPhotos.length}</span>
+                            <span className="text-[10px] sm:text-xs font-black text-white tracking-[0.3em]">{lightboxIndex + 1} / {displayedPhotos.length}</span>
                             <div className="w-[1px] h-6 bg-white/10" />
-                            <button onClick={(e) => { e.stopPropagation(); setLightboxIndex((lightboxIndex + 1) % displayedPhotos.length) }} className="text-zinc-500 hover:text-[#C5A059] transition-colors"><ChevronRight size={32} /></button>
+                            <button onClick={(e) => { e.stopPropagation(); setLightboxIndex((lightboxIndex + 1) % displayedPhotos.length) }} className="text-zinc-500 hover:text-[#C5A059] transition-colors"><ChevronRight size={24} className="sm:w-8 sm:h-8" /></button>
                         </div>
                     </motion.div>
                 )}

@@ -88,13 +88,13 @@ const Dashboard = () => {
             {/* Title & Rapid Stats Header */}
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
                 <div>
-                    <h1 className="text-5xl font-bold tracking-tight text-white mb-3 font-heading">
+                    <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-3 font-heading">
                         Imperial <span className="text-[#C5A059] italic font-display font-medium">Nexus</span>
                     </h1>
                     <p className="text-zinc-500 text-sm font-medium tracking-wide">Command center for Klypso digital operations.</p>
                 </div>
 
-                <div className="flex items-center gap-12 bg-white/[0.01] border border-white/5 p-6 rounded-[2rem] backdrop-blur-md">
+                <div className="flex flex-wrap items-center gap-6 sm:gap-12 bg-white/[0.01] border border-white/5 p-6 rounded-3xl lg:rounded-[2rem] backdrop-blur-md">
                     <RapidStat label="Active Nodes" value="23" color="text-zinc-100" />
                     <div className="w-[1px] h-10 bg-white/5" />
                     <RapidStat label="Traffic Flux" value="+12.4%" color="text-[#C5A059]" />
@@ -149,7 +149,7 @@ const Dashboard = () => {
                                 <button className="px-5 py-2 text-[10px] font-black uppercase tracking-widest text-zinc-500 hover:text-white transition-colors">Quarterly</button>
                             </div>
                         </div>
-                        <div className="p-12 h-80 flex items-end gap-3 px-10">
+                        <div className="p-8 sm:p-12 h-80 flex items-end gap-3 px-6 sm:px-10">
                             {[40, 65, 35, 90, 50, 85, 75, 95, 45, 70, 80, 100].map((h, i) => (
                                 <div key={i} className="flex-1 flex flex-col items-center gap-4 group/bar">
                                     <div className="w-full relative h-full flex items-end">
@@ -180,16 +180,16 @@ const Dashboard = () => {
                             <table className="w-full text-left">
                                 <thead>
                                     <tr className="bg-black/40">
-                                        <th className="px-8 py-5 text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600">Client Node</th>
-                                        <th className="px-8 py-5 text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600">Classification</th>
-                                        <th className="px-8 py-5 text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600">Timestamp</th>
-                                        <th className="px-8 py-5 text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600 text-right">Action</th>
+                                        <th className="px-4 sm:px-8 py-5 text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600">Client Node</th>
+                                        <th className="px-4 sm:px-8 py-5 text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600">Classification</th>
+                                        <th className="px-4 sm:px-8 py-5 text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600">Timestamp</th>
+                                        <th className="px-4 sm:px-8 py-5 text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600 text-right">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-white/5">
                                     {recentEnquiries.map((enq) => (
                                         <tr key={enq._id} className="hover:bg-white/[0.01] transition-colors group">
-                                            <td className="px-8 py-6">
+                                            <td className="px-4 sm:px-8 py-6">
                                                 <div className="flex items-center gap-4">
                                                     <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-white/5 flex items-center justify-center font-black text-zinc-500 group-hover:text-[#C5A059] group-hover:border-[#C5A059]/30 transition-all">
                                                         {enq.name.charAt(0)}
@@ -200,18 +200,18 @@ const Dashboard = () => {
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td className="px-8 py-6">
+                                            <td className="px-4 sm:px-8 py-6">
                                                 <span className="px-3 py-1 bg-[#7C3AED]/10 text-[#7C3AED] border border-[#7C3AED]/20 rounded-lg text-[9px] font-black uppercase tracking-[0.2em]">
                                                     {enq.service}
                                                 </span>
                                             </td>
-                                            <td className="px-8 py-6">
+                                            <td className="px-4 sm:px-8 py-6">
                                                 <div className="flex flex-col">
                                                     <span className="text-xs text-zinc-400 font-bold">{new Date(enq.createdAt).toLocaleDateString()}</span>
                                                     <span className="text-[9px] text-zinc-700 font-medium uppercase tracking-widest">{new Date(enq.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                                                 </div>
                                             </td>
-                                            <td className="px-8 py-6 text-right">
+                                            <td className="px-4 sm:px-8 py-6 text-right">
                                                 <Link to="/admin/enquiries" className="p-3 bg-white/5 rounded-xl text-zinc-500 hover:text-white hover:bg-white/10 transition-all inline-block">
                                                     <ChevronRight size={16} />
                                                 </Link>

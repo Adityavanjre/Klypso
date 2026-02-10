@@ -3,11 +3,11 @@ import { NavLink } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="footer bg-[#0A0A0B] text-zinc-400 pt-48 border-t border-white/5 mt-auto overflow-hidden relative">
+    <footer className="footer bg-[#0A0A0B] text-zinc-400 pt-32 lg:pt-48 border-t border-white/5 mt-auto overflow-hidden relative">
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#C5A059]/30 to-transparent" />
 
       {/* Massive CTA Section - Editorial Scale */}
-      <div className="container mx-auto px-4 mb-48 text-center relative">
+      <div className="container mx-auto px-4 mb-32 lg:mb-48 text-center relative">
         <h2 className="text-[14vw] font-bold leading-none tracking-tighter text-white opacity-[0.02] select-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full font-heading">
           KLYPSO
         </h2>
@@ -25,7 +25,7 @@ const Footer = () => {
       </div>
 
       <div className="container mx-auto px-6 pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-24 mb-32 border-t border-white/5 pt-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-24 mb-32 border-t border-white/5 pt-24">
           <div className="lg:col-span-1 space-y-10">
             <div className="group flex items-center gap-4">
               <div className="w-10 h-10 bg-[#C5A059] rounded-xl flex items-center justify-center font-black text-black text-lg shadow-lg">K</div>
@@ -84,7 +84,7 @@ const Footer = () => {
 
         <div className="pt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-10 text-[9px] uppercase tracking-[0.5em] font-black text-zinc-700">
           <p>© {new Date().getFullYear()} KLYPSO. Crafting Digital Legacies.</p>
-          <div className="flex gap-12">
+          <div className="flex gap-6 sm:gap-12">
             <NavLink to="/login" className="hover:text-[#C5A059] transition-colors">Admin Access</NavLink>
             <NavLink to="/legal" className="hover:text-white transition-colors">Legal</NavLink>
             <NavLink to="/legal" className="hover:text-white transition-colors">Privacy</NavLink>

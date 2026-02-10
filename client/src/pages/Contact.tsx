@@ -80,7 +80,7 @@ const Contact = () => {
             <div className="absolute bottom-[-10%] left-[-10%] w-[50rem] h-[50rem] bg-[#7C3AED]/5 rounded-full blur-[180px]" />
 
             <div className="container mx-auto max-w-7xl relative z-10">
-                <div className="grid lg:grid-cols-2 gap-32 items-start">
+                <div className="grid lg:grid-cols-2 gap-20 lg:gap-32 items-start">
 
                     {/* Left: Context */}
                     <div className="space-y-20">
@@ -95,7 +95,7 @@ const Contact = () => {
                                     Contact Us
                                 </span>
                             </div>
-                            <h1 className="text-6xl md:text-[8rem] font-bold mb-10 tracking-tight leading-[0.85] font-heading">
+                            <h1 className="text-5xl sm:text-7xl md:text-[8rem] font-bold mb-10 tracking-tight leading-[0.85] font-heading">
                                 Start Your <br />
                                 <span className="font-display italic font-light text-[#C5A059]">Project.</span>
                             </h1>
@@ -131,7 +131,7 @@ const Contact = () => {
                         initial={{ opacity: 0, x: 50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 1 }}
-                        className="bg-[#121214] border border-white/5 p-10 md:p-20 rounded-[3rem] shadow-3xl relative overflow-hidden"
+                        className="bg-[#121214] border border-white/5 p-6 sm:p-10 md:p-20 rounded-[3rem] shadow-3xl relative overflow-hidden"
                     >
                         {/* Decorative Gradient */}
                         <div className="absolute top-0 right-0 w-80 h-80 bg-[#C5A059]/5 blur-[120px] -z-10" />

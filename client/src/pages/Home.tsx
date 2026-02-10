@@ -100,7 +100,7 @@ const Home = () => {
                             <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#C5A059]/40" />
                         </div>
 
-                        <h1 className="text-6xl md:text-[11rem] font-bold mb-12 tracking-[-0.04em] leading-[0.8] font-heading">
+                        <h1 className="text-5xl sm:text-7xl md:text-[11rem] font-bold mb-12 tracking-[-0.04em] leading-[0.8] font-heading">
                             REFINED <br />
                             <span className="font-display italic font-light text-[#C5A059]">Engineering.</span>
                         </h1>
@@ -179,7 +179,7 @@ const Home = () => {
             {/* Case Study Feature */}
             <section className="py-40 px-4 bg-[#080809]">
                 <div className="container mx-auto max-w-7xl">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center mb-40">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-32 items-center mb-40">
                         <div className="space-y-12">
                             <div>
                                 <h3 className="text-[#C5A059] font-black tracking-[0.4em] uppercase text-[10px] mb-8">Selected Case Study</h3>
@@ -219,7 +219,7 @@ const Home = () => {
             {/* Performance Stats */}
             <section className="py-32 bg-black border-y border-white/5">
                 <div className="container mx-auto px-4 max-w-7xl">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-20">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-20">
                         <EliteStat value="99.9" label="Uptime Reliability" unit="%" />
                         <EliteStat value="25" label="Industry Experts" unit="+" />
                         <EliteStat value="2" label="Development Speed" unit="wk" />
@@ -241,7 +241,7 @@ const Home = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-6xl md:text-[10rem] font-bold mb-16 tracking-tighter leading-[0.85] font-heading">
+                        <h2 className="text-5xl sm:text-7xl md:text-[10rem] font-bold mb-16 tracking-tighter leading-[0.85] font-heading">
                             Forge Your <br />
                             <span className="font-display italic font-light text-[#C5A059]">Legacy.</span>
                         </h2>
