@@ -12,6 +12,17 @@ const app = express();
 
 app.set('trust proxy', 1);
 
+// Immediate Request Logger
+app.use((req, res, next) => {
+    console.log(`>>> [CORE LOG] ${req.method} ${req.url}`);
+    next();
+});
+
+process.on('uncaughtException', (err) => {
+    console.error('--- CRITICAL UNCAUGHT EXCEPTION ---');
+    console.error(err);
+});
+
 app.get('/', (req, res) => {
     res.send('Klypso API is running...');
 });
@@ -26,12 +37,12 @@ app.use(cors({
 }));
 app.use(express.json());
 
-const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // limit each IP to 100 requests per windowMs
-});
+// const limiter = rateLimit({
+//     windowMs: 15 * 60 * 1000, // 15 minutes
+//     max: 100, // limit each IP to 100 requests per windowMs
+// });
 
-app.use(limiter);
+// app.use(limiter);
 
 // Routes
 const enquiryRoutes = require('./routes/enquiryRoutes');
@@ -40,10 +51,6 @@ const userRoutes = require('./routes/userRoutes');
 const blogRoutes = require('./routes/blogRoutes');
 const jobRoutes = require('./routes/jobRoutes');
 
-app.use((req, res, next) => {
-    console.log(`Incoming request: ${req.method} ${req.url}`);
-    next();
-});
 
 const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 
@@ -68,6 +75,10 @@ const server = app.listen(PORT, '0.0.0.0', () => {
     // Connect to DB using helper
     connectDB();
 });
+
+// Configure server timeouts for Render/Load Balancer stability
+server.keepAliveTimeout = 120 * 1000; // 120 seconds
+server.headersTimeout = 125 * 1000; // 125 seconds
 
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (err, promise) => {
