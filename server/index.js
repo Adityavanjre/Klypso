@@ -10,7 +10,13 @@ dotenv.config();
 
 const app = express();
 
-app.use(helmet());
+app.get('/', (req, res) => {
+    res.send('Klypso API is running...');
+});
+
+app.use(helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" }
+}));
 app.use(cors({
     origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
