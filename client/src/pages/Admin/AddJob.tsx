@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, Briefcase, Plus, X } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import axios from 'axios';
+import API_URL from '../../api/config';
 
 const AddJob = () => {
     const navigate = useNavigate();
@@ -43,7 +44,7 @@ const AddJob = () => {
                 },
             };
 
-            await axios.post('http://localhost:5000/api/jobs', {
+            await axios.post(`${API_URL}/api/jobs`, {
                 role,
                 type,
                 location,

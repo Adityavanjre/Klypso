@@ -63,7 +63,7 @@ Reference Links:
 ${referenceLinks && referenceLinks.length > 0 ? referenceLinks.join('\n') : 'None'}
 
 ---
-View in Dashboard: http://localhost:5173/admin
+View in Dashboard: ${process.env.FRONTEND_URL || 'http://localhost:5173'}/admin
             `,
         };
 

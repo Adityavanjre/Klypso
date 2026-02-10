@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import API_URL from '../api/config';
 import { useParams, Link } from 'react-router-dom';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Calendar, ArrowLeft, Tag, Share2, BookOpen } from 'lucide-react';
@@ -38,11 +39,11 @@ const BlogDetails = () => {
         const fetchPostAndRelated = async () => {
             try {
                 // Fetch the main article
-                const { data } = await axios.get(`http://localhost:5000/api/blogs/${id}`);
+                const { data } = await axios.get(`${API_URL}/api/blogs/${id}`);
                 setPost(data);
 
                 // Fetch all articles for the "Related" section
-                const { data: allBlogs } = await axios.get('http://localhost:5000/api/blogs');
+                const { data: allBlogs } = await axios.get(`${API_URL}/api/blogs`);
                 const filtered = allBlogs
                     .filter((b: BlogPost) => b._id !== data._id)
                     .slice(0, 3);

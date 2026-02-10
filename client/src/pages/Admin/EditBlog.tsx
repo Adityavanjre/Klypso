@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, Image as ImageIcon, Send, Link as LinkIcon, Eye, Save, Loader2 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import axios from 'axios';
+import API_URL from '../../api/config';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
@@ -32,7 +33,7 @@ const EditBlog = () => {
     useEffect(() => {
         const fetchBlog = async () => {
             try {
-                const { data } = await axios.get(`http://localhost:5000/api/blogs/${id}`);
+                const { data } = await axios.get(`${API_URL}/api/blogs/${id}`);
                 setTitle(data.title);
                 setSlug(data.slug || '');
                 setStatus(data.status || 'draft');
@@ -83,7 +84,7 @@ const EditBlog = () => {
                 },
             };
 
-            await axios.put(`http://localhost:5000/api/blogs/${id}`, {
+            await axios.put(`${API_URL}/api/blogs/${id}`, {
                 title,
                 slug,
                 status,

@@ -17,7 +17,7 @@ const connectDB = async () => {
         console.log(`Connecting to: ${sanitizedUri}`);
 
         await mongoose.connect(process.env.MONGO_URI, {
-            serverSelectionTimeoutMS: 5000,
+            serverSelectionTimeoutMS: 15000,
         });
         console.log(`✅ MongoDB Connected (Persistent)`);
 

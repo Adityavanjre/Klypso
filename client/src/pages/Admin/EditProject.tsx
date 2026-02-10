@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Save, Loader2, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import axios from 'axios';
+import API_URL from '../../api/config';
 
 const EditProject = () => {
     const { id } = useParams();
@@ -35,7 +36,7 @@ const EditProject = () => {
     useEffect(() => {
         const fetchProject = async () => {
             try {
-                const { data } = await axios.get(`http://localhost:5000/api/projects/${id}`);
+                const { data } = await axios.get(`${API_URL}/api/projects/${id}`);
                 setTitle(data.title);
                 setDescription(data.description);
                 setFullDescription(data.fullDescription || '');
@@ -73,7 +74,7 @@ const EditProject = () => {
                 },
             };
 
-            await axios.put(`http://localhost:5000/api/projects/${id}`, {
+            await axios.put(`${API_URL}/api/projects/${id}`, {
                 title,
                 description,
                 fullDescription,

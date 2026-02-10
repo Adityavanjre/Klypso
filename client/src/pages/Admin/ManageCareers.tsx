@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import API_URL from '../../api/config';
 import { useAuth } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 import { Trash2, Plus, Briefcase, MapPin, Clock, Search, Edit } from 'lucide-react';
@@ -23,7 +24,7 @@ const ManageCareers = () => {
     useEffect(() => {
         const fetchJobs = async () => {
             try {
-                const { data } = await axios.get('http://localhost:5000/api/jobs');
+                const { data } = await axios.get(`${API_URL}/api/jobs`);
                 setJobs(data);
             } catch (error) {
                 console.error("Failed to fetch jobs", error);
@@ -41,7 +42,7 @@ const ManageCareers = () => {
             const config = {
                 headers: { Authorization: `Bearer ${user?.token}` },
             };
-            await axios.delete(`http://localhost:5000/api/jobs/${id}`, config);
+            await axios.delete(`${API_URL}/api/jobs/${id}`, config);
             setJobs(prev => prev.filter(j => j._id !== j._id)); // Wait, bug in previous code? prev.filter(j => j._id !== id)
             setJobs(prev => prev.filter(j => j._id !== id));
         } catch (error) {

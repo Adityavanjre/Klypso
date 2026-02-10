@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, Image as ImageIcon, Send, Link as LinkIcon, Eye, Save } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import axios from 'axios';
+import API_URL from '../../api/config';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
@@ -66,7 +67,7 @@ const AddBlog = () => {
                 },
             };
 
-            await axios.post('http://localhost:5000/api/blogs', {
+            await axios.post(`${API_URL}/api/blogs`, {
                 title,
                 slug,
                 status,

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Save } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import axios from 'axios';
+import API_URL from '../../api/config';
 
 const AddProject = () => {
     const navigate = useNavigate();
@@ -43,7 +44,7 @@ const AddProject = () => {
                 },
             };
 
-            await axios.post('http://localhost:5000/api/projects', {
+            await axios.post(`${API_URL}/api/projects`, {
                 title,
                 description,
                 fullDescription,

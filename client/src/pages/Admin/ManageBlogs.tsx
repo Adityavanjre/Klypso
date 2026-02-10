@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import API_URL from '../../api/config';
 import { useAuth } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 import { Trash2, Plus, Edit, FileText, Calendar, Search, User, Eye } from 'lucide-react';
@@ -15,7 +16,7 @@ const ManageBlogs = () => {
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
-                const { data } = await axios.get('http://localhost:5000/api/blogs');
+                const { data } = await axios.get(`${API_URL}/api/blogs`);
                 setBlogs(data);
             } catch (error) {
                 console.error("Failed to fetch blogs", error);
@@ -33,7 +34,7 @@ const ManageBlogs = () => {
             const config = {
                 headers: { Authorization: `Bearer ${user?.token}` },
             };
-            await axios.delete(`http://localhost:5000/api/blogs/${id}`, config);
+            await axios.delete(`${API_URL}/api/blogs/${id}`, config);
             setBlogs(prev => prev.filter(b => b._id !== id));
         } catch (error) {
             console.error("Failed to delete blog", error);

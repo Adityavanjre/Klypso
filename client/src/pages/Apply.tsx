@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, CheckCircle, ArrowLeft, Paperclip } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import API_URL from '../api/config';
 import SEO from '../components/SEO';
 
 const Apply = () => {
@@ -38,7 +39,7 @@ const Apply = () => {
 
         // Simulate API call for now (or use the same enquiry endpoint with a 'type' field if backend supports it)
         try {
-            const res = await fetch("http://localhost:5000/api/enquiries", {
+            const res = await fetch(`${API_URL}/api/enquiries`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import API_URL from '../api/config';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import type { Project } from '../types';
@@ -15,7 +16,7 @@ const Portfolio = () => {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const { data } = await axios.get('http://localhost:5000/api/projects');
+                const { data } = await axios.get(`${API_URL}/api/projects`);
                 if (data && data.length > 0) {
                     setProjects(data);
                 }

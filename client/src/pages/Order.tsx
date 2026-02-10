@@ -7,6 +7,7 @@ import {
     Smartphone, Globe, Lock
 } from 'lucide-react';
 import axios from 'axios';
+import API_URL from '../api/config';
 import SEO from '../components/SEO';
 
 const services = [
@@ -89,7 +90,7 @@ const Order = () => {
                 referenceLinks: formData.referenceLinks.split(',').map(link => link.trim()).filter(link => link)
             };
 
-            await axios.post('http://localhost:5000/api/enquiries', payload, config);
+            await axios.post(`${API_URL}/api/enquiries`, payload, config);
             setStep(3);
         } catch (err) {
             console.error(err);

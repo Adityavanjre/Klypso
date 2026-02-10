@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import API_URL from '../api/config';
 import { motion } from 'framer-motion';
 import { Calendar, ArrowRight, Tag, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -26,7 +27,7 @@ const Blog = () => {
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
-                const { data } = await axios.get('http://localhost:5000/api/blogs');
+                const { data } = await axios.get(`${API_URL}/api/blogs`);
                 setBlogPosts(data || []);
             } catch (err) {
                 console.error("Error fetching blogs:", err);

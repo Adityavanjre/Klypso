@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import API_URL from '../../api/config';
 import { useAuth } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 import { Trash2, Plus, ExternalLink, Edit, FolderOpen, LayoutGrid, List, Search } from 'lucide-react';
@@ -24,7 +25,7 @@ const ManageProjects = () => {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const { data } = await axios.get('http://localhost:5000/api/projects');
+                const { data } = await axios.get(`${API_URL}/api/projects`);
                 setProjects(data);
             } catch (error) {
                 console.error("Failed to fetch projects", error);
@@ -42,7 +43,7 @@ const ManageProjects = () => {
             const config = {
                 headers: { Authorization: `Bearer ${user?.token}` },
             };
-            await axios.delete(`http://localhost:5000/api/projects/${id}`, config);
+            await axios.delete(`${API_URL}/api/projects/${id}`, config);
             setProjects(prev => prev.filter(p => p._id !== id));
         } catch (error) {
             console.error("Failed to delete project", error);
