@@ -3,38 +3,25 @@ const mongoose = require('mongoose');
 let mongod = null;
 
 const connectDB = async () => {
-    // 1. Try to connect to persistent MongoDB if URI is provided
-    if (process.env.MONGO_URI) {
-        try {
-            const conn = await mongoose.connect(process.env.MONGO_URI);
-            console.log(`MongoDB Connected (Persistent): ${conn.connection.host}`);
+    console.log("Uplink Initialized. Checking Environment...");
 
-            // Seed data if database is empty
-            await createAdminSafely();
-            return;
-        } catch (err) {
-            console.error(`Failed to connect to persistent DB: ${err.message}`);
-            if (!process.env.ALLOW_FALLBACK) {
-                console.log('Fallback disabled or persistent connection required. Exiting...');
-                process.exit(1);
-            }
-            console.log('Falling back to In-Memory Database...');
-        }
+    if (!process.env.MONGO_URI) {
+        console.error("CRITICAL: MONGO_URI is missing from environment variables!");
     }
 
-    // 2. Fallback to In-Memory Database (only for local dev/testing)
+    // 1. Try to connect to persistent MongoDB
     try {
-        const { MongoMemoryServer } = require('mongodb-memory-server');
-        console.log('Attempting to start MongoDB Memory Server...');
-        mongod = await MongoMemoryServer.create();
-        const uri = mongod.getUri();
-        console.log(`MongoDB Memory Server started at: ${uri}`);
-        const conn = await mongoose.connect(uri);
-        console.log(`MongoDB Connected (Memory): ${conn.connection.host}`);
+        console.log('Connecting to MongoDB Atlas...');
+        await mongoose.connect(process.env.MONGO_URI, {
+            serverSelectionTimeoutMS: 5000,
+        });
+        console.log(`✅ MongoDB Connected (Persistent)`);
+
         await createAdminSafely();
-    } catch (error) {
-        console.error(`MongoDB Fallback Error: ${error.message}`);
-        process.exit(1);
+        return;
+    } catch (err) {
+        console.error(`❌ Database Connection Failed: ${err.message}`);
+        console.log('Attempting to continue without DB (API will remain limited)...');
     }
 };
 
