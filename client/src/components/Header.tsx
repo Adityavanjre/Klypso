@@ -14,7 +14,7 @@ const Header = () => {
       const currentScrollY = window.scrollY;
       setScrolled(currentScrollY > 50);
 
-      if (currentScrollY > 150) {
+      if (currentScrollY > 150 && !isOpen) {
         if (currentScrollY > lastScrollY) {
           setHidden(true);
         } else {
@@ -27,7 +27,7 @@ const Header = () => {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, [lastScrollY, isOpen]);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -105,7 +105,7 @@ const Header = () => {
             initial={{ opacity: 0, scale: 0.95, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -20 }}
-            className="lg:hidden absolute top-full left-0 w-full p-4"
+            className="lg:hidden absolute top-full left-0 w-full p-4 pointer-events-auto"
           >
             <div className="bg-[#0A0A0B]/95 backdrop-blur-3xl border border-white/5 rounded-[3rem] p-12 shadow-3xl overflow-hidden relative">
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#C5A059]/5 rounded-full blur-[100px] -z-10" />
