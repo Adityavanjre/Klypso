@@ -36,16 +36,20 @@ const createAdminSafely = async () => {
         const Blog = require('../models/Blog');
         const Job = require('../models/Job');
 
-        const userExists = await User.findOne({ email: 'admin@klypso.agency' });
+        const adminEmail = 'admin@klypso.agency';
+        const userExists = await User.findOne({ email: adminEmail });
 
         if (!userExists) {
+            console.log(`Seeding Admin User: ${adminEmail}...`);
             await User.create({
                 name: 'System Admin',
-                email: 'admin@klypso.agency',
+                email: adminEmail,
                 password: 'password123',
                 isAdmin: true,
             });
-            console.log('Admin user seeded in memory database.');
+            console.log('✅ Admin user created successfully.');
+        } else {
+            console.log(`System Check: Admin user (${adminEmail}) already exists.`);
         }
 
         // Check if projects exist, if not seed them
