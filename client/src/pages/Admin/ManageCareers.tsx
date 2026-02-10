@@ -43,7 +43,6 @@ const ManageCareers = () => {
                 headers: { Authorization: `Bearer ${user?.token}` },
             };
             await axios.delete(`${API_URL}/api/jobs/${id}`, config);
-            setJobs(prev => prev.filter(j => j._id !== j._id)); // Wait, bug in previous code? prev.filter(j => j._id !== id)
             setJobs(prev => prev.filter(j => j._id !== id));
         } catch (error) {
             console.error("Failed to delete job", error);

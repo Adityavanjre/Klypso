@@ -5,7 +5,7 @@ const Job = require('../models/Job');
 // @access  Public
 const getJobs = async (req, res) => {
     try {
-        const jobs = await Job.find({ isActive: true }).sort({ createdAt: -1 });
+        const jobs = await Job.find({ isActive: { $ne: false } }).sort({ createdAt: -1 });
         res.json(jobs);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -25,6 +25,7 @@ const createJob = async (req, res) => {
             location,
             description,
             requirements,
+            isActive: true,
         });
 
         const createdJob = await job.save();
