@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { MongoMemoryServer } = require('mongodb-memory-server');
 
 let mongod = null;
 
@@ -7,57 +6,35 @@ const connectDB = async () => {
     // 1. Try to connect to persistent MongoDB if URI is provided
     if (process.env.MONGO_URI) {
         try {
-            const conn = await mongoose.connect(process.env.MONGO_URI, {
-                serverSelectionTimeoutMS: 2000 // 2 second timeout before fallback
-            });
+            const conn = await mongoose.connect(process.env.MONGO_URI);
             console.log(`MongoDB Connected (Persistent): ${conn.connection.host}`);
+
+            // Seed data if database is empty
+            await createAdminSafely();
             return;
         } catch (err) {
             console.error(`Failed to connect to persistent DB: ${err.message}`);
+            if (!process.env.ALLOW_FALLBACK) {
+                console.log('Fallback disabled or persistent connection required. Exiting...');
+                process.exit(1);
+            }
             console.log('Falling back to In-Memory Database...');
         }
     }
 
-    // 2. Fallback to In-Memory Database
+    // 2. Fallback to In-Memory Database (only for local dev/testing)
     try {
+        const { MongoMemoryServer } = require('mongodb-memory-server');
         console.log('Attempting to start MongoDB Memory Server...');
-        mongod = await MongoMemoryServer.create({
-            instance: {
-                port: 27017, // Try to bind to default port
-            }
-        });
+        mongod = await MongoMemoryServer.create();
         const uri = mongod.getUri();
-
         console.log(`MongoDB Memory Server started at: ${uri}`);
-
         const conn = await mongoose.connect(uri);
-
         console.log(`MongoDB Connected (Memory): ${conn.connection.host}`);
-
-        // Seed admin user on start since data is volatile
         await createAdminSafely();
     } catch (error) {
-        console.error(`MongoDB Memory Server Error: ${error.message}`);
-        // If port 27017 is taken, try dynamic port
-        if (error.code === 'EADDRINUSE' || error.message.includes('port')) {
-            console.log('Port 27017 busy, trying dynamic port...');
-            try {
-                mongod = await MongoMemoryServer.create();
-                const uri = mongod.getUri();
-                console.log(`MongoDB Memory Server started at: ${uri}`);
-                const conn = await mongoose.connect(uri);
-                console.log(`MongoDB Connected (Memory): ${conn.connection.host}`);
-                await createAdminSafely();
-            } catch (retryError) {
-                console.error(`Retry failed: ${retryError.message}`);
-                process.exit(1);
-            }
-        } else {
-            console.error(error);
-            // Don't exit process, maybe the persistent DB worked?
-            // Actually if we are here, everything failed.
-            if (!mongoose.connection.readyState) process.exit(1);
-        }
+        console.error(`MongoDB Fallback Error: ${error.message}`);
+        process.exit(1);
     }
 };
 
