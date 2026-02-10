@@ -1,5 +1,6 @@
 import { createContext, useState, useContext, type ReactNode } from 'react';
 import axios from 'axios';
+import API_URL from '../api/config';
 
 interface User {
     _id: string;
@@ -37,7 +38,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const login = async (email: string, password: string) => {
         setIsLoading(true);
         try {
-            const { data } = await axios.post('http://localhost:5000/api/users/login', {
+            const { data } = await axios.post(`${API_URL}/api/users/login`, {
                 email,
                 password,
             });

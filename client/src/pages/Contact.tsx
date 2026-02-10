@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import API_URL from '../api/config';
 import {
     Send, CheckCircle, Mail,
     Phone, Instagram,
@@ -46,7 +47,7 @@ const Contact = () => {
         setStatus(null);
 
         try {
-            const res = await fetch("http://localhost:5000/api/enquiries", {
+            const res = await fetch(`${API_URL}/api/enquiries`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData)

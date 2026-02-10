@@ -13,8 +13,7 @@ import {
     ChevronRight,
     PanelLeftClose,
     PanelLeftOpen,
-    ExternalLink,
-    Zap
+    ExternalLink
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useState } from 'react';

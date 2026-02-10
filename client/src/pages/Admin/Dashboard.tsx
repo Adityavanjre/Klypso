@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import API_URL from '../../api/config';
 import { Link } from 'react-router-dom';
 import {
     Users,
@@ -12,12 +13,10 @@ import {
     TrendingUp,
     ArrowUpRight,
     ChevronRight,
-    Activity,
     Plus,
     Send,
     Crown,
     Shield,
-    Globe,
     Lock
 } from 'lucide-react';
 
@@ -46,16 +45,16 @@ const Dashboard = () => {
             try {
                 const config = { headers: { Authorization: `Bearer ${user?.token}` } };
                 const [projects, blogs, jobs] = await Promise.all([
-                    axios.get('http://localhost:5000/api/projects'),
-                    axios.get('http://localhost:5000/api/blogs'),
-                    axios.get('http://localhost:5000/api/jobs')
+                    axios.get(`${API_URL}/api/projects`),
+                    axios.get(`${API_URL}/api/blogs`),
+                    axios.get(`${API_URL}/api/jobs`)
                 ]);
 
                 let enquiriesCount = 0;
                 let enquiriesList: Enquiry[] = [];
 
                 try {
-                    const enquiriesRes = await axios.get<Enquiry[]>('http://localhost:5000/api/enquiries', config);
+                    const enquiriesRes = await axios.get<Enquiry[]>(`${API_URL}/api/enquiries`, config);
                     enquiriesCount = enquiriesRes.data.length;
                     enquiriesList = enquiriesRes.data.slice(0, 5);
                 } catch (e) { }

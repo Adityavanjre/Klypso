@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import API_URL from '../../api/config';
 import { useAuth } from '../../contexts/AuthContext';
 import { Trash2, Mail, Calendar, Search, Users, ExternalLink, MessageSquare, Briefcase, DollarSign, ChevronRight, Inbox } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -36,7 +37,7 @@ const ManageEnquiries = () => {
             const config = {
                 headers: { Authorization: `Bearer ${user?.token}` },
             };
-            const { data } = await axios.get('http://localhost:5000/api/enquiries', config);
+            const { data } = await axios.get(`${API_URL}/api/enquiries`, config);
             setEnquiries(data);
             if (data.length > 0) setSelectedId(data[0]._id);
         } catch (error) {
@@ -54,7 +55,7 @@ const ManageEnquiries = () => {
             const config = {
                 headers: { Authorization: `Bearer ${user?.token}` },
             };
-            await axios.delete(`http://localhost:5000/api/enquiries/${id}`, config);
+            await axios.delete(`${API_URL}/api/enquiries/${id}`, config);
             setEnquiries(prev => prev.filter(enq => enq._id !== id));
             if (selectedId === id) setSelectedId(null);
         } catch (error) {
