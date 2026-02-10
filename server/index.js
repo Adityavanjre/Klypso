@@ -10,6 +10,8 @@ dotenv.config();
 
 const app = express();
 
+app.set('trust proxy', 1);
+
 app.get('/', (req, res) => {
     res.send('Klypso API is running...');
 });
@@ -62,9 +64,8 @@ const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, '0.0.0.0', () => {
     console.log(`--- KLYPSO SYSTEM ONLINE ---`);
     console.log(`Port: ${PORT}`);
-    console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 
-    // Connect to DB after server is up
+    // Connect to DB using helper
     connectDB();
 });
 
