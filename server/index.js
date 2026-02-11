@@ -31,9 +31,10 @@ app.use(helmet({
     crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
 app.use(cors({
-    origin: '*',
+    origin: [process.env.FRONTEND_URL, 'http://localhost:5173', 'http://localhost:3000', 'https://klypso.in'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
 }));
 app.use(express.json());
 
