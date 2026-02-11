@@ -149,7 +149,7 @@ const Dashboard = () => {
                                 <button className="px-5 py-2 text-[10px] font-black uppercase tracking-widest text-zinc-500 hover:text-white transition-colors">Quarterly</button>
                             </div>
                         </div>
-                        <div className="p-8 sm:p-12 h-80 flex items-end gap-3 px-6 sm:px-10">
+                        <div className="p-8 sm:p-12 h-80 flex items-end gap-1.5 sm:gap-3 px-6 sm:px-10">
                             {[40, 65, 35, 90, 50, 85, 75, 95, 45, 70, 80, 100].map((h, i) => (
                                 <div key={i} className="flex-1 flex flex-col items-center gap-4 group/bar">
                                     <div className="w-full relative h-full flex items-end">

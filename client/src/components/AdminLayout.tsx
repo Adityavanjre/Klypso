@@ -16,13 +16,25 @@ import {
     ExternalLink
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const AdminLayout = () => {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
-    const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth > 1024);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
+
+    useEffect(() => {
+        const handleResize = () => {
+            const mobile = window.innerWidth <= 1024;
+            setIsMobile(mobile);
+            if (mobile) setSidebarOpen(false);
+            else setSidebarOpen(true);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const handleLogout = () => {
         logout();
@@ -66,9 +78,22 @@ const AdminLayout = () => {
                 <div className="noise" />
             </div>
 
+            {/* Mobile Overlay */}
+            <AnimatePresence>
+                {isMobile && sidebarOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setSidebarOpen(false)}
+                        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[45]"
+                    />
+                )}
+            </AnimatePresence>
+
             {/* Sidebar */}
             <aside
-                className={`fixed inset-y-0 left-0 z-50 bg-[#0A0A0B] border-r border-white/5 transition-all duration-500 ease-[0.2,1,0.3,1] flex flex-col ${sidebarOpen ? 'w-72' : 'w-24'}`}
+                className={`fixed inset-y-0 left-0 z-50 bg-[#0A0A0B] border-r border-white/5 transition-all duration-500 ease-[0.2,1,0.3,1] flex flex-col ${sidebarOpen ? 'w-72 translate-x-0' : 'w-24 -translate-x-full lg:translate-x-0 lg:w-24'}`}
             >
                 {/* Logo Section */}
                 <div className="h-24 flex items-center px-8 border-b border-white/5">
@@ -98,6 +123,7 @@ const AdminLayout = () => {
                                     <Link
                                         key={item.to}
                                         to={item.to}
+                                        onClick={() => isMobile && setSidebarOpen(false)}
                                         className={`flex items-center gap-4 px-4 py-3 rounded-2xl transition-all group ${isActive ? 'bg-white/5 text-white border border-white/10 shadow-xl' : 'text-zinc-500 hover:text-white border border-transparent'}`}
                                         title={sidebarOpen ? "" : item.label}
                                     >
@@ -140,10 +166,10 @@ const AdminLayout = () => {
             </aside>
 
             {/* Main Content Area */}
-            <main className={`flex-1 flex flex-col transition-all duration-500 ease-[0.2,1,0.3,1] ${sidebarOpen ? 'ml-72' : 'ml-24'}`}>
+            <main className={`flex-1 flex flex-col transition-all duration-500 ease-[0.2,1,0.3,1] ${sidebarOpen ? 'lg:ml-72' : 'lg:ml-24'} ml-0`}>
                 {/* Header */}
-                <header className="h-24 bg-[#0A0A0B]/60 backdrop-blur-xl sticky top-0 z-40 px-10 flex items-center justify-between">
-                    <div className="flex items-center gap-10">
+                <header className="h-20 lg:h-24 bg-[#0A0A0B]/60 backdrop-blur-xl sticky top-0 z-40 px-4 lg:px-10 flex items-center justify-between border-b border-white/5">
+                    <div className="flex items-center gap-4 lg:gap-10">
                         <button
                             onClick={() => setSidebarOpen(!sidebarOpen)}
                             className="p-3 text-zinc-500 hover:text-white transition-all bg-white/[0.02] rounded-xl border border-white/5 hover:border-white/10"
@@ -151,7 +177,7 @@ const AdminLayout = () => {
                             {sidebarOpen ? <PanelLeftClose size={18} /> : <PanelLeftOpen size={18} />}
                         </button>
 
-                        <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600">
+                        <div className="hidden md:flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600">
                             <span className="hover:text-white transition-colors cursor-pointer">Console</span>
                             <ChevronRight size={10} className="text-zinc-800" />
                             <span className="text-white">
@@ -181,14 +207,14 @@ const AdminLayout = () => {
                             />
                         </div>
 
-                        <a href="/" target="_blank" className="bg-[#C5A059] hover:bg-[#D4AF37] text-black px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] transition-all flex items-center gap-3 shadow-lg shadow-[#C5A059]/10">
-                            Live Site <ExternalLink size={14} />
+                        <a href="/" target="_blank" className="bg-[#C5A059] hover:bg-[#D4AF37] text-black h-10 lg:h-12 px-4 lg:px-6 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] transition-all flex items-center gap-3 shadow-lg shadow-[#C5A059]/10">
+                            <span className="hidden sm:inline">Live Site</span> <ExternalLink size={14} />
                         </a>
                     </div>
                 </header>
 
                 {/* Page Content */}
-                <div className="flex-1 p-10 pb-32 max-w-[1600px] mx-auto w-full relative z-10">
+                <div className="flex-1 p-4 lg:p-10 pb-32 max-w-[1600px] mx-auto w-full relative z-10">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={location.pathname}
